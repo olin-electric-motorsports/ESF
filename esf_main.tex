@@ -46,6 +46,8 @@
 \counterwithin{table}{section} %number tables with section#.table#
 
 \begin{document}
+\section*{Table of Contents iii}
+TODO
 
 \renewcommand{\headrulewidth}{0pt}
 \lhead{Olin College of Engineering, E238}
@@ -917,34 +919,5 @@ We only have one firewall, described in \ref{firewall_1}.
 \subsection{Tractive System Active Light}
 \href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
 
-IMD
-Description (type, operation parameters)
-
-
-The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then used in a SPST-NO relay to close the switch in the shutdown circuit which opens the AIRs. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored
-
-
-Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also describe how the IMD indicator light is wired, etc.
-Additionally fill out the following table replacing the values with your specification:
-
-
-Table 2.4 Parameters of the IMD
-
-Supply voltage range:  10..36VDC
-Supply voltage:  12VDC
-Environmental temperature range:  -40..105°C
-Selftest interval:  Always at startup, then every 5 minutes
-High voltage range:  DC 0..1000V
-Set response value:  100kΩ
-Max. operation current:  150mA
-Approximate time to shut down at 50% of the response value:  ≤ 40s 
-
-
-Wiring/cables/connectors/
-Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
-
-
-Position in car
-Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 
 \end{document}
