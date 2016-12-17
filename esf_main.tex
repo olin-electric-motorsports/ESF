@@ -7,14 +7,39 @@
 \usepackage[utf8]{inputenc}
 
 \begin{document}
+\section*{Table of Contents iii}
+TODO
 
-Hey everyone!
+\section*{I List of Figures}
+TODO
 
-IMD
-Description (type, operation parameters)
+\section*{II List of Tables}
+TODO
 
+\section*{III List of Abbreviations}
+TODO
 
-The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then used in a SPST-NO relay to close the switch in the shutdown circuit which opens the AIRs. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored
+\section*{1 System Overview}
+TODO
+
+\section*{2 Electrical Systems}
+TODO
+
+\subsection*{2.1 Shutdown Circuit}
+TODO
+
+\subsubsection*{2.1.1 Description/concept}
+TODO
+
+\subsubsection*{2.1.2 Wiring / additional circuitry}
+TODO
+
+\subsubsection*{2.1.3 Position in car}
+TODO
+
+\subsection*{2.2 IMD}
+TODO
+The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then used in a SPST-NO relay to close the switch in the shutdown circuit which opens the AIRs. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the ???? board. If the ???? board detects the relay is  open it activates the IMD light.
 
 
 Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also describe how the IMD indicator light is wired, etc.
@@ -22,22 +47,316 @@ Additionally fill out the following table replacing the values with your specifi
 
 
 Table 2.4 Parameters of the IMD
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Supply voltage range: &  10..36VDC \\
+\hline
+Supply voltage: &  12VDC\\
+\hline
+Environmental temperature range: &  -40..105$^{\circ}$C \\
+\hline
+Selftest interval: &  Always at startup, then every 5 minutes \\
+\hline
+High voltage range: &  DC 0..1000V \\
+\hline
+Set response value: &  100k$\Omega$ \\
+\hline
+Max. operation current: &  150mA \\
+\hline
+Approximate time to shut down at 50\% of the response value:&  $\leq$ 40s \\
+\hline
+\end{tabular}
+\end{center}
 
-Supply voltage range:  10..36VDC
-Supply voltage:  12VDC
-Environmental temperature range:  -40..105°C
-Selftest interval:  Always at startup, then every 5 minutes
-High voltage range:  DC 0..1000V
-Set response value:  100kΩ
-Max. operation current:  150mA
-Approximate time to shut down at 50% of the response value:  ≤ 40s 
 
 
-Wiring/cables/connectors/
+
+
+\subsubsection*{2.2.1 "Description (type, operation parameters)"}
+TODO
+
+\subsubsection*{2.2.2 Wiring/cables/connectors/}
+TODO
 Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 
-
+\subsubsection*{2.2.3 Position in car}
+TODO
 Position in car
 Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 
+\subsection*{2.3 Inertia Switch}
+TODO
+
+\subsubsection*{2.3.1 "Description (type, operation parameters)"}
+TODO
+
+\subsubsection*{2.3.2 Wiring/cables/connectors/}
+TODO
+
+\subsubsection*{2.3.3 Position in car}
+TODO
+
+\subsection*{2.4 Brake Plausibility Device}
+TODO
+
+\subsubsection*{2.4.1 Description/additional circuitry}
+TODO
+
+\subsubsection*{2.4.2 Wiring}
+TODO
+
+\subsubsection*{2.4.3 Position in car/mechanical fastening/mechanical connection}
+TODO
+
+\subsection*{2.5 Reset / Latching for IMD and BMS}
+TODO
+
+\subsubsection*{2.5.1 Description/circuitry}
+TODO
+
+\subsubsection*{2.5.2 Wiring/cables/connectors}
+TODO
+
+\subsubsection*{2.5.3 Position in car}
+TODO
+
+\subsection*{2.6 Shutdown System Interlocks}
+TODO
+
+\subsubsection*{2.6.1 Description/circuitry}
+TODO
+
+\subsubsection*{2.6.2 Wiring/cables/connectors}
+TODO
+
+\subsubsection*{2.6.3 Position in car}
+TODO
+
+\subsection*{2.7 Tractive system active light}
+TODO
+
+\subsubsection*{2.7.1 Description/circuitry}
+TODO
+
+\subsubsection*{2.7.2 Wiring/cables/connectors}
+TODO
+
+\subsubsection*{2.7.3 Position in car}
+TODO
+
+\subsection*{2.8 Measurement points}
+TODO
+
+\subsubsection*{2.8.1 Description}
+TODO
+
+\subsubsection*{2.8.2 "Wiring, connectors, cables"}
+TODO
+
+\subsubsection*{2.8.3 Position in car}
+TODO
+
+\subsection*{2.9 Pre-Charge circuitry}
+TODO
+
+\subsubsection*{2.9.1 Description}
+TODO
+
+\subsubsection*{2.9.2 "Wiring, cables, current calculations, connectors"}
+TODO
+
+\subsubsection*{2.9.3 Position in car}
+TODO
+
+\subsection*{2.1 Discharge circuitry}
+TODO
+
+\subsubsection*{2.10.1 Description}
+TODO
+
+\subsubsection*{2.10.2 "Wiring, cables, current calculations, connectors"}
+TODO
+
+\subsubsection*{2.10.3 Position in car}
+TODO
+
+\subsection*{2.11 HV Disconnect (HVD)}
+TODO
+
+\subsubsection*{2.11.1 Description}
+TODO
+
+\subsubsection*{2.11.2 "Wiring, cables, current calculations, connectors"}
+TODO
+
+\subsubsection*{2.11.3 Position in car}
+TODO
+
+\subsection*{2.12 Ready-To-Drive-Sound (RTDS)}
+TODO
+
+\subsubsection*{2.12.1 Description}
+TODO
+
+\subsubsection*{2.12.2 "Wiring, cables, current calculations, connectors"}
+TODO
+
+\subsubsection*{2.12.3 Position in car}
+TODO
+
+\section*{3 Accumulator}
+TODO
+
+\subsection*{3.1 Accumulator pack 1}
+TODO
+
+\subsubsection*{3.1.1 Overview/description/parameters}
+TODO
+
+\subsubsection*{3.1.2 Cell description}
+TODO
+
+\subsubsection*{3.1.3 Cell configuration}
+TODO
+
+\subsubsection*{3.1.4 Cell temperature monitoring}
+TODO
+
+\subsubsection*{3.1.5 Battery management system}
+TODO
+
+\subsubsection*{3.1.6 Accumulator indicator}
+TODO
+
+\subsubsection*{3.1.7 "Wiring, cables, current calculations, connectors"}
+TODO
+
+\subsubsection*{3.1.8 Accumulator insulation relays}
+TODO
+
+\subsubsection*{3.1.9 Fusing}
+TODO
+
+\subsubsection*{3.1.10 Charging}
+TODO
+
+\subsubsection*{3.1.11 Mechanical Configuration/materials}
+TODO
+
+\subsubsection*{3.1.12 Position in car}
+TODO
+
+\subsection*{3.2 Accumulator pack 2}
+TODO
+
+\section*{4 Energy meter mounting}
+TODO
+
+\subsection*{4.1 Description}
+TODO
+
+\subsection*{4.2 "Wiring, cables, current calculations, connectors"}
+TODO
+
+\subsection*{4.3 Position in car}
+TODO
+
+\section*{5 Motor controller}
+TODO
+
+\subsection*{5.1 Motor controller 1}
+TODO
+
+\subsubsection*{5.1.1 "Description, type, operation parameters"}
+TODO
+
+\subsubsection*{5.1.2 "Wiring, cables, current calculations, connectors"}
+TODO
+
+\subsubsection*{5.1.3 Position in car}
+TODO
+
+\subsection*{5.2 Motor controller 2}
+TODO
+
+\section*{6 Motors}
+TODO
+
+\subsection*{6.1 Motor 1}
+TODO
+
+\subsubsection*{6.1.1 "Description, type, operating parameters"}
+TODO
+
+\subsubsection*{6.1.2 "Wiring, cables, current calculations, connectors"}
+TODO
+
+\subsubsection*{6.1.3 Position in car}
+TODO
+
+\subsection*{6.2 Motor 2}
+TODO
+
+\section*{7 Torque encoder}
+TODO
+
+\subsection*{7.1 Description/additional circuitry}
+TODO
+
+\subsection*{7.2 Torque Encoder Plausibility Check}
+TODO
+
+\subsection*{7.3 Wiring}
+TODO
+
+\subsection*{7.4 Position in car/mechanical fastening/mechanical connection}
+TODO
+
+\section*{8 Additional LV-parts interfering with the tractive system}
+TODO
+
+\subsection*{8.1 LV part 1}
+TODO
+
+\subsubsection*{8.1.1 Description}
+TODO
+
+\subsubsection*{8.1.2 "Wiring, cables,"}
+TODO
+
+\subsubsection*{8.1.3 Position in car}
+TODO
+
+\subsection*{8.2 LV part 2}
+TODO
+
+\section*{9 Overall Grounding Concept}
+TODO
+
+\subsection*{9.1 Description of the Grounding Concept}
+TODO
+
+\subsection*{9.2 Grounding Measurements}
+TODO
+
+\section*{10 Firewall(s)}
+TODO
+
+\subsection*{10.1 Firewall 1}
+TODO
+
+\subsubsection*{10.1.1 Description/materials}
+TODO
+
+\subsubsection*{10.1.2 Position in car}
+TODO
+
+\subsection*{10.2 Firewall 2}
+TODO
+
+\section*{11 Appendix}
+TODO
+
 \end{document}
+TODO
