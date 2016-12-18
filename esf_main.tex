@@ -224,25 +224,36 @@ TODO
 
 \subsection{IMD}\label{imd}
 \subsubsection{Description (type, operation parameters)}
-%Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also, describe how the IMD indicator light is wired, etc.
-TODO
+%Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also describe how the IMD indicator light is wired, etc.Additionally fill out the following table replacing the values with your specification:
 
-	\begin{table}[H]
-	    \centering
-	    \begin{tabular}{|l|l|}
-	    \hline
-	        Supply voltage range: & 10...36VDC \\ \hline
-	        Supply voltage & 12VDC \\ \hline
-	        Environmental temperature range: & Unknown \\ \hline
-	        Selftest interval: & Every 5 minutes \\ \hline
-	        High voltage range: & 0-1000 VDC \\ \hline
-	        Set response value: & 100 k\ohm TODO:double check this\\ \hline
-	        Max. operation current: & 150 mA \\ \hline
-	        Approximate time to shut down at 50$\%$ of the response value: & $\leq$ 40 sec \\ \hline
-	    \end{tabular}
-	    \caption{Parameters of the IMD}
-	    \label{IMDparameters}
+The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the ???? board. If the ???? board detects the relay is  open it activates the IMD light.
+
+Table 2.4 Parameters of the IMD
+\begin{center}
+	\begin{table}
+		\begin{tabular}{|l|l|}
+			\hline
+			Supply voltage range: &  10..36VDC \\
+			\hline
+			Supply voltage: &  12VDC\\
+			\hline
+			Environmental temperature range: &  -40..105$^{\circ}$C \\
+			\hline
+			Selftest interval: &  Always at startup, then every 5 minutes \\
+			\hline
+			High voltage range: &  DC 0..1000V \\
+			\hline
+			Set response value: &  100k$\Omega$ \\
+			\hline
+			Max. operation current: &  150mA \\
+			\hline
+			Approximate time to shut down at 50\% of the response value:&  $\leq$ 40s \\
+			\hline
+		\end{tabular}
+		\caption{Parameters of the IMD}
 	\end{table}
+\end{center}
+
 
 \subsubsection{Wiring/cables/connectors/}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
@@ -385,7 +396,6 @@ The TSAL will be mounted to the underside of the highest point of the main roll 
 \subsection{Measurement points}\label{measurement_points}
 \subsubsection{Description}
 %Describe the housing used and how it can be accessed, etc.  Describe how the measurement points protected/covered when not in use and how the electrical connections on the back of the measurement points are protected when the measurement points are being used.
-TODO
 
 \subsubsection{Wiring, connectors, cables}
 %Describe wiring, show schematics, and describe connectors and cables used and show useful data regarding the wiring.  Include details on the protection resistor including resistance, voltage and power rating.
