@@ -38,8 +38,10 @@ TODO
 TODO
 
 \subsection*{2.2 IMD}
+\subsubsection*{2.2.1 "Description (type, operation parameters)"}
+
 TODO
-The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then used in a SPST-NO relay to close the switch in the shutdown circuit which opens the AIRs. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the ???? board. If the ???? board detects the relay is  open it activates the IMD light.
+The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the ???? board. If the ???? board detects the relay is  open it activates the IMD light.
 
 
 Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also describe how the IMD indicator light is wired, etc.
@@ -48,33 +50,35 @@ Additionally fill out the following table replacing the values with your specifi
 
 Table 2.4 Parameters of the IMD
 \begin{center}
-\begin{tabular}{|l|l|}
-\hline
-Supply voltage range: &  10..36VDC \\
-\hline
-Supply voltage: &  12VDC\\
-\hline
-Environmental temperature range: &  -40..105$^{\circ}$C \\
-\hline
-Selftest interval: &  Always at startup, then every 5 minutes \\
-\hline
-High voltage range: &  DC 0..1000V \\
-\hline
-Set response value: &  100k$\Omega$ \\
-\hline
-Max. operation current: &  150mA \\
-\hline
-Approximate time to shut down at 50\% of the response value:&  $\leq$ 40s \\
-\hline
-\end{tabular}
+	\begin{table}
+		\begin{tabular}{|l|l|}
+			\hline
+			Supply voltage range: &  10..36VDC \\
+			\hline
+			Supply voltage: &  12VDC\\
+			\hline
+			Environmental temperature range: &  -40..105$^{\circ}$C \\
+			\hline
+			Selftest interval: &  Always at startup, then every 5 minutes \\
+			\hline
+			High voltage range: &  DC 0..1000V \\
+			\hline
+			Set response value: &  100k$\Omega$ \\
+			\hline
+			Max. operation current: &  150mA \\
+			\hline
+			Approximate time to shut down at 50\% of the response value:&  $\leq$ 40s \\
+			\hline
+		\end{tabular}
+		\caption{Parameters of the IMD}
+	\end{table}
 \end{center}
 
 
 
 
 
-\subsubsection*{2.2.1 "Description (type, operation parameters)"}
-TODO
+
 
 \subsubsection*{2.2.2 Wiring/cables/connectors/}
 TODO
