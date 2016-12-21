@@ -5,321 +5,399 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{varioref}
+\usepackage{fancyref}
+\usepackage{subcaption}
+\usepackage{comment}
+\usepackage{hyperref}
+\usepackage{epstopdf}
+\usepackage{gensymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{epstopdf}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{soul}
+
+\graphicspath{{img/}}
+
 
 \begin{document}
-\section*{Table of Contents iii}
-TODO
 
-\section*{I List of Figures}
-TODO
+\renewcommand{\headrulewidth}{0pt}
+\lhead{Olin College of Engineering, E238}
+\chead{}
+\rhead{\rightmark}
+\lfoot{2017 Formula SAE Electric}
+\cfoot{\includegraphics[width=2cm]{logo_blue.png}}
+\rfoot{\thepage}
 
-\section*{II List of Tables}
-TODO
+\begin{titlepage}
 
-\section*{III List of Abbreviations}
-TODO
+    \centering
+    \vfill
+    \includegraphics[width=10cm]{logo_blue.png}
+
+    {\bfseries\Large
+        \vskip3cm
+        Electrical System Form FSAE-E 2017\\
+        Car E238\\
+    }
+
+    \begin{table}[H]
+        \centering
+        \label{my-label}
+        \begin{tabular}{lr}
+        University Name: & Olin College of Engineering \\ \hline
+        Team Name: & Olin Electric Motorsports \\ \hline
+        Car Number: & E238 \\ \hline
+        ESF Contact: & Alex Hoppe \\ \hline
+        e-mail: & Alexander.Hoppe@students.olin.edu \\ \hline
+        \end{tabular}
+    \end{table}
+\vfill
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.9 \textwidth]{mk1}
+\end{figure}
+
+\end{titlepage}
+
+\tableofcontents
+\addcontentsline{toc}{section}{Table of Contents}
+
+\newpage
+\listoffigures
+\addcontentsline{toc}{section}{List of Figures}
+
+\newpage
+\listoftables
+\addcontentsline{toc}{section}{List of Tables}
+
+\newpage
+\section*{List of Abbreviations}
+\addcontentsline{toc}{section}{List of Abbreviations}
+\begin{itemize}
+    \item MSD- Manual Service Disconnect
+    \item CONN- Main accumulator connector
+\end{itemize}
 
-\section*{1 System Overview}
+\section{System Overview}
 TODO
 
-\section*{2 Electrical Systems}
+\section{Electrical Systems}
 TODO
 
-\subsection*{2.1 Shutdown Circuit}
+\subsection{Shutdown Circuit}
 TODO
 
-\subsubsection*{2.1.1 Description/concept}
+\subsubsection{Description/concept}
 TODO
 
-\subsubsection*{2.1.2 Wiring / additional circuitry}
+\subsubsection{Wiring / additional circuitry}
 TODO
 
-\subsubsection*{2.1.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{2.2 IMD}
+\subsection{IMD}
 TODO
 
-\subsubsection*{2.2.1 "Description (type, operation parameters)"}
+\subsubsection{Description (type, operation parameters)}
 TODO
 
-\subsubsection*{2.2.2 Wiring/cables/connectors/}
+\subsubsection{Wiring/cables/connectors/}
 TODO
 
-\subsubsection*{2.2.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{2.3 Inertia Switch}
+\subsection{Inertia Switch}
 TODO
 
-\subsubsection*{2.3.1 "Description (type, operation parameters)"}
+\subsubsection{Description (type, operation parameters)}
 TODO
 
-\subsubsection*{2.3.2 Wiring/cables/connectors/}
+\subsubsection{Wiring/cables/connectors/}
 TODO
 
-\subsubsection*{2.3.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{2.4 Brake Plausibility Device}
+\subsection{Brake Plausibility Device}
 TODO
 
-\subsubsection*{2.4.1 Description/additional circuitry}
+\subsubsection{Description/additional circuitry}
 TODO
 
-\subsubsection*{2.4.2 Wiring}
+\subsubsection{Wiring}
 TODO
 
-\subsubsection*{2.4.3 Position in car/mechanical fastening/mechanical connection}
+\subsubsection{Position in car/mechanical fastening/mechanical connection}
 TODO
 
-\subsection*{2.5 Reset / Latching for IMD and BMS}
+\subsection{Reset / Latching for IMD and BMS}
 TODO
 
-\subsubsection*{2.5.1 Description/circuitry}
+\subsubsection{Description/circuitry}
 TODO
 
-\subsubsection*{2.5.2 Wiring/cables/connectors}
+\subsubsection{Wiring/cables/connectors}
 TODO
 
-\subsubsection*{2.5.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{2.6 Shutdown System Interlocks}
+\subsection{Shutdown System Interlocks}
 TODO
 
-\subsubsection*{2.6.1 Description/circuitry}
+\subsubsection{Description/circuitry}
 TODO
 
-\subsubsection*{2.6.2 Wiring/cables/connectors}
+\subsubsection{Wiring/cables/connectors}
 TODO
 
-\subsubsection*{2.6.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{2.7 Tractive system active light}
+\subsection{Tractive system active light}
 TODO
 
-\subsubsection*{2.7.1 Description/circuitry}
+\subsubsection{Description/circuitry}
 TODO
 
-\subsubsection*{2.7.2 Wiring/cables/connectors}
+\subsubsection{Wiring/cables/connectors}
 TODO
 
-\subsubsection*{2.7.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{2.8 Measurement points}
+\subsection{Measurement points}
 TODO
 
-\subsubsection*{2.8.1 Description}
+\subsubsection{Description}
 TODO
 
-\subsubsection*{2.8.2 "Wiring, connectors, cables"}
+\subsubsection{Wiring, connectors, cables}
 TODO
 
-\subsubsection*{2.8.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{2.9 Pre-Charge circuitry}
+\subsection{Pre-Charge circuitry}
 TODO
 
-\subsubsection*{2.9.1 Description}
+\subsubsection{Description}
 TODO
 
-\subsubsection*{2.9.2 "Wiring, cables, current calculations, connectors"}
+\subsubsection{Wiring, cables, current calculations, connectors}
 TODO
 
-\subsubsection*{2.9.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{2.1 Discharge circuitry}
+\subsection{Discharge circuitry}
 TODO
 
-\subsubsection*{2.10.1 Description}
+\subsubsection{Description}
 TODO
 
-\subsubsection*{2.10.2 "Wiring, cables, current calculations, connectors"}
+\subsubsection{Wiring, cables, current calculations, connectors}
 TODO
 
-\subsubsection*{2.10.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{2.11 HV Disconnect (HVD)}
+\subsection{HV Disconnect (HVD)}
 TODO
 
-\subsubsection*{2.11.1 Description}
+\subsubsection{Description}
 TODO
 
-\subsubsection*{2.11.2 "Wiring, cables, current calculations, connectors"}
+\subsubsection{Wiring, cables, current calculations, connectors}
 TODO
 
-\subsubsection*{2.11.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{2.12 Ready-To-Drive-Sound (RTDS)}
+\subsection{Ready-To-Drive-Sound (RTDS)}
 TODO
 
-\subsubsection*{2.12.1 Description}
+\subsubsection{Description}
 TODO
 
-\subsubsection*{2.12.2 "Wiring, cables, current calculations, connectors"}
+\subsubsection{Wiring, cables, current calculations, connectors}
 TODO
 
-\subsubsection*{2.12.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\section*{3 Accumulator}
+\section{Accumulator}
 TODO
 
-\subsection*{3.1 Accumulator pack 1}
+\subsection{Accumulator pack 1}
 TODO
 
-\subsubsection*{3.1.1 Overview/description/parameters}
+\subsubsection{Overview/description/parameters}
 TODO
 
-\subsubsection*{3.1.2 Cell description}
+\subsubsection{Cell description}
 TODO
 
-\subsubsection*{3.1.3 Cell configuration}
+\subsubsection{Cell configuration}
 TODO
 
-\subsubsection*{3.1.4 Cell temperature monitoring}
+\subsubsection{Cell temperature monitoring}
 TODO
 
-\subsubsection*{3.1.5 Battery management system}
+\subsubsection{Battery management system}
 TODO
 
-\subsubsection*{3.1.6 Accumulator indicator}
+\subsubsection{Accumulator indicator}
 TODO
 
-\subsubsection*{3.1.7 "Wiring, cables, current calculations, connectors"}
+\subsubsection{Wiring, cables, current calculations, connectors}
 TODO
 
-\subsubsection*{3.1.8 Accumulator insulation relays}
+\subsubsection{Accumulator insulation relays}
 TODO
 
-\subsubsection*{3.1.9 Fusing}
+\subsubsection{Fusing}
 TODO
 
-\subsubsection*{3.1.10 Charging}
+\subsubsection{Charging}
 TODO
 
-\subsubsection*{3.1.11 Mechanical Configuration/materials}
+\subsubsection{Mechanical Configuration/materials}
 TODO
 
-\subsubsection*{3.1.12 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{3.2 Accumulator pack 2}
+\subsection{Accumulator pack 2}
 TODO
 
-\section*{4 Energy meter mounting}
+\section{Energy meter mounting}
 TODO
 
-\subsection*{4.1 Description}
+\subsection{Description}
 TODO
 
-\subsection*{4.2 "Wiring, cables, current calculations, connectors"}
+\subsection{Wiring, cables, current calculations, connectors}
 TODO
 
-\subsection*{4.3 Position in car}
+\subsection{Position in car}
 TODO
 
-\section*{5 Motor controller}
+\section{Motor controller}
 TODO
 
-\subsection*{5.1 Motor controller 1}
+\subsection{Motor controller 1}
 TODO
 
-\subsubsection*{5.1.1 "Description, type, operation parameters"}
+\subsubsection{Description, type, operation parameters}
 TODO
 
-\subsubsection*{5.1.2 "Wiring, cables, current calculations, connectors"}
+\subsubsection{Wiring, cables, current calculations, connectors}
 TODO
 
-\subsubsection*{5.1.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{5.2 Motor controller 2}
+\subsection{Motor controller 2}
 TODO
 
-\section*{6 Motors}
+\section{Motors}
 TODO
 
-\subsection*{6.1 Motor 1}
+\subsection{Motor 1}
 TODO
 
-\subsubsection*{6.1.1 "Description, type, operating parameters"}
+\subsubsection{Description, type, operating parameters}
 TODO
 
-\subsubsection*{6.1.2 "Wiring, cables, current calculations, connectors"}
+\subsubsection{Wiring, cables, current calculations, connectors}
 TODO
 
-\subsubsection*{6.1.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{6.2 Motor 2}
+\subsection{Motor 2}
 TODO
 
-\section*{7 Torque encoder}
+\section{Torque encoder}
 TODO
 
-\subsection*{7.1 Description/additional circuitry}
+\subsection{Description/additional circuitry}
 TODO
 
-\subsection*{7.2 Torque Encoder Plausibility Check}
+\subsection{Torque Encoder Plausibility Check}
 TODO
 
-\subsection*{7.3 Wiring}
+\subsection{Wiring}
 TODO
 
-\subsection*{7.4 Position in car/mechanical fastening/mechanical connection}
+\subsection{Position in car/mechanical fastening/mechanical connection}
 TODO
 
-\section*{8 Additional LV-parts interfering with the tractive system}
+\section{Additional LV-parts interfering with the tractive system}
 TODO
 
-\subsection*{8.1 LV part 1}
+\subsection{LV part 1}
 TODO
 
-\subsubsection*{8.1.1 Description}
+\subsubsection{Description}
 TODO
 
-\subsubsection*{8.1.2 "Wiring, cables,"}
+\subsubsection*{Wiring, cables}
 TODO
 
-\subsubsection*{8.1.3 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{8.2 LV part 2}
+\subsection{LV part 2}
 TODO
 
-\section*{9 Overall Grounding Concept}
+\section{Overall Grounding Concept}
 TODO
 
-\subsection*{9.1 Description of the Grounding Concept}
+\subsection{Description of the Grounding Concept}
 TODO
 
-\subsection*{9.2 Grounding Measurements}
+\subsection{Grounding Measurements}
 TODO
 
-\section*{10 Firewall(s)}
+\section{Firewall(s)}
 TODO
 
-\subsection*{10.1 Firewall 1}
+\subsection{Firewall 1}
 TODO
 
-\subsubsection*{10.1.1 Description/materials}
+\subsubsection{Description/materials}
 TODO
 
-\subsubsection*{10.1.2 Position in car}
+\subsubsection{Position in car}
 TODO
 
-\subsection*{10.2 Firewall 2}
+\subsection{Firewall 2}
 TODO
 
-\section*{11 Appendix}
+\section{Appendix}
 TODO
 
 \end{document}
