@@ -660,44 +660,98 @@ TODO
 
 
 \section{Motor controller}
-TODO
-
 \subsection{Motor controller 1}
+\subsubsection{Description, type, operation parameters}
+%Describe important functions; provide table with main parameters like resulting voltages->minimum, maximum, nominal, currents etc.
 TODO
 
-\subsubsection{Description, type, operation parameters}
-TODO
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+	\hline
+	Motor Controller type & TODO \\ \hline
+	Maximum continuous power & TODO kW \\ \hline
+	Maximum peak power & TODO kW \\ \hline
+	Maximum input voltage & TODO VDC \\ \hline
+	Output voltage & TODO \\ \hline
+	Maximum continuous output current & TODO A \\ \hline
+	Maximum peak current & TODO A \\ \hline
+	Control method & CAN \\ \hline
+	Cooling method & Water \\ \hline
+	Auxiliary supply voltage & TODO \\ \hline
+	\end{tabular}
+	\caption{General Motor Controller data}
+	\label{MC}
+\end{table}
 
 \subsubsection{Wiring, cables, current calculations, connectors}
-TODO
+%Describe the wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
+TODO: fill out table for all wires used to connect to MC and Motor 
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+	\hline
+	Wire type & 2 AWG Cable\\ \hline
+	Current rating & 181 A \\ \hline
+	Maximum operating voltage & 8kVAC \\ \hline
+	Temperature rating & 125 \degree C \\ \hline
+	\end{tabular}
+	\caption{Wire data of the company: Prestolite, 0.052 in$^{2}$}
+	\label{motortomcwire}
+\end{table}
 
 \subsubsection{Position in car}
+%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
 \subsection{Motor controller 2}
-TODO
+We only have one motor controller.
 
 \section{Motors}
-TODO
-
 \subsection{Motor 1}
 TODO
 
 \subsubsection{Description, type, operating parameters}
+%Describe the motor used, provide table with main parameters like resulting voltages->minimum, maximum, nominal, currents, resulting motor power, use figures to show important characteristics.
 TODO
 
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+	\hline
+	Motor Manufacturer and Type: & \begin{tabular}[c]{@{}l@{}}Make,\\ Model\end{tabular} \\ \hline
+	Motor principle & Permanent magnet synchronous motor \\ \hline
+	Maximum continuous power & TODO kW \\ \hline
+	Peak Power & TODO kW \\ \hline
+	Input voltage & TODO V \\ \hline
+	Nominal current & TODO A \\ \hline
+	Peak current & TODO A \\ \hline
+	Maximum torque & TODO ft-lb \\ \hline
+	Nominal torque & TODO ft-lb \\ \hline
+	Cooling method & Water \\ \hline
+	\end{tabular}
+	\caption{General motor data}
+	\label{motortable}
+\end{table}
+
+% Give a plot of power vs. Rpm including a line for nominal and maximum power
+% Give a plot of torque vs. rpm including a line for nominal and maximum torque
+
+
 \subsubsection{Wiring, cables, current calculations, connectors}
+%Describe the wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
 TODO
 
 \subsubsection{Position in car}
+%Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary and clearly identify the structure used to protect all relevant parts.
 TODO
 
 \subsection{Motor 2}
-TODO
+We only have one motor. 
+
 
 \section{Torque encoder}
-TODO
-
 \subsection{Description/additional circuitry}
 TODO
 
