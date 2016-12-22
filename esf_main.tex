@@ -447,57 +447,212 @@ TODO
 
 
 \section{Accumulator}
-TODO
-
 \subsection{Accumulator pack 1}
+\subsubsection{Overview/description/parameters}
+%Describe concept of accumulator pack, provide table with main parameters like number of cells, cell stacks separated by maintenance plugs, cell configuration, resulting voltages->minimum, maximum, nominal, currents, capacity etc.
 TODO
 
-\subsubsection{Overview/description/parameters}
-TODO
+	\begin{table}[H]
+	    \centering
+	    \begin{tabular}{|l|l|}
+	        \hline
+	        Maximum Voltage & 298.8 VDC \\ \hline
+	        Nominal Voltage & 266.4 VDC \\ \hline
+	        Minimum Voltage & 201.6 VDC \\ \hline
+	        Maximum output current & 225 A \\ \hline
+	        Maximum nominal current & 125 A \\ \hline
+	        Maximum charging current & 180 A \\ \hline
+	        Total number of cells & 72 \\ \hline
+	        Cell configuration & 72s1p \\ \hline
+	        Total capacity & 25.9 Ah TODO convert to MJ \\ \hline
+	        Number of cell stacks (segments) & 6 \\ \hline
+	    \end{tabular}
+	    \caption{Main accumulator parameters}
+	    \label{batterytable}
+	\end{table}
 
 \subsubsection{Cell description}
+%Describe the cell type used and the chemistry, provide table with main parameters.
 TODO
 
+	\begin{table}[H]
+	    \centering
+	    \begin{tabular}{|l|l|}
+	        \hline
+	        Cell Manufacturer and Type &
+	            \begin{tabular}[c]{@{}l@{}}
+	                LG Chem\\ Model P2.7
+	            \end{tabular} \\ \hline
+	        Cell nominal capacity & 25.9 Ah \\ \hline
+	        Maximum Voltage & 4.15 V \\ \hline
+	        Nominal Voltage & 3.7 V \\ \hline
+	        Minimum Voltage & 2.8 V \\ \hline
+	        Maximum output current & 225 A \\ \hline
+	        Maximum nominal output current & 125 A \\ \hline
+	        Maximum charging current & 180 A \\ \hline
+	        Maximum Cell Temperature (discharging) & 45 \degree C \\ \hline
+	        Maximum Cell Temperature (charging) & 45 \degree C \\ \hline
+	        Cell Chemistry & NMC/LMO\\ \hline
+	    \end{tabular}
+	    \caption{Main cell specification}
+	    \label{cells}
+	\end{table}
+
 \subsubsection{Cell configuration}
+%Describe cell configuration, cell interconnect, show schematics of electrical configuration and CAD of connection techniques, cover additional parts like internal cell fuses etc.
 TODO
 
 \subsubsection{Cell temperature monitoring}
+%Describe how the temperature of the cells is monitored, where the temperature sensors are placed, how many cells are monitored, etc. Show schematics, cover additional parts, etc.
 TODO
 
 \subsubsection{Battery management system}
+%Describe the BMS used including at least the following:
+%-	Sense wiring protection (fusing / fusible link wire used)
+%-	What upper and lower voltage does the BMS react at and how does it react?
+%-	What cell temperature does the BMS react at and how does it react?
+%-	Show tables of operation parameters
+%-	Describe how many cells are sensed by each BMS board, the configuration of the cells, the configuration of the boards and how any comms wiring between boards is protected 
+%-	Describe how the BMS is able to open the AIRs if any error is detected
+%-	Describe where galvanic isolation occurs between TS and GLV system connections.
+
 TODO
 
 \subsubsection{Accumulator indicator}
+%Describe the indicator, show wiring, provide tables with operation, PCB design, etc. 
 TODO
 
 \subsubsection{Wiring, cables, current calculations, connectors}
+%Describe the internal wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
+% Discuss maximum expected current, DC and AC how long will this be provided?
+% Compare the maximum values to nominal currents
+% Give a table for each kind of wire in your tractive-system:
+% Describe your maintenance plugs, provide pictures
+% Use tables like the one shown below:
+
 TODO
+
+	\begin{table}[H]
+	    \centering
+	    \begin{tabular}{|l|l|}
+	        \hline
+	        Wire type & Company A \\ \hline
+	        Current rating & 150A TODO \\ \hline
+	        Cross sectional area & 0.326 mm$^2$ TODO \\ \hline
+	        Maximum voltage & 600VDC TODO \\ \hline
+	        Temperature rating & 120 \degree C TODO \\ \hline
+	        \begin{tabular}[c]{@{}l@{}}
+	            Wire connects the\\ following components:
+	        \end{tabular} &
+	        \begin{tabular}[c]{@{}l@{}}
+	            Cell and BMS \\ other \\ TODO
+	        \end{tabular} \\ \hline
+	    \end{tabular}
+	    \caption{Wire data of the company: A, 0.326 mm$^{2}$ TODO}
+	    \label{tslowcurrentwire}
+	\end{table}
 
 \subsubsection{Accumulator insulation relays}
+%Describe the AIRs used and their main operation parameters, use tables, etc.
 TODO
+
+	\begin{table}[H]
+	    \centering
+	    \begin{tabular}{|l|l|}
+	        \hline
+	        Relay Type: & Normally Open \\ \hline
+	        Contact arrangement & SPST-NO-DM \\ \hline
+	        Continuous DC current rating & 500A \\ \hline
+	        Overload DC current rating & 2000A \\ \hline
+	        Maximum operation voltage & 900VDC \\ \hline
+	        Nominal coil voltage & 12VDC \\ \hline
+	        Normal Load switching & TODO \\ \hline
+	        Maximum Load switching & TODO \\ \hline
+	    \end{tabular}
+	    \caption{Basic AIR Data}
+	    \label{air}
+	\end{table}
 
 \subsubsection{Fusing}
+%Describe the fuses used and their main operation parameters, use tables, etc.
+%Additionally, fill out the following table for each fuse type used:
 TODO
+
+	\begin{table}[H]
+	    \centering
+	    \begin{tabular}{|l|l|}
+	    \hline
+	        Fuse manufacturer and type: & \begin{tabular}[c]{@{}l@{}}Bussmann,\\ LPJ type\end{tabular} \\ \hline
+	        Continuous current rating & 150 A \\ \hline
+	        Maximum operating voltage & 600 V \\ \hline
+	        Type of fuse & Time delay \\ \hline
+	        I2t rating & TODO \\ \hline
+	        \begin{tabular}[c]{@{}l@{}}Interrupt Current (max. current\\ at which the fuse can interrupt\\ the circuit)\end{tabular} & 300 kA \\ \hline
+	    \end{tabular}
+	    \caption{Tractive system main fuse, LPJ type}
+	    \label{tsfuse}
+	\end{table}
+
+%Create a table with components and wires protected by the fuse(s) and the according continuous current rating, below is an example table with some potential entries.  Complete this table with information for your design and add/remove additional locations as applicable.  Ensure that the rating of all the components is greater than the rating of the fuse such that none of the other components become the fuse.
+
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|l|l|l|l|l|}
+		    \hline
+		    Location & Wire Size & Wire Ampacity & Fuse type & Fuse rating \\ \hline
+		    \begin{tabular}[c]{@{}l@{}}TS Main fuse (before HVD,\\ on pos pole)\end{tabular} & 2 AWG & 181A & LPJ type & 175A \\ \hline
+		    TS+ to GLV DC-DC converter & 20 AWG & 7A & MIN fuse & 5A \\ \hline
+		    GLV 12V+ & 20 AWG & 7A & MIN fuse & 2A \\ \hline
+		    GLV 12V+ to PCBs & trace width 12mil & 1A & 0zck series & 1A \\ \hline
+		    Shutdown pos pole & 22 AWG & 7A & MIN fuse & 2A \\ \hline
+		    \begin{tabular}[c]{@{}l@{}}TS+ to IMD, TSMPs TSAL's DC-DC\\ converter\end{tabular} & 22 AWG & 7A & ABC fuse & 1A \\ \hline
+		    \begin{tabular}[c]{@{}l@{}}GLV 12V to 5V regulator \\ (CAN system)\end{tabular} & 22 AWG & 7A & ABC fuse & 1A \\ \hline
+		    \begin{tabular}[c]{@{}l@{}}Keyswitch, in parallel with\\ TS voltage\end{tabular} & 18 AWG & 16A & AC fuse & 7A \\ \hline
+		    Cell to BMS x28 & \begin{tabular}[c]{@{}l@{}}PCB\\          trace\end{tabular} & \begin{tabular}[c]{@{}l@{}}Trace\\ ampacity: 7.6 A \\ (open air)\end{tabular} & \begin{tabular}[c]{@{}l@{}}CIQ\\           Fuse x28\end{tabular} & 3A \\ \hline
+		\end{tabular}
+		\caption{Fuse Protection Table TODO:this is just fuses within the accumulator}
+		\label{allfuses}
+	\end{table}
 
 \subsubsection{Charging}
+%Describe how the accumulator will be charged. How will the charger be connected? How will the accumulator be supervised during charging? Show schematics, CAD-Renderings, etc., if needed
 TODO
 
+	\begin{table}[H]
+	    \centering
+	    \begin{tabular}{|l|l|}
+	        \hline
+	        Charger Type: & TODO \\ \hline
+	        Maximum charging power & TODO W \\ \hline
+	        Maximum charging voltage & TODO V \\ \hline
+	        Maximum charging current & TODO A \\ \hline
+	        Interface with accumulator & TODO \\ \hline
+	        Input voltage & TODO \\ \hline
+	        Input current & TODO \\ \hline
+	    \end{tabular}
+	    \caption{General Charger data}
+	    \label{charger}
+	\end{table}
+
 \subsubsection{Mechanical Configuration/materials}
+%Describe the concept of the container, show how the cells are mounted, use CAD-Renderings, show data regarding materials used, etc.
 TODO
 
 \subsubsection{Position in car}
+%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.  Ensure that the required mechanical structure to protect the accumulator and other electrical components is clearly identified.
 TODO
 
 \subsection{Accumulator pack 2}
-TODO
+We only have one accumulator.
 
 \section{Energy meter mounting}
-TODO
-
 \subsection{Description}
+%Describe where the energy meter is mounted and how, etc.
 TODO
 
 \subsection{Wiring, cables, current calculations, connectors}
+%Describe the wiring, show schematics, provide calculations for currents and voltages, and show data regarding the cables and connectors used.
+
 TODO
 
 \subsection{Position in car}
