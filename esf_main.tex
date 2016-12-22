@@ -753,58 +753,77 @@ We only have one motor.
 
 \section{Torque encoder}
 \subsection{Description/additional circuitry}
+%Describe the type of the torque encoder(s) used, provide tables with main operation parameters, and describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how the system reacts if an implausibility or error (e.g. short circuit or open circuit or equivalent) is detected.
 TODO
 
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+	\hline
+	Torque encoder manufacturer and type: & MHR5621 from Active Sensors \\ \hline
+	Torque encoder principle & Potentiometer \\ \hline
+	Supply voltage & 5V \\ \hline
+	Maximum supply current & 15 mA \\ \hline
+	Operating temperature & -55 to 150 \degree C \\ \hline
+	Used output & 0-5V \\ \hline
+	\end{tabular}
+	\caption{Torque Encoder data}
+	\label{encoder}
+\end{table}
+
 \subsection{Torque Encoder Plausibility Check}
+%Describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how failures (e.g. Implausibility, short circuit or open circuit or equivalent) are detected and how the system reacts if an implausibility or errors is detected.
 TODO
 
 \subsection{Wiring}
+%Describe the wiring, show schematics, show data regarding the cables and connectors used.
 TODO
 
 \subsection{Position in car/mechanical fastening/mechanical connection}
+%Provide CAD-renderings showing all relevant parts and discuss the mechanical connection of the sensors to the pedal assembly. Mark the parts in the rendering, if necessary.
 TODO
 
 \section{Additional LV-parts interfering with the tractive system}
-TODO
-
 \subsection{LV part 1}
+%Describe those parts here which interfere or influence the tractive system, for example a controlling unit that measures wheel speeds and steering angle and calculates a target torque for each motor or a DC/DC-Converter providing power for the LV-system from the HV-system, etc.
 TODO
 
 \subsubsection{Description}
+%Describe the parts used and their circuitry, and provide main operation parameters, use tables or figures, etc.
 TODO
 
 \subsubsection*{Wiring, cables}
+%Describe the wiring, show schematics, etc.
 TODO
 
 \subsubsection{Position in car}
+%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
 \subsection{LV part 2}
 TODO
 
 \section{Overall Grounding Concept}
-TODO
-
 \subsection{Description of the Grounding Concept}
+%Describe how you intend to achieve the resistances between components at the required levels as defined in EV4.3.
 TODO
 
 \subsection{Grounding Measurements}
+%Describe which measurements you will take to ensure that EV4.3 is achieved
 TODO
 
 \section{Firewall(s)}
-TODO
-
 \subsection{Firewall 1}
-TODO
-
 \subsubsection{Description/materials}
+%Describe the concept, layer structure and the materials used for the firewall. Show how the low resistance Control System ground connection is achieved.
 TODO
 
 \subsubsection{Position in car}
+%Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
 \subsection{Firewall 2}
-TODO
+We only have one firewall. 
 
 \section{Appendix}
 TODO
