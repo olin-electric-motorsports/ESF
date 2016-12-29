@@ -2,6 +2,7 @@
 \usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{chngcntr}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
@@ -44,6 +45,10 @@
 \DeclareRobustCommand{\hlr}[1]{{\sethlcolor{red}\hl{#1}}}
 \graphicspath{{img/}}
 \counterwithin{table}{section} %number tables with section#.table#
+
+
+\counterwithin{table}{section} %number tables with section#.table#
+
 
 \begin{document}
 \section*{Table of Contents iii}
@@ -228,9 +233,8 @@ TODO
 
 The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the ???? board. If the ???? board detects the relay is  open it activates the IMD light.
 
-Table 2.4 Parameters of the IMD
 \begin{center}
-	\begin{table}
+	\begin{table}[H]
 		\begin{tabular}{|l|l|}
 			\hline
 			Supply voltage range: &  10..36VDC \\
@@ -251,6 +255,7 @@ Table 2.4 Parameters of the IMD
 			\hline
 		\end{tabular}
 		\caption{Parameters of the IMD}
+		\label{IMDParameters}
 	\end{table}
 \end{center}
 
@@ -258,11 +263,18 @@ Table 2.4 Parameters of the IMD
 \subsubsection{Wiring/cables/connectors/}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 TODO
+The connector on the IMD is the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8. It is attached to a 28 AWG ribbon cable that is connected to the IMD latch using a 6-pin TE Connectivity AMP connector. The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used.
 
-\subsubsection{Position in car}
-%Provide CAD-renderings showing the relevant parts. Mark the parts in the renderings, if necessary.
+%Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
+
+% I don't know if the IMD has a built in fuse
+
+\subsubsection*{2.2.3 Position in car}
 TODO
-The IMD will be located inside the accumulator, as shown in Section 3.
+%Position in car
+%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
+
+The IMD will be located inside the accumulator, as shown in Section 3.1.
 
 
 \subsection{Inertia Switch}\label{inertia_switch}
