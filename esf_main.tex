@@ -51,9 +51,12 @@
 
 
 \begin{document}
+<<<<<<< HEAD
 \section*{Table of Contents iii}
 TODO
 
+=======
+>>>>>>> Resolved duplicates from merge. Added IMD latch schematic as a figure in section 2.2.2
 \renewcommand{\headrulewidth}{0pt}
 \lhead{Olin College of Engineering, E238}
 \chead{}
@@ -259,11 +262,24 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 	\end{table}
 \end{center}
 
-
 \subsubsection{Wiring/cables/connectors/}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 TODO
 The connector on the IMD is the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8. It is attached to a 28 AWG ribbon cable that is connected to the IMD latch using a 6-pin TE Connectivity AMP connector. The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used.
+
+
+\begin{figure} [!ht]
+	\centering  % this centers the image
+	
+	\includegraphics[width=0.6\textwidth]{IMD_Latch_Rev2_AltiumSchematic.png}
+	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+	
+	\caption{The schematic for the IMD Latch.}
+	% always caption your figures!
+	
+	\label{fig:IMDLatch_Schematic}
+\end{figure}
+
 
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 
@@ -327,7 +343,7 @@ TODO
 	    \label{TorqueEncoder1}
 	\end{table}
 
-<<<<<<< HEAD
+
 \subsubsection{Wiring}
 %Describe the wiring, show schematics including the circuit board, show data regarding the cables and connectors used.  If not detailed in section 2.1, be sure to show how the device open the shutdown circuit.
 TODO
