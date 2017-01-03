@@ -231,8 +231,8 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 \subsubsection*{2.2.2 Wiring/cables/connectors/}
 TODO
 
-The connector on the IMD is the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8. It is attached to a 28 AWG ribbon cable that is connected to the IMD latch using a 6-pin TE Connectivity AMP connector. The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used.
-
+The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity AMP connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used.
+% I am not sure if this is actually how we are doing it, but I am assuming it is correct until I have time to check.
 
 \begin{figure} [!ht]
 	\centering  % this centers the image
@@ -246,7 +246,7 @@ The connector on the IMD is the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8. It is att
 	\label{fig:IMDLatch_Schematic}
 \end{figure}
 
-
+The IMD latch shown in figure~\ref{fig:IMDLatch_Schematic} uses the signal from the IMD to close a relay in the shutdown circuit. In order for the shutdown relay to close a second relay needs to be closed. The second relay is initially powered by a one shot 4 second pulse from the GLV system. After the first four seconds the sicnal from the IMD is used to keep the secondary relay closed. If the IMD signal goes low the secondary relay will close. This opens the shutdown relay and makes it impossible for the IMD to close the shutdown relay again until the latch has been manually reset. The initial 4 second pulse is necessary to ensure that anomalous start up behavior from the IMD does not cause the secondary relay to open and force a manual reset.
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 
 % I don't know if the IMD has a built in fuse
