@@ -184,9 +184,15 @@ TODO
 
 
 
+
+
+
+
+
+
 \subsection{IMD}
 \subsubsection{Description (type, operation parameters)}TODO
-The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the ???? board. If the ???? board detects the relay is  open it activates the IMD light.
+The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s.
 
 
 %Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also describe how the IMD indicator light is wired, etc.
@@ -222,8 +228,6 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 
 
 
-
-
 \subsubsection*{2.2.2 Wiring/cables/connectors/}
 TODO
 
@@ -252,7 +256,15 @@ The connector on the IMD is the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8. It is att
 %Position in car
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 
-The IMD will be located inside the accumulator, as shown in Section 3.1.. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
+The IMD will be located inside the accumulator, as shown in figure~\ref{??}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
+
+
+
+
+
+
+
+
 
 \subsection{Inertia Switch}
 \subsubsection{Description (type, operation parameters)}
@@ -310,18 +322,42 @@ TODO
 %Provide CAD-renderings showing all relevant parts and discuss the mechanical connection of the sensors to the pedal assembly. Mark the parts in the rendering, if necessary.
 TODO
 
+
+
+
+
+
+
+
+
+
+
 \subsection{Reset / Latching for IMD and BMS}
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the latching/reset system for a tripped IMD or BMS.  Describe the method for resetting the IMD and BMS.
 TODO
 
+% reference {fig:IMDLatch_Schematic} and find out details of BMS
+
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
 TODO
 
+% will need to ask around
+
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
+
+% reference ??? in shutdown section (maybe MSP)
+
+
+
+
+
+
+
+
 
 \subsection{Shutdown System Interlocks}
 \subsubsection{Description/circuitry}
