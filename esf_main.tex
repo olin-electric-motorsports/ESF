@@ -337,7 +337,10 @@ TODO
 %Describe the concept and circuitry of the latching/reset system for a tripped IMD or BMS.  Describe the method for resetting the IMD and BMS.
 TODO
 
-% reference {fig:IMDLatch_Schematic} and find out details of BMS
+Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.
+
+
+% find out details of BMS
 
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
@@ -347,9 +350,8 @@ TODO
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
-
-% reference ??? in shutdown section (maybe MSP)
+The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{??}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD.
+% reference ??? in shutdown section
 
 
 
