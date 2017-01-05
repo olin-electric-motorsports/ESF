@@ -263,7 +263,7 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 \end{center}
 
 
-<<<<<<< HEAD
+
 \subsubsection{Wiring/cables/connectors/}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity AMP connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used.
@@ -361,26 +361,15 @@ TODO
 %Provide CAD-renderings showing all relevant parts and discuss the mechanical connection of the sensors to the pedal assembly. Mark the parts in the rendering, if necessary.
 TODO
 
-<<<<<<< HEAD
 \subsection{Reset / Latching for IMD and BMS}\label{reset_latching_for_imd_and_bms}
-=======
-
-
-
-
-
-
-
-
-
-
-\subsection{Reset / Latching for IMD and BMS}
->>>>>>> Added more detailed outline for section 2.5. Added specific references in section 2.2.1 and 2.2.2.
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the latching/reset system for a tripped IMD or BMS.  Describe the method for resetting the IMD and BMS.
 TODO
 
-% reference {fig:IMDLatch_Schematic} and find out details of BMS
+Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.
+
+
+% find out details of BMS
 
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
@@ -390,23 +379,10 @@ TODO
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{??}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD.
+% reference ??? in shutdown section
 
-<<<<<<< HEAD
 \subsection{Shutdown System Interlocks}\label{shutdown_system_interlocks}
-=======
-% reference ??? in shutdown section (maybe MSP)
-
-
-
-
-
-
-
-
-
-\subsection{Shutdown System Interlocks}
->>>>>>> Added more detailed outline for section 2.5. Added specific references in section 2.2.1 and 2.2.2.
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the Shutdown System Interlocks.
 %Note: Interlocks are circuits used to open the shutdown circuit if a connector is disconnected or enclosure is opened.  This is not the entire shutdown circuit.
