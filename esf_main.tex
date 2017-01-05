@@ -685,13 +685,14 @@ TODO
 \subsection{Motor controller 1}
 \subsubsection{Description, type, operation parameters}
 %Describe important functions; provide table with main parameters like resulting voltages->minimum, maximum, nominal, currents etc.
-TODO
+
+The motor controller regulates the power delivered to the motor. This motor controller is preferable for its small package and isolated control interface. We will communicate with it using our CAN bus. 
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|l|}
 	\hline
-	Motor Controller type & TODO \\ \hline
+	Motor Controller type & Rinehart PM100DX \\ \hline
 	Maximum continuous power & TODO kW \\ \hline
 	Maximum peak power & TODO kW \\ \hline
 	Maximum input voltage & TODO VDC \\ \hline
@@ -700,7 +701,7 @@ TODO
 	Maximum peak current & TODO A \\ \hline
 	Control method & CAN \\ \hline
 	Cooling method & Water \\ \hline
-	Auxiliary supply voltage & TODO \\ \hline
+	Auxiliary supply voltage & 12 VDC \\ \hline
 	\end{tabular}
 	\caption{General Motor Controller data}
 	\label{MC}
@@ -736,21 +737,21 @@ TODO
 
 \subsubsection{Description, type, operating parameters}
 %Describe the motor used, provide table with main parameters like resulting voltages->minimum, maximum, nominal, currents, resulting motor power, use figures to show important characteristics.
-TODO
+Originally designed for aviation use, this outrunner motor delivers remarkable performance for its weight. 
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|l|}
 	\hline
-	Motor Manufacturer and Type: & \begin{tabular}[c]{@{}l@{}}Make,\\ Model\end{tabular} \\ \hline
+	Motor Manufacturer and Type: & \begin{tabular}[c]{@{}l@{}}Make: Enstroj \\ Model: EMRAX 228\end{tabular} \\ \hline
 	Motor principle & Permanent magnet synchronous motor \\ \hline
-	Maximum continuous power & TODO kW \\ \hline
-	Peak Power & TODO kW \\ \hline
-	Input voltage & TODO V \\ \hline
-	Nominal current & TODO A \\ \hline
-	Peak current & TODO A \\ \hline
-	Maximum torque & TODO ft-lb \\ \hline
-	Nominal torque & TODO ft-lb \\ \hline
+	Maximum continuous power & 28 - 42 kW \\ \hline
+	Peak Power & 100 kW \\ \hline
+	Input voltage & 50 – 450 V \\ \hline
+	Nominal current & 160 A \\ \hline
+	Peak current & 340 A \\ \hline
+	Maximum torque & 240 Nm \\ \hline
+	Nominal torque & 125 Nm \\ \hline
 	Cooling method & Water \\ \hline
 	\end{tabular}
 	\caption{General motor data}
