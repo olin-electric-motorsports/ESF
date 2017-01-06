@@ -232,7 +232,7 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 TODO
 
 The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity AMP connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used.
-% I am not sure if this is actually how we are doing it, but I am assuming it is correct until I have time to check.
+% I am not sure if this is actually how we are doing it, but I am assuming it is correct until I have time to check. I think it might be more convenient to route it through the AIR control board, if possible, as it already needs to connect to the Atmega on that board. 
 
 \begin{figure} [!ht]
 	\centering  % this centers the image
@@ -335,7 +335,7 @@ TODO
 \subsection{Reset / Latching for IMD and BMS}
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the latching/reset system for a tripped IMD or BMS.  Describe the method for resetting the IMD and BMS.
-TODO
+%TODO
 
 Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.
 
@@ -344,14 +344,16 @@ Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} ,
 
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
-TODO
+%TODO
 
-% will need to ask around
+The IMD latch will be connected to the ?? board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the ?? board using a  6-pin TE Connectivity AMP connector with 28 AWG ribbon cable. The 20 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The ribbon cable carries signals from the IMD.%On the ?? board it will connect , or another Molex product of the same series but with a different number of headers on each side of the connector.
+
+% connects to IMD through either accumulator interface or AIR control.
+
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{??}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD.
-% reference ??? in shutdown section
 
 
 
