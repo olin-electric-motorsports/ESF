@@ -231,7 +231,7 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 \subsubsection*{2.2.2 Wiring/cables/connectors/}
 TODO
 
-The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity AMP connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used.
+The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used.
 % I am not sure if this is actually how we are doing it, but I am assuming it is correct until I have time to check. I think it might be more convenient to route it through the AIR control board, if possible, as it already needs to connect to the Atmega on that board. 
 
 \begin{figure} [!ht]
@@ -346,7 +346,7 @@ Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} ,
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
 %TODO
 
-The IMD latch will be connected to the ?? board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the ?? board using a  6-pin TE Connectivity AMP connector with 28 AWG ribbon cable. The 20 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The ribbon cable carries signals from the IMD.%On the ?? board it will connect , or another Molex product of the same series but with a different number of headers on each side of the connector.
+The IMD latch will be connected to the ?? board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the ?? board using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 20 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The ribbon cable carries signals from the IMD.%On the ?? board it will connect , or another Molex product of the same series but with a different number of headers on each side of the connector.
 
 % connects to IMD through either accumulator interface or AIR control.
 
