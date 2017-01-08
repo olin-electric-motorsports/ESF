@@ -34,7 +34,7 @@
 \usepackage{soul}
 \usepackage{chngcntr}
 %font
-\usepackage{lmodern} 
+\usepackage{lmodern}
 \usepackage[sfdefault, light]{roboto}
 
 % Document Setup
@@ -106,13 +106,22 @@
     \item CONN- Main accumulator connector
 \end{itemize}
 
+    Any other abbreviations used in this document are those used in the 2016 Formula SAE Rules and those used in the FSAE ESF template document.
+
 \setlength{\parindent}{0pt}
 
 \newpage
 \pagenumbering{arabic}
 
 \section{System Overview}
-	%Short description of the system’s concept 
+The vehicle's electrical system is designed to support all necessary functions of electric vehicle locomotion, while simultaneously ensuring driver and team member safety. The vehicle's electrical system is comprised of two major galvanically isolated subsystems: a 298.8V maximum high power tractive system and a 14V maximum sensing and control system.
+
+The tractive system consists of a custom-designed and fabricated accumulator container which houses 72 LG Chem proprietary pouch cells, as well as a Rinehart Motion Systems PM100DX motor controller driving an Emrax 228 Medium Voltage outrunner motor. Communication to the motor controllers is achieved via the CAN network built into the low voltage system.
+
+The low voltage system consists primarily of a shutdown circuit and a series of peripheral sensors to gather data about vehicle state and performance, all powered by a 12V nominal sealed lead acid battery that is recharged by a DC/DC converter. The Shutdown circuit monitors the vehicle for dangerous conditions such as impacts or isolation faults of the Tractive System, and de-energizes the vehicle in case of emergency. The low voltage system also contains a CAN communucation network between Atmel ATmega16m1 microconttrollers that fulfill several rules-required functions like the Ready-to-Drive sound, as well as collecting data and serving as a debugging tool for both high and low power electrical systems.
+
+See \Fref{TS_block_diagram} for a block diagram of the Tractive System and interfacing GLVS parts.
+
 	%Rough Schematic (blocks) showing all parts affected with the electrical systems and function of the tractive-system
 	%No detailed wiring
 
@@ -131,7 +140,14 @@
         \end{tabular}
         \caption{General parameters}
         \label{systemtable}
-    \end{table}
+  \end{table}
+
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width = 0.9 \textwidth]{TS_block_diagram}
+  \caption{Block diagram of the Tractive System and important interfacing parts of the GLVS}
+  \label{TS_block_diagram}
+  \end{figure}
 
 \section{Electrical Systems}
 TODO
@@ -344,7 +360,7 @@ TODO
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
 %Give a plot “Percentage of Maximum Voltage” vs. time
-%Give a plot Current vs. time 
+%Give a plot Current vs. time
 %For each plot, give the basic formula describing the plots
 TODO
 
@@ -512,14 +528,14 @@ TODO
 %-	What upper and lower voltage does the BMS react at and how does it react?
 %-	What cell temperature does the BMS react at and how does it react?
 %-	Show tables of operation parameters
-%-	Describe how many cells are sensed by each BMS board, the configuration of the cells, the configuration of the boards and how any comms wiring between boards is protected 
+%-	Describe how many cells are sensed by each BMS board, the configuration of the cells, the configuration of the boards and how any comms wiring between boards is protected
 %-	Describe how the BMS is able to open the AIRs if any error is detected
 %-	Describe where galvanic isolation occurs between TS and GLV system connections.
 
 TODO
 
 \subsubsection{Accumulator indicator}
-%Describe the indicator, show wiring, provide tables with operation, PCB design, etc. 
+%Describe the indicator, show wiring, provide tables with operation, PCB design, etc.
 TODO
 
 \subsubsection{Wiring, cables, current calculations, connectors}
@@ -686,7 +702,7 @@ TODO
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe the wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
-TODO: fill out table for all wires used to connect to MC and Motor 
+TODO: fill out table for all wires used to connect to MC and Motor
 
 \begin{table}[H]
 	\centering
@@ -748,7 +764,7 @@ TODO
 TODO
 
 \subsection{Motor 2}
-We only have one motor. 
+We only have one motor.
 
 
 \section{Torque encoder}
@@ -823,10 +839,9 @@ TODO
 TODO
 
 \subsection{Firewall 2}
-We only have one firewall. 
+We only have one firewall.
 
 \section{Appendix}
 TODO
 
 \end{document}
-
