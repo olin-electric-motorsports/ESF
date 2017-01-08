@@ -13,14 +13,13 @@
 \subsection{Ready-To-Drive-Sound (RTDS)}
 \subsubsection{Description}
 %Describe your concept of the RTDS, how is the sound produced, what are the parameters for activating the RTDS, etc.
-The Ready to Drive sound is located as a component of the dashboard subsystem, and contains a buzzer (\href{http://www.puiaudio.com/pdf/XL-5530L-LW300-S-R.pdf}{Link: PUI Audio Inc. XL-5530L-LW300-S-R}). The buzzer automatically makes a noise when given power, with the loudness proportional
-to the voltage. The last step in the start up sequence will notify the CAN system that it is time for the ready
-to drive sound. This will then provide voltage to the gate of an N-FET which will provide 12V to the buzzer.
+The Ready to Drive sound is located as a component of the dashboard subsystem, and contains a buzzer (\href{http://www.mallory-sonalert.com/specifications/STA20502.PDF}{Link: Mallory Sonalert Products Inc. STA20502}). The buzzer automatically makes a noise when given power, with the loudness proportional
+to the voltage. The BMS will notify the Dashboard CAN system when shutdown circuit is complete. This will then provide voltage to the gate of an N-FET which will provide a ground path for the buzzer.
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.
 When the shutdown circuit closes and activates the AIRs, the car is in ready to drive mode. As soon as the
 car is in this mode, the CAN system will activate the ready to drive sound node to send a positive output
-that provides voltage to the N-FET 2 seconds, thus letting the buzzer sound for 2 seconds. 
+that provides voltage to the N-FET for 2 seconds, thus letting the buzzer sound for 2 seconds. 
 
 
 \begin{figure}[h]
@@ -31,10 +30,10 @@ that provides voltage to the N-FET 2 seconds, thus letting the buzzer sound for 
 	\includegraphics[width=\linewidth]{FormulasForDistanceAndSoundLevel}
 	\caption{Inverse Square Law equations needed to calculate the volume at a certain distance}
 \end{figure}
-Using the inverse square law for sound pressure levels, 123db at 10cm will translate to 117db at 2m which is well over the minimum SPL. 
+Using the inverse square law for sound pressure levels, 97db at 122cm will translate to 93db at 2m which is a loud enough volume without inducing harm to the listener. 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 The ready to drive sound will be located in the dashboard enclosure shown in Figure !!!!. The buzzer will be mounted
 to the exterior and front side of this enclosure. It must be contained outside of the box so that the buzzer is
-loud enough and is waterproof, so it doesn't require any extra protection besides a waterproof O-ring around the mounting point.
+loud enough. The speaker is waterproof, so it doesn't require any extra protection besides using an RTV silicone seal for final instillation. 
 \end{document}
