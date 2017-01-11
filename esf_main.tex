@@ -34,7 +34,7 @@
 \usepackage{soul}
 \usepackage{chngcntr}
 %font
-\usepackage{lmodern} 
+\usepackage{lmodern}
 \usepackage[sfdefault, light]{roboto}
 
 % Document Setup
@@ -99,20 +99,28 @@
 \addcontentsline{toc}{section}{II List of Tables}
 
 \newpage
-\section*{List of Abbreviations}
+\section*{List of Abbreviations} \label{list_of_abbreviations}
 \addcontentsline{toc}{section}{III List of Abbreviations}
 \begin{itemize}
     \item MSD- Manual Service Disconnect
     \item CONN- Main accumulator connector
 \end{itemize}
 
+    Any other abbreviations used in this document are those used in the 2016 Formula SAE Rules and those used in the FSAE ESF template document.
+
 \setlength{\parindent}{0pt}
 
 \newpage
 \pagenumbering{arabic}
+\section{System Overview}\label{system_overview}
+The vehicle's electrical system is designed to support all necessary functions of electric vehicle locomotion, while simultaneously ensuring driver and team member safety. The vehicle's electrical system is comprised of two major galvanically isolated subsystems: a 298.8V maximum high power tractive system and a 14V maximum sensing and control system.
 
-\section{System Overview}
-	%Short description of the system’s concept 
+The tractive system consists of a custom-designed and fabricated accumulator container which houses 72 LG Chem proprietary pouch cells, as well as a Rinehart Motion Systems PM100DX motor controller driving an Emrax 228 Medium Voltage outrunner motor. Communication to the motor controllers is achieved via the CAN network built into the low voltage system.
+
+The low voltage system consists primarily of a shutdown circuit and a series of peripheral sensors to gather data about vehicle state and performance, all powered by a 12V nominal sealed lead acid battery that is recharged by a DC/DC converter. The Shutdown circuit monitors the vehicle for dangerous conditions such as impacts or isolation faults of the Tractive System, and de-energizes the vehicle in case of emergency. The low voltage system also contains a CAN communication network between Atmel ATmega16m1 microcontrollers that fulfill several rules-required functions like the Ready-to-Drive sound, as well as collecting data and serving as a debugging tool for both high and low power electrical systems.
+
+See \fref{fig:TS_block_diagram} for a block diagram of the Tractive System and interfacing GLVS parts.
+
 	%Rough Schematic (blocks) showing all parts affected with the electrical systems and function of the tractive-system
 	%No detailed wiring
 
@@ -131,11 +139,19 @@
         \end{tabular}
         \caption{General parameters}
         \label{systemtable}
-    \end{table}
+  \end{table}
 
-\section{Electrical Systems}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width = 0.9 \textwidth]{TS-Block-Diagram.png}
+  \caption{Block diagram of the enclosures of the Tractive System}
+  \label{fig:TS_block_diagram}
+  \end{figure}
 
-\subsection{Shutdown Circuit}
+
+\section{Electrical Systems}\label{electrical_systems}
+
+\subsection{Shutdown Circuit}\label{shutdown_circuit}
 
 \subsubsection{Description/concept}
 %Describe your concept of the shutdown circuit, the master switches, shut down buttons, brake over travel switch, etc.
@@ -204,7 +220,7 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the renderings, if necessary.
 TODO
 
-\subsection{IMD}
+\subsection{IMD}\label{imd}
 \subsubsection{Description (type, operation parameters)}
 %Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also, describe how the IMD indicator light is wired, etc.
 TODO
@@ -234,7 +250,7 @@ TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the renderings, if necessary.
 TODO
 
-\subsection{Inertia Switch}
+\subsection{Inertia Switch}\label{inertia_switch}
 \subsubsection{Description (type, operation parameters)}
 %Describe the Inertia Switch used and use a table for the common operation parameters, like supply voltage, temperature, etc.
 The Sensata Resettable crash sensor (6-11g version) will trigger due to an impact that decelerates the vehicle between 6-11g.
@@ -262,7 +278,7 @@ TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{Brake Plausibility Device}
+\subsection{Brake Plausibility Device}\label{brake_plausibility_device}
 \subsubsection{Description/additional circuitry}
 %Describe how your electronic hardware brake plausibility system works (this is in addition to your ECU controlled brake plausibility software), provide tables with main operation parameters, and describe additional circuitry used to check or for an implausibility. Describe how the system reacts if an implausibility or error is detected.
 TODO
@@ -290,7 +306,7 @@ TODO
 %Provide CAD-renderings showing all relevant parts and discuss the mechanical connection of the sensors to the pedal assembly. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{Reset / Latching for IMD and BMS}
+\subsection{Reset / Latching for IMD and BMS}\label{reset_latching_for_imd_and_bms}
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the latching/reset system for a tripped IMD or BMS.  Describe the method for resetting the IMD and BMS.
 TODO
@@ -303,7 +319,7 @@ TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{Shutdown System Interlocks}
+\subsection{Shutdown System Interlocks}\label{shutdown_system_interlocks}
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the Shutdown System Interlocks.
 %Note: Interlocks are circuits used to open the shutdown circuit if a connector is disconnected or enclosure is opened.  This is not the entire shutdown circuit.
@@ -317,7 +333,7 @@ TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{Tractive system active light}
+\subsection{Tractive system active light}\label{tractive_system_active_light}
 \subsubsection{Description/circuitry}
 %Describe the tractive system active light and additional circuitry.
 TODO
@@ -346,7 +362,7 @@ TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{Measurement points}
+\subsection{Measurement points}\label{measurement_points}
 \subsubsection{Description}
 %Describe the housing used and how it can be accessed, etc.  Describe how the measurement points protected/covered when not in use and how the electrical connections on the back of the measurement points are protected when the measurement points are being used.
 TODO
@@ -359,14 +375,14 @@ TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{Pre-Charge circuitry}
+\subsection{Pre-Charge circuitry}\label{pre_charge_circuitry}
 \subsubsection{Description}
 %Describe your concept of the pre-charge circuitry.
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
 %Give a plot “Percentage of Maximum Voltage” vs. time
-%Give a plot Current vs. time 
+%Give a plot Current vs. time
 %For each plot, give the basic formula describing the plots
 TODO
 
@@ -403,7 +419,7 @@ TODO
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{Discharge circuitry}
+\subsection{Discharge circuitry}\label{discharge_circuitry}
 \subsubsection{Description}
 %Describe your concept of the discharge circuitry.
 TODO
@@ -436,7 +452,7 @@ TODO
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{HV Disconnect (HVD)}
+\subsection{HV Disconnect (HVD)}\label{hv_disconnect}
 \subsubsection{Description}
 %Describe your concept of the HVD and how it can be operated.
 TODO
@@ -449,7 +465,7 @@ TODO
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{Ready-To-Drive-Sound (RTDS)}
+\subsection{Ready-To-Drive-Sound (RTDS)}\label{ready_to_drive_sound}
 \subsubsection{Description}
 %Describe your concept of the RTDS, how is the sound produced, what are the parameters for activating the RTDS, etc.
 TODO
@@ -468,9 +484,9 @@ TODO
 
 
 
-\section{Accumulator}
-\subsection{Accumulator pack 1}
-\subsubsection{Overview/description/parameters}
+\section{Accumulator}\label{accumulator}
+\subsection{Accumulator pack 1}\label{accumulator_pack_1}
+\subsubsection{Overview/description/parameters}\label{accumulator_overview}
 %Describe concept of accumulator pack, provide table with main parameters like number of cells, cell stacks separated by maintenance plugs, cell configuration, resulting voltages->minimum, maximum, nominal, currents, capacity etc.
 TODO
 
@@ -493,7 +509,7 @@ TODO
 	    \label{batterytable}
 	\end{table}
 
-\subsubsection{Cell description}
+\subsubsection{Cell description}\label{accumulator_cell_description}
 %Describe the cell type used and the chemistry, provide table with main parameters.
 TODO
 
@@ -520,31 +536,31 @@ TODO
 	    \label{cells}
 	\end{table}
 
-\subsubsection{Cell configuration}
+\subsubsection{Cell configuration}\label{accumulator_cell_configuration}
 %Describe cell configuration, cell interconnect, show schematics of electrical configuration and CAD of connection techniques, cover additional parts like internal cell fuses etc.
 TODO
 
-\subsubsection{Cell temperature monitoring}
+\subsubsection{Cell temperature monitoring}\label{accumulator_cell_temperature_monitoring}
 %Describe how the temperature of the cells is monitored, where the temperature sensors are placed, how many cells are monitored, etc. Show schematics, cover additional parts, etc.
 TODO
 
-\subsubsection{Battery management system}
+\subsubsection{Battery management system}\label{accumulator_battery_management_system}
 %Describe the BMS used including at least the following:
 %-	Sense wiring protection (fusing / fusible link wire used)
 %-	What upper and lower voltage does the BMS react at and how does it react?
 %-	What cell temperature does the BMS react at and how does it react?
 %-	Show tables of operation parameters
-%-	Describe how many cells are sensed by each BMS board, the configuration of the cells, the configuration of the boards and how any comms wiring between boards is protected 
+%-	Describe how many cells are sensed by each BMS board, the configuration of the cells, the configuration of the boards and how any comms wiring between boards is protected
 %-	Describe how the BMS is able to open the AIRs if any error is detected
 %-	Describe where galvanic isolation occurs between TS and GLV system connections.
 
 TODO
 
-\subsubsection{Accumulator indicator}
-%Describe the indicator, show wiring, provide tables with operation, PCB design, etc. 
+\subsubsection{Accumulator indicator}\label{accumulator_indicator}
+%Describe the indicator, show wiring, provide tables with operation, PCB design, etc.
 TODO
 
-\subsubsection{Wiring, cables, current calculations, connectors}
+\subsubsection{Wiring, cables, current calculations, connectors}\label{accumulator_wiring}
 %Describe the internal wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
 % Discuss maximum expected current, DC and AC how long will this be provided?
 % Compare the maximum values to nominal currents
@@ -573,6 +589,29 @@ TODO
 	    \caption{Wire data of the company: A, 0.326 mm$^{2}$ TODO}
 	    \label{tslowcurrentwire}
 	\end{table}
+
+TODO
+
+  \begin{table}[H]
+      \centering
+      \begin{tabular}{|l|l|}
+          \hline
+          Wire type & Company A \\ \hline
+          Current rating & 150A TODO \\ \hline
+          Cross sectional area & 0.326 mm$^2$ TODO \\ \hline
+          Maximum voltage & 600VDC TODO \\ \hline
+          Temperature rating & 120 \degree C TODO \\ \hline
+          \begin{tabular}[c]{@{}l@{}}
+              Wire connects the\\ following components:
+          \end{tabular} &
+          \begin{tabular}[c]{@{}l@{}}
+              Cell and BMS \\ other \\ TODO
+          \end{tabular} \\ \hline
+      \end{tabular}
+      \caption{Wire data of the company: A, 0.326 mm$^{2}$ TODO}
+      \label{tshighcurrentwire}
+  \end{table}
+
 
 \subsubsection{Accumulator insulation relays}
 %Describe the AIRs used and their main operation parameters, use tables, etc.
@@ -664,10 +703,10 @@ TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.  Ensure that the required mechanical structure to protect the accumulator and other electrical components is clearly identified.
 TODO
 
-\subsection{Accumulator pack 2}
-We only have one accumulator.
+\subsection{Accumulator pack 2}\label{accumulator_pack_2}
+We only have one accumulator, described in \ref{accumulator_pack_1}.
 
-\section{Energy meter mounting}
+\section{Energy meter mounting} \label{energy_meter_mounting}
 \subsection{Description}
 %Describe where the energy meter is mounted and how, etc.
 TODO
@@ -681,8 +720,8 @@ TODO
 TODO
 
 
-\section{Motor controller}
-\subsection{Motor controller 1}
+\section{Motor controller}\label{motor_controller}
+\subsection{Motor controller 1}\label{motor_controller_1}
 \subsubsection{Description, type, operation parameters}
 %Describe important functions; provide table with main parameters like resulting voltages->minimum, maximum, nominal, currents etc.
 
@@ -709,7 +748,7 @@ The motor controller regulates the power delivered to the motor. This motor cont
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe the wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
-TODO: fill out table for all wires used to connect to MC and Motor 
+TODO: fill out table for all wires used to connect to MC and Motor
 
 \begin{table}[H]
 	\centering
@@ -729,10 +768,11 @@ TODO: fill out table for all wires used to connect to MC and Motor
 TODO
 
 \subsection{Motor controller 2}
-We only have one motor controller.
+We only have one motor controller, described in \ref{motor_controller_1}.
 
-\section{Motors}
-\subsection{Motor 1}
+\section{Motors}\label{motors}
+\subsection{Motor 1}\label{motor_1}
+
 \subsubsection{Description, type, operating parameters}
 %Describe the motor used, provide table with main parameters like resulting voltages->minimum, maximum, nominal, currents, resulting motor power, use figures to show important characteristics.
 Originally designed for aviation use, this outrunner motor delivers remarkable performance for its weight. 
@@ -775,11 +815,10 @@ TODO
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary and clearly identify the structure used to protect all relevant parts.
 TODO
 
-\subsection{Motor 2}
-We only have one motor. 
+\subsection{Motor 2}\label{motor_2}
+We only have one motor, described in \ref{motor_1}.
 
-
-\section{Torque encoder}
+\section{Torque encoder}\label{torque_encoder}
 \subsection{Description/additional circuitry}
 %Describe the type of the torque encoder(s) used, provide tables with main operation parameters, and describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how the system reacts if an implausibility or error (e.g. short circuit or open circuit or equivalent) is detected.
 TODO
@@ -799,7 +838,7 @@ TODO
 	\label{encoder}
 \end{table}
 
-\subsection{Torque Encoder Plausibility Check}
+\subsection{Torque Encoder Plausibility Check}\label{torque_encoder_plausibility_check}
 %Describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how failures (e.g. Implausibility, short circuit or open circuit or equivalent) are detected and how the system reacts if an implausibility or errors is detected.
 TODO
 
@@ -831,17 +870,18 @@ TODO
 \subsection{LV part 2}
 TODO
 
-\section{Overall Grounding Concept}
+\section{Overall Grounding Concept}\label{overall_grounding_concept}
 \subsection{Description of the Grounding Concept}
 %Describe how you intend to achieve the resistances between components at the required levels as defined in EV4.3.
-TODO
+The vehicle's steel chassis is uses as GLVS ground. This ground will be established inside the master switch panel enclosure by attachment to a piositively-retained ring terminal on a chassis member that has been locally stripped of paint. All components of the GLVS will be grounded to this point on the chassis through the wiring harness for simplicity of installation and mechanical robustness. All conductive mechanical enlosures are mounted to the chassis with conductive metal fasteners. Electrical connection of the suspension members and knuckles to the main vehicle frame will be achieved by short jumpers with ring terminals on either end in the suspension member bolt stackup on either side of the spherical bearing.
+
 
 \subsection{Grounding Measurements}
 %Describe which measurements you will take to ensure that EV4.3 is achieved
-TODO
+All conductive components within 100 mm of any Tractive System or GLVS component will be measured by Kelvin ohmmeter to have a resistance of less tham 300 m$\omega$ to chassis ground, measured at the chassis ground measurement point on the master switch panel. All fastened mechanical components and enclosures will be individually measured to ensure proper ground connection. Chassis ground continuity will be tested during and after assembly to ensure complete coverage. Any carbon fiber components will be exhaustively measured to ensure resistance compliance.
 
-\section{Firewall(s)}
-\subsection{Firewall 1}
+\section{Firewall(s)}\label{firewalls}
+\subsection{Firewall 1}\label{firewall_1}
 \subsubsection{Description/materials}
 %Describe the concept, layer structure and the materials used for the firewall. Show how the low resistance Control System ground connection is achieved.
 TODO
@@ -850,11 +890,10 @@ TODO
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{Firewall 2}
-We only have one firewall. 
+\subsection{Firewall 2}\label{firewall_2}
+We only have one firewall, described in \ref{firewall_1}.
 
-\section{Appendix}
+\section{Appendix}\label{appendix}
 TODO
 
 \end{document}
-
