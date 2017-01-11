@@ -119,7 +119,7 @@ The tractive system consists of a custom-designed and fabricated accumulator con
 
 The low voltage system consists primarily of a shutdown circuit and a series of peripheral sensors to gather data about vehicle state and performance, all powered by a 12V nominal sealed lead acid battery that is recharged by a DC/DC converter. The Shutdown circuit monitors the vehicle for dangerous conditions such as impacts or isolation faults of the Tractive System, and de-energizes the vehicle in case of emergency. The low voltage system also contains a CAN communucation network between Atmel ATmega16m1 microconttrollers that fulfill several rules-required functions like the Ready-to-Drive sound, as well as collecting data and serving as a debugging tool for both high and low power electrical systems.
 
-See \Fref{TS_block_diagram} for a block diagram of the Tractive System and interfacing GLVS parts.
+See \fref{fig:TS_block_diagram} for a block diagram of the Tractive System and interfacing GLVS parts.
 
 	%Rough Schematic (blocks) showing all parts affected with the electrical systems and function of the tractive-system
 	%No detailed wiring
@@ -143,17 +143,17 @@ See \Fref{TS_block_diagram} for a block diagram of the Tractive System and inter
 
   \begin{figure}[H]
   \centering
-  \includegraphics[width = 0.9 \textwidth]{TS-block-diagram}
+  \includegraphics[width = 0.9 \textwidth]{TS-Block-Diagram.png}
   \caption{Block diagram of the enclosures of the Tractive System}
-  \label{TS_block_diagram}
+  \label{fig:TS_block_diagram}
   \end{figure}
 
 
   \begin{figure}[H]
   \centering
-  \includegraphics[width = 0.9 \textwidth]{TS-block-diagram}
+  \includegraphics[width = 0.9 \textwidth]{TS-Block-Diagram.png}
   \caption{Block diagram of the enclosures of the Tractive System}
-  \label{TS_block_diagram}
+  \label{fig:TS_block_diagram}
   \end{figure}
 
 \section{Electrical Systems}\label{electrical_systems}
@@ -856,7 +856,7 @@ The vehicle's steel chassis is uses as GLVS ground. This ground will be establis
 
 \subsection{Grounding Measurements}
 %Describe which measurements you will take to ensure that EV4.3 is achieved
-All conductive components within 100 mm of any Tractive System or GLVS component will be measured by Kelvin ohmmeter to have a resistance of less tham 300 m\omega to chassis ground, measured at the chassis ground measurement point on the master switch panel. All fastened mechanical components and enclosures will be individually measured to ensure proper ground connection. Chassis ground continuity will be tested during and after assembly to ensure complete coverage. Any carbon fiber components will be exhaustively measured to ensure resistance compliance.
+All conductive components within 100 mm of any Tractive System or GLVS component will be measured by Kelvin ohmmeter to have a resistance of less tham 300 m$\omega$ to chassis ground, measured at the chassis ground measurement point on the master switch panel. All fastened mechanical components and enclosures will be individually measured to ensure proper ground connection. Chassis ground continuity will be tested during and after assembly to ensure complete coverage. Any carbon fiber components will be exhaustively measured to ensure resistance compliance.
 
 \section{Firewall(s)}\label{firewalls}
 \subsection{Firewall 1}\label{firewall_1}
