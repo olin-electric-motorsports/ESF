@@ -150,12 +150,29 @@ See \fref{fig:TS_block_diagram} for a block diagram of the Tractive System and i
 
 
 \section{Electrical Systems}\label{electrical_systems}
-TODO
 
 \subsection{Shutdown Circuit}\label{shutdown_circuit}
 
 \subsubsection{Description/concept}
 %Describe your concept of the shutdown circuit, the master switches, shut down buttons, brake over travel switch, etc.
+
+The shutdown circuit directly controls the current that closes the AIRs. Since each switch/relay on the shutdown circuit is connected in series, that current must pass through every switch and safety check. If any device on the circuit is triggered by an unsafe condition, the current to the AIRs is cut off and the AIRs open, disconnecting the accumulator from the tractive system. Any capacitive load on the tractive system outside the accumulator is then discharged to ensure that all high voltage is contained inside the accumulator. 
+
+	\begin{itemize}
+		\item The GLV Master Switch (GLVMS) controls power to the entire low voltage system including the AIRs. As a result, high voltage cannot be present when the low voltage system is not active. The GLVMS has a lockout such that the vehicle can be safely worked on. 
+		\item The Left E-Stop is a large red push-rotate button located at approximately the height of the driver's head on the left side of the vehicle. 
+		\item The Right E-Stop is identical to the Left E-Stop located on the other side of the vehicle. 
+		\item The Brake System Plausibility Device (BSPD) holds a normally open relay closed when it has not detected an implausibility. When it does detect an implausibility, it latches in a low state until the GLV system is power cycled. This shuts down the Tractive System in the event that the brake is pressed while the motors are being significantly driven.  
+		\item The Brake Over Travel Switch (BOTS) is a push pull switch located behind the brake pedal. If the pedal over travels, the switch is pushed into an open state and stays that way until it is pulled back into the closed state. This shuts down the Tractive System in the event that brake pressure is lost. 
+		\item The Dashboard E-stop functions the same as the other E-stops. It is located such that it can be easily pressed by the driver. 
+		\item The Inertia Switch operates as a crash sensor that opens the shutdown circuit in the event that it detects an acceleration indicative of a collision. This ensures that the vehicle is electrically safe in an emergency situation. 
+		\item The Battery Management System (BMS) monitors the condition of the accumulator. It holds a normally open relay closed while the lithium cells are operating within safe temperature and electrical conditions. 
+		\item The Insulation Monitoring Device (IMD) detects any loss of isolation between the Tractive and GLV systems. It's output is held high while isolation is maintained. This holds a normally open relay closed through a latching circuit that prevents the IMD from re-closing the relay if the output goes low and then returns high. This latches the Tractive System in a shutdown state until the GLV system is power cycled. 
+		\item The HVD interlock closes the shutdown circuit whenever the HVD is present. This automatically shuts down the Tractive System whenever the HVD is removed. 
+		\item There is an interlock on the Tractive System connector on the accumulator which can be removed without tools. If the connector is removed, the Tractive System automatically shuts down. 
+		\item The Tractive System Master Switch (TSMS) is the last switch in the shutdown circuit before the AIRs. It has a lockout such that the vehicle can be safely worked on. 
+		\item Both the Pre-charge Relay and positive pole AIR have software controlled MOSFETs in series after them such that the timing of the pre-charge can be controlled by the sensing system.  
+	\end{itemize}
 
 	\begin{table}[H]
         \centering
@@ -177,18 +194,23 @@ TODO
     \end{table}
 
 \subsubsection{Wiring / additional circuitry}
-%shutdown schematic
-TODO
+	Figure \ref{shutdown_circuit} shows the wiring of the shutdown circuit.
+
+	\begin{sidewaysfigure}[p]
+        \includegraphics[width= 1\textheight]{shutdown_circuit}
+        \caption{Block Diagram of Shutdown Circuit}
+        \label{shutdown_circuit}
+    \end{sidewaysfigure}
 
 	\begin{table}[H]
         \centering
         \begin{tabular}{|l|l|}
         \hline
             Total Number of AIRs: & 2 \\ \hline
-            Current per AIR & 3.9A peak while closing, 0.23A average\\ \hline
-            Additional parts consumption within the shutdown circuit: & ??? A TODO: find current of pre/discharge relays \\ \hline
-            Total current: & TODO \\ \hline
-            Cross sectional area of the wiring used: & 0.00080384 in$^2$ (20 AWG) TODO:spec and convert to mm$^2$ \\ \hline
+            Current per AIR & 3.9A peak while closing, 0.23 A average\\ \hline
+            Additional parts consumption within the shutdown circuit: & 0.067 A (pre-charge and discharge relays)  \\ \hline
+            Total current: & 7.867 A peak (everything closing simultaneously) \\ \hline
+            Cross sectional area of the wiring used: & 0.52 mm$^2$ (20 AWG) \\ \hline
         \end{tabular}
         \caption{Wiring- Shutdown Circuit}
         \label{ShutdownCircuitTable}
@@ -702,13 +724,14 @@ TODO
 \subsection{Motor controller 1}\label{motor_controller_1}
 \subsubsection{Description, type, operation parameters}
 %Describe important functions; provide table with main parameters like resulting voltages->minimum, maximum, nominal, currents etc.
-TODO
+
+The motor controller regulates the power delivered to the motor. This motor controller is preferable for its small package and isolated control interface. We will communicate with it using our CAN bus. 
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|l|}
 	\hline
-	Motor Controller type & TODO \\ \hline
+	Motor Controller type & Rinehart PM100DX \\ \hline
 	Maximum continuous power & TODO kW \\ \hline
 	Maximum peak power & TODO kW \\ \hline
 	Maximum input voltage & TODO VDC \\ \hline
@@ -717,7 +740,7 @@ TODO
 	Maximum peak current & TODO A \\ \hline
 	Control method & CAN \\ \hline
 	Cooling method & Water \\ \hline
-	Auxiliary supply voltage & TODO \\ \hline
+	Auxiliary supply voltage & 12 VDC \\ \hline
 	\end{tabular}
 	\caption{General Motor Controller data}
 	\label{MC}
@@ -749,25 +772,24 @@ We only have one motor controller, described in \ref{motor_controller_1}.
 
 \section{Motors}\label{motors}
 \subsection{Motor 1}\label{motor_1}
-TODO
 
 \subsubsection{Description, type, operating parameters}
 %Describe the motor used, provide table with main parameters like resulting voltages->minimum, maximum, nominal, currents, resulting motor power, use figures to show important characteristics.
-TODO
+Originally designed for aviation use, this outrunner motor delivers remarkable performance for its weight. 
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|l|}
 	\hline
-	Motor Manufacturer and Type: & \begin{tabular}[c]{@{}l@{}}Make,\\ Model\end{tabular} \\ \hline
+	Motor Manufacturer and Type: & \begin{tabular}[c]{@{}l@{}}Make: Enstroj \\ Model: EMRAX 228\end{tabular} \\ \hline
 	Motor principle & Permanent magnet synchronous motor \\ \hline
-	Maximum continuous power & TODO kW \\ \hline
-	Peak Power & TODO kW \\ \hline
-	Input voltage & TODO V \\ \hline
-	Nominal current & TODO A \\ \hline
-	Peak current & TODO A \\ \hline
-	Maximum torque & TODO ft-lb \\ \hline
-	Nominal torque & TODO ft-lb \\ \hline
+	Maximum continuous power & 28 - 42 kW \\ \hline
+	Peak Power & 100 kW \\ \hline
+	Input voltage & 50 – 450 V \\ \hline
+	Nominal current & 160 A \\ \hline
+	Peak current & 340 A \\ \hline
+	Maximum torque & 240 Nm \\ \hline
+	Nominal torque & 125 Nm \\ \hline
 	Cooling method & Water \\ \hline
 	\end{tabular}
 	\caption{General motor data}
@@ -776,6 +798,13 @@ TODO
 
 % Give a plot of power vs. Rpm including a line for nominal and maximum power
 % Give a plot of torque vs. rpm including a line for nominal and maximum torque
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 1 \textwidth]{motor_power_torque.jpg}
+    \caption{Motor Power and Torque: although we are using the medium voltage version of the motor, the only differnece in terms of this plot is the ratio of current and voltage. }
+    \label{motor_power_torque}
+\end{figure}
 
 
 \subsubsection{Wiring, cables, current calculations, connectors}
