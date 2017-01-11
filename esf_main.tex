@@ -117,7 +117,7 @@ The vehicle's electrical system is designed to support all necessary functions o
 
 The tractive system consists of a custom-designed and fabricated accumulator container which houses 72 LG Chem proprietary pouch cells, as well as a Rinehart Motion Systems PM100DX motor controller driving an Emrax 228 Medium Voltage outrunner motor. Communication to the motor controllers is achieved via the CAN network built into the low voltage system.
 
-The low voltage system consists primarily of a shutdown circuit and a series of peripheral sensors to gather data about vehicle state and performance, all powered by a 12V nominal sealed lead acid battery that is recharged by a DC/DC converter. The Shutdown circuit monitors the vehicle for dangerous conditions such as impacts or isolation faults of the Tractive System, and de-energizes the vehicle in case of emergency. The low voltage system also contains a CAN communucation network between Atmel ATmega16m1 microconttrollers that fulfill several rules-required functions like the Ready-to-Drive sound, as well as collecting data and serving as a debugging tool for both high and low power electrical systems.
+The low voltage system consists primarily of a shutdown circuit and a series of peripheral sensors to gather data about vehicle state and performance, all powered by a 12V nominal sealed lead acid battery that is recharged by a DC/DC converter. The Shutdown circuit monitors the vehicle for dangerous conditions such as impacts or isolation faults of the Tractive System, and de-energizes the vehicle in case of emergency. The low voltage system also contains a CAN communication network between Atmel ATmega16m1 microcontrollers that fulfill several rules-required functions like the Ready-to-Drive sound, as well as collecting data and serving as a debugging tool for both high and low power electrical systems.
 
 See \fref{fig:TS_block_diagram} for a block diagram of the Tractive System and interfacing GLVS parts.
 
@@ -148,13 +148,6 @@ See \fref{fig:TS_block_diagram} for a block diagram of the Tractive System and i
   \label{fig:TS_block_diagram}
   \end{figure}
 
-
-  \begin{figure}[H]
-  \centering
-  \includegraphics[width = 0.9 \textwidth]{TS-Block-Diagram.png}
-  \caption{Block diagram of the enclosures of the Tractive System}
-  \label{fig:TS_block_diagram}
-  \end{figure}
 
 \section{Electrical Systems}\label{electrical_systems}
 TODO
