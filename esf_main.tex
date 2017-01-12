@@ -336,31 +336,49 @@ TODO
 \subsection{Tractive system active light}\label{tractive_system_active_light}
 \subsubsection{Description/circuitry}
 %Describe the tractive system active light and additional circuitry.
-TODO
+The TSAL illuminates when the tractive system is active, which is defined as the tractive system voltage being over 60V.
 
 	\begin{table}[H]
 	    \centering
 	    \begin{tabular}{|l|l|}
 	    \hline
 	    Supply voltage: & 12V \\ \hline
-	    Max. operational current: &  0.04A\\ \hline
-	    Lamp type & LEDs \\ \hline
-	    Power consumption: & 0.48 W\\ \hline
-	    Brightness & Unknown\\ \hline
-	    Frequency: & Manual with 555 timer, 2.4 Hz \\ \hline
-	    Size (length x height x width): & 103x27x51 mm \\ \hline
+	    Max. operational current: &  2A\\ \hline
+	    Lamp type: & LEDs \\ \hline
+	    Power consumption: & 24W (max)\\ \hline
+	    Brightness: & Unknown\\ \hline
+	    Frequency: & 2 Hz \\ \hline
+	    Size (length x height x width): & 41x41x32 mm \\ \hline
 	    \end{tabular}
 	    \caption{Parameters of the TSAL}
 	    \label{TSALparameters}
 	\end{table}
+	
+See the appendix \hyperlink{TSALdatasheet}{here} for a link to the TSAL Datasheet.
 
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  Include gauge, voltage and temperature rating of wiring used and any fuses or other overcurrent protection used.
-TODO
+The circuitry designed has a TS-controlled optocoupler. When the TS is over 60V, Zener diodes with a breakdown voltage of 58V and 3.6V respectively power the photodiode side which switches the MOSFET side allowing current to flow from the GLV to power the TSAL. The frequency of the TSAL will be controlled by built in settings to flash at 2Hz. See \fref{fig:TSALcircuit} for a schematic diagram of the TSAL circuit.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.7]{TSAL}
+\caption{Schematic for the TSAL}
+\label{fig:TSALcircuit}
+\end{figure}
+
+All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A, while all PCB traces will be a minimum of 12 mil, but nominally 20 mil in width. The TS voltage will be fused to 1A on the power line. The GLV voltage will be fused to 2A and its traces will be 50 mil in width and 2 oz per square foot in thickness, able to handle 2.3A of current due to the 2A max current draw of the TSAL.
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The TSAL will be mounted to the underside of the highest point of the main roll hoop, per EV 4.12.3 and 4.12.4 using a robust 3D printed (Kevlar reinforced Nylon) bracket integrating the light and necessary wiring. This enclosure has not been designed yet. The PCB will be located in the master switch panel enclosure.
+
+%Need to add rendering here
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{}
+\caption{CAD rendering of TSAL position}
+\end{figure}
 
 \subsection{Measurement points}\label{measurement_points}
 \subsubsection{Description}
@@ -894,6 +912,9 @@ TODO
 We only have one firewall, described in \ref{firewall_1}.
 
 \section{Appendix}\label{appendix}
-TODO
+
+\hypertarget{TSALdatasheet}{}
+\subsection{Tractive System Active Light}
+\href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
 
 \end{document}
