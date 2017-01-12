@@ -51,12 +51,6 @@
 
 
 \begin{document}
-<<<<<<< HEAD
-\section*{Table of Contents iii}
-TODO
-
-=======
->>>>>>> Resolved duplicates from merge. Added IMD latch schematic as a figure in section 2.2.2
 \renewcommand{\headrulewidth}{0pt}
 \lhead{Olin College of Engineering, E238}
 \chead{}
@@ -230,24 +224,20 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the renderings, if necessary.
 TODO
 
+
+
+
+
+
+
 \subsection{IMD}\label{imd}
-\subsubsection{Description (type, operation parameters)}
-%Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also describe how the IMD indicator light is wired, etc.Additionally fill out the following table replacing the values with your specification:
-
-<<<<<<< HEAD
-The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s.
-=======
-
-
-
-
-
-
-
-\subsection{IMD}
 \subsubsection{Description (type, operation parameters)}TODO
-The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s. \hl{Further infor mation on the IMD can be found in the appendix, section} \ref{IMD_datasheet}.
->>>>>>> Added apendix section with IMD datasheet and hyperlink. Added \ref regarding fuses. Mentioned all current ratings for wires, and voltage + temperature rating where brand of wire was known.
+The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s. \hl{Further information on the IMD can be found in the appendix, section} \ref{IMD_datasheet}.
+
+
+
+%Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also describe how the IMD indicator light is wired, etc.
+
 
 \begin{center}
 	\begin{table}[H]
