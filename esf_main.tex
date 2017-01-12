@@ -234,7 +234,20 @@ TODO
 \subsubsection{Description (type, operation parameters)}
 %Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also describe how the IMD indicator light is wired, etc.Additionally fill out the following table replacing the values with your specification:
 
+<<<<<<< HEAD
 The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s.
+=======
+
+
+
+
+
+
+
+\subsection{IMD}
+\subsubsection{Description (type, operation parameters)}TODO
+The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s. \hl{Further infor mation on the IMD can be found in the appendix, section} \ref{IMD_datasheet}.
+>>>>>>> Added apendix section with IMD datasheet and hyperlink. Added \ref regarding fuses. Mentioned all current ratings for wires, and voltage + temperature rating where brand of wire was known.
 
 \begin{center}
 	\begin{table}[H]
@@ -266,7 +279,8 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 
 \subsubsection{Wiring/cables/connectors/}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
-The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. There is a 1 amp fuse protecting the high voltage wiring of the IMD. % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
+The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. \hl{The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps.} There is a 1 amp fuse protecting the high voltage wiring of the IMD \hl{(details of the fuse are in the appendix, section ??)}. % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
+
 
 
 % I am not sure if this is actually how we are doing it, but I am assuming it is correct until I have time to check. I think it might be more convenient to route it through the AIR control board, if possible, as it already needs to connect to the Atmega on that board. 
@@ -374,7 +388,7 @@ Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} ,
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
 %TODO
 
-The IMD latch will be connected to the ?? board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the ?? board using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 20 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The ribbon cable carries signals from the IMD.%On the ?? board it will connect , or another Molex product of the same series but with a different number of headers on each side of the connector.
+The IMD latch will be connected to the \hl{acummulator interface} board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the ?? board using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. \hl{The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. This is provides a considerable safety margin.} The ribbon cable carries signals from the IMD. 20 AWG wire is used for the shutdown circuit, and 18 AWG wire to supply power and ground to the IMD latch. \hl{The 20 AWG wire has a cross sectional area of .52mm$^2$, and is rated for 11 amps. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmision.}%On the ?? board it will connect , or another Molex product of the same series but with a different number of headers on each side of the connector.
 
 % connects to IMD through either accumulator interface or AIR control.
 
@@ -979,6 +993,23 @@ We only have one firewall, described in \ref{firewall_1}.
 \hypertarget{TSALdatasheet}{}
 \subsection{Tractive System Active Light}
 \href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
+
+
+
+\subsection{IMD Datasheet}\label{IMD_datasheet}
+
+\begin{figure} [!ht]
+	\centering  % this centers the image
+	
+	\includegraphics[width=\textwidth]{Formula_IMD_Datasheet.png}
+	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+	
+	\caption{The datasheet for the IMD.}
+	
+	\label{fig:IMD_Datasheet}
+\end{figure}
+
+\href{http://www.bender-us.com/documents/IR155-10_datasheet_NAE1012821.pdf}{Full IMD datasheet here.}
 
 
 \end{document}
