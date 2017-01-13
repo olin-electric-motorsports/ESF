@@ -232,7 +232,7 @@ TODO
 
 \subsection{IMD}\label{imd}
 \subsubsection{Description (type, operation parameters)}TODO
-The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s. \hl{Further information on the IMD can be found in the appendix, section} \ref{IMD_datasheet}.
+The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s. Further information on the IMD can be found in the appendix, section \ref{IMD_datasheet}.
 
 
 
@@ -269,6 +269,7 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 
 \subsubsection{Wiring/cables/connectors/}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
+TODO
 The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. There is a 1 amp fuse protecting the high voltage wiring of the IMD (details of the fuse are in the appendix, section ??). % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
 
 
@@ -295,7 +296,7 @@ TODO
 %Position in car
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 
-The IMD will be located inside the accumulator, as shown in figure~\ref{img_not_found.jpg}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
+The IMD will be located inside the accumulator, as shown in figure~\ref{fig:accumulator_cad}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
 
 
 
@@ -387,7 +388,7 @@ The IMD latch will be connected to the acummulator interface board board via a 4
 \subsubsection{Position in car}
 TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{img_not_found.jpg}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD.
+The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{fig:accumulator_cad}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD.
 
 \subsection{Shutdown System Interlocks}\label{shutdown_system_interlocks}
 \subsubsection{Description/circuitry}
@@ -789,6 +790,17 @@ TODO
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.  Ensure that the required mechanical structure to protect the accumulator and other electrical components is clearly identified.
 TODO
+
+\begin{figure} [!ht]
+	\centering  % this centers the image
+	
+	\includegraphics[width=0.6\textwidth]{img_not_found.jpg}
+	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+	
+	\caption{The CAD for the accumulator}
+	
+	\label{fig:accumulator_cad}
+\end{figure}
 
 \subsection{Accumulator pack 2}\label{accumulator_pack_2}
 We only have one accumulator, described in \ref{accumulator_pack_1}.
