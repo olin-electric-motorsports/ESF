@@ -485,11 +485,18 @@ We will be using the shunt version of a TE Connectivity AMP+ Manual Service Disc
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.  Include information on the working voltage and current rating of the HVD.
-TODO
+The Manual Service Disconnect is rated for 495V and contains a 630A fuse, which is more than our maximum current of 225A as shown in table \ref{batterytable}.  It has a dual lever action, which first disconnects the shutdown circuit interlock inside the plug before disconnecting the high power terminals, which causes the AIRs to open and the tractive system to de-energize. The Manual Service Disconnect is a sealed panel mount device, which prevents the ingress of any water or debris. 
+
+The datasheet can be found in \fref{sec:appendix_hvd}.
+
+The HVD is in series with the negative pole of the tractive system, on the vehicle side of the AIRs, as shown in \fref{fig:TS_block_diagram}. 
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The HVD is mounted at the rear of the vehicle, on the rear-facing side of the energy meter enclosure, however this enclosure is yet to be designed. It is bright orange, and will be clearly marked and easily accessible from the rear of the vehicle. In accordance with EV 4.7.1, the HVD will be mounted more than 350mm from the ground.  
+
+TODO add render and positioning info
+
 
 \subsection{Ready-To-Drive-Sound (RTDS)}\label{ready_to_drive_sound}
 \subsubsection{Description}
@@ -569,7 +576,7 @@ TODO
 	        Maximum nominal output current & 125 A \\ \hline
 	        Maximum charging current & 180 A \\ \hline
 	        Maximum Cell Temperature (discharging) & 45 \degree C \\ \hline
-	        Maximum Cell Temperature (charging) & 45 \degree C \\ \hline
+	        Maximum Cell Temperature (charging) & 45 \degree C \\ \hline 
 	        Cell Chemistry & NMC/LMO\\ \hline
 	    \end{tabular}
 	    \caption{Main cell specification}
@@ -939,6 +946,13 @@ We only have one firewall, described in \ref{firewall_1}.
 \subsection{Tractive System Active Light}
 \href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
 
+\subsection{HV disconnect (HVD)}\label{sec:appendix_hvd}
+TE AMP+ Manual Service Disconnect \href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-2-msd.pdf}{datasheet}.
+
+\begin{figure}[H]
+	\includegraphics[width=0.7\linewidth]{MSD_Ratings.png}
+	\caption{Rating information for the TE AMP+ Manual Service Disconnect}
+\end{figure}
 
 \setcounter{subsection}{11}
 \subsection{Ready to Drive Sound}\label{Ready to Drive}
