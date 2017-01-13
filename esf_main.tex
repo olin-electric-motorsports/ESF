@@ -2,6 +2,7 @@
 \usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{chngcntr}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
@@ -45,8 +46,11 @@
 \graphicspath{{img/}}
 \counterwithin{table}{section} %number tables with section#.table#
 
-\begin{document}
 
+\counterwithin{table}{section} %number tables with section#.table#
+
+
+\begin{document}
 \renewcommand{\headrulewidth}{0pt}
 \lhead{Olin College of Engineering, E238}
 \chead{}
@@ -220,40 +224,95 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the renderings, if necessary.
 TODO
 
-\subsection{IMD}\label{imd}
-\subsubsection{Description (type, operation parameters)}
-%Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also, describe how the IMD indicator light is wired, etc.
-TODO
 
+
+
+
+
+
+\subsection{IMD}\label{imd}
+\subsubsection{Description (type, operation parameters)}TODO
+The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s. Further information on the IMD can be found in the appendix, section \ref{IMD_datasheet}.
+
+
+
+%Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also describe how the IMD indicator light is wired, etc.
+
+
+\begin{center}
 	\begin{table}[H]
-	    \centering
-	    \begin{tabular}{|l|l|}
-	    \hline
-	        Supply voltage range: & 10...36VDC \\ \hline
-	        Supply voltage & 12VDC \\ \hline
-	        Environmental temperature range: & Unknown \\ \hline
-	        Selftest interval: & Every 5 minutes \\ \hline
-	        High voltage range: & 0-1000 VDC \\ \hline
-	        Set response value: & 100 k\ohm TODO:double check this\\ \hline
-	        Max. operation current: & 150 mA \\ \hline
-	        Approximate time to shut down at 50$\%$ of the response value: & $\leq$ 40 sec \\ \hline
-	    \end{tabular}
-	    \caption{Parameters of the IMD}
-	    \label{IMDparameters}
+		\begin{tabular}{|l|l|}
+			\hline
+			Supply voltage range: &  10..36VDC \\
+			\hline
+			Supply voltage: &  12VDC\\
+			\hline
+			Environmental temperature range: &  -40..105$^{\circ}$C \\
+			\hline
+			Selftest interval: &  Always at startup, then every 5 minutes \\
+			\hline
+			High voltage range: &  DC 0..1000V \\
+			\hline
+			Set response value: &  100k$\Omega$ \\
+			\hline
+			Max. operation current: &  150mA \\
+			\hline
+			Approximate time to shut down at 50\% of the response value:&  $\leq$ 40s \\
+			\hline
+		\end{tabular}
+		\caption{Parameters of the IMD}
+		\label{IMDParameters}
 	\end{table}
+\end{center}
+
+
 
 \subsubsection{Wiring/cables/connectors/}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 TODO
+The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. There is a 1 amp fuse protecting the high voltage wiring of the IMD (details of the fuse are in the appendix, section ??). % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
 
-\subsubsection{Position in car}
-%Provide CAD-renderings showing the relevant parts. Mark the parts in the renderings, if necessary.
+
+
+% I am not sure if this is actually how we are doing it, but I am assuming it is correct until I have time to check. I think it might be more convenient to route it through the AIR control board, if possible, as it already needs to connect to the Atmega on that board. 
+
+\begin{figure} [!ht]
+	\centering  % this centers the image
+	
+	\includegraphics[width=0.6\textwidth]{IMD_Latch_Rev2_AltiumSchematic.png}
+	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+	
+	\caption{The schematic for the IMD Latch.}
+	
+	\label{fig:IMDLatch_Schematic}
+\end{figure}
+
+The IMD latch shown in figure~\ref{fig:IMDLatch_Schematic} uses the signal from the IMD to close a relay in the shutdown circuit. In order for the shutdown relay to close a second relay needs to be closed. The second relay is initially powered by a one shot 4 second pulse from the GLV system. After the first four seconds the sicnal from the IMD is used to keep the secondary relay closed. If the IMD signal goes low the secondary relay will close. This opens the shutdown relay and makes it impossible for the IMD to close the shutdown relay again until the latch has been manually reset. The initial 4 second pulse is necessary to ensure that anomalous start up behavior from the IMD does not cause the secondary relay to open and force a manual reset.
+%Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
+
+
+\subsubsection*{2.2.3 Position in car}
 TODO
+%Position in car
+%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
+
+The IMD will be located inside the accumulator, as shown in figure~\ref{fig:accumulator_cad}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Inertia Switch}\label{inertia_switch}
 \subsubsection{Description (type, operation parameters)}
 %Describe the Inertia Switch used and use a table for the common operation parameters, like supply voltage, temperature, etc.
 The Sensata Resettable crash sensor (6-11g version) will trigger due to an impact that decelerates the vehicle between 6-11g.
+
 
 	\begin{table}[H]
 	    \centering
@@ -298,6 +357,7 @@ TODO
 	    \label{TorqueEncoder1}
 	\end{table}
 
+
 \subsubsection{Wiring}
 %Describe the wiring, show schematics including the circuit board, show data regarding the cables and connectors used.  If not detailed in section 2.1, be sure to show how the device open the shutdown circuit.
 TODO
@@ -309,15 +369,26 @@ TODO
 \subsection{Reset / Latching for IMD and BMS}\label{reset_latching_for_imd_and_bms}
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the latching/reset system for a tripped IMD or BMS.  Describe the method for resetting the IMD and BMS.
-TODO
+
+Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.
+
+
+% find out details of BMS
 
 \subsubsection{Wiring/cables/connectors}
-%Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
 TODO
+%Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
+%TODO
+
+The IMD latch will be connected to the acummulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the ?? board using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. This is provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmision. The 18 wire will be rated for at least 90 \textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).
+
+% connects to IMD through either accumulator interface or AIR control.
+
 
 \subsubsection{Position in car}
-%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
+%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
+The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{fig:accumulator_cad}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD.
 
 \subsection{Shutdown System Interlocks}\label{shutdown_system_interlocks}
 \subsubsection{Description/circuitry}
@@ -384,7 +455,6 @@ TODO
 \subsection{Measurement points}\label{measurement_points}
 \subsubsection{Description}
 %Describe the housing used and how it can be accessed, etc.  Describe how the measurement points protected/covered when not in use and how the electrical connections on the back of the measurement points are protected when the measurement points are being used.
-TODO
 
 \subsubsection{Wiring, connectors, cables}
 %Describe wiring, show schematics, and describe connectors and cables used and show useful data regarding the wiring.  Include details on the protection resistor including resistance, voltage and power rating.
@@ -736,6 +806,17 @@ TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.  Ensure that the required mechanical structure to protect the accumulator and other electrical components is clearly identified.
 TODO
 
+\begin{figure} [!ht]
+	\centering  % this centers the image
+	
+	\includegraphics[width=0.6\textwidth]{img_not_found.jpg}
+	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+	
+	\caption{The CAD for the accumulator}
+	
+	\label{fig:accumulator_cad}
+\end{figure}
+
 \subsection{Accumulator pack 2}\label{accumulator_pack_2}
 We only have one accumulator, described in \ref{accumulator_pack_1}.
 
@@ -931,6 +1012,21 @@ We only have one firewall, described in \ref{firewall_1}.
 \hypertarget{TSALdatasheet}{}
 \subsection{Tractive System Active Light}
 \href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
+
+\subsection{IMD Datasheet}\label{IMD_datasheet}
+
+\begin{figure} [!ht]
+	\centering  % this centers the image
+	
+	\includegraphics[width=\textwidth]{Formula_IMD_Datasheet.png}
+	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+	
+	\caption{The datasheet for the IMD.}
+	
+	\label{fig:IMD_Datasheet}
+\end{figure}
+
+\href{http://www.bender-us.com/documents/IR155-10_datasheet_NAE1012821.pdf}{Full IMD datasheet here.}
 
 \setcounter{subsection}{11}
 \subsection{Ready to Drive Sound}\label{Ready to Drive}
