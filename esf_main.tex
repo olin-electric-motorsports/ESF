@@ -1,4 +1,4 @@
-\documentclass{article} %on the controller banch now
+\documentclass{article}
 \usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -732,14 +732,14 @@ The motor controller regulates the power delivered to the motor. This motor cont
 	\begin{tabular}{|l|l|}
 	\hline
 	Motor Controller type & Rinehart PM100DX \\ \hline
-	Maximum continuous power & TODO kW \\ \hline
-	Maximum peak power & TODO kW \\ \hline
-	Maximum input voltage & TODO VDC \\ \hline
+	Maximum continuous power & 86 kVA \\ \hline
+	Maximum peak power & 100 kVA for 10s \\ \hline
+	Maximum input voltage & 400 VDC \\ \hline
 	Output voltage & TODO \\ \hline
-	Maximum continuous output current & TODO A \\ \hline
-	Maximum peak current & TODO A \\ \hline
+	Maximum continuous output current & 300 A \\ \hline
+	Maximum peak current & 350 A for 10s \\ \hline
 	Control method & CAN \\ \hline
-	Cooling method & Water \\ \hline
+	Cooling method & Water \\ \hline   
 	Auxiliary supply voltage & 12 VDC \\ \hline
 	\end{tabular}
 	\caption{General Motor Controller data}
@@ -748,18 +748,19 @@ The motor controller regulates the power delivered to the motor. This motor cont
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe the wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
-TODO: fill out table for all wires used to connect to MC and Motor
+
+The PM100DX has five high voltage connections (DC+, DC-, Phase A, Phase B, Phase C) as seen in Figure \ref{fig:TS_block_diagram}. Each connection is done with a cable gland that provides strain relief, envoronmental sealing, and shield termination for the dual insulated shielded 4 AWG cable. The manufacturer recommends this particular cable from Champlain Cable. 
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|l|}
 	\hline
-	Wire type & 2 AWG Cable\\ \hline
-	Current rating & 181 A \\ \hline
-	Maximum operating voltage & 8kVAC \\ \hline
-	Temperature rating & 125 \degree C \\ \hline
+	Wire type & 4 AWG Cable\\ \hline
+	Current rating & 190 A \\ \hline
+	Maximum operating voltage & 1 kV \\ \hline
+	Temperature rating & -55 \degree C to 150 \degree C \\ \hline
 	\end{tabular}
-	\caption{Wire data of the company: Prestolite, 0.052 in$^{2}$}
+	\caption{Wire data of the company: Champlain Cable, EXRAD SAE 150 XLE Shielded Cable}
 	\label{motortomcwire}
 \end{table}
 
