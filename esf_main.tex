@@ -337,10 +337,17 @@ TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
 
-\subsection{Brake Plausibility Device}\label{brake_plausibility_device}
+\subsection{Brake Plausibility Device (BSPD)}\label{brake_plausibility_device}
 \subsubsection{Description/additional circuitry}
 %Describe how your electronic hardware brake plausibility system works (this is in addition to your ECU controlled brake plausibility software), provide tables with main operation parameters, and describe additional circuitry used to check or for an implausibility. Describe how the system reacts if an implausibility or error is detected.
-TODO
+
+The Brake System Plausibility Device (BSPD) is a custom circuit designed to open a relay in the shutdown circuit if the brakes are being pressed while there is positive-current being delivered to the motors for more than 0.5 seconds. The custom circuit takes in two digital signals, the brake signal and a boolean yes/no whether or not positive-current is being delivered to the motor. The positive-current will be sensed with our BMS using a hall-effect current sensor and a comparator which will output high when positive-current is being delivered to the motors. \\
+
+There are two main sections to the circuit: the timing section and the latching section. The timing section consists of a 555-timer in monostable mode which is configured to be powered from the output of an AND-gate which takes in both the brake signal and the positive-current signal. This 555-timer will output a high pulse if the AND gate outputs a high voltage for more than 0.5 seconds. \\
+
+The latching section of the circuit is a simple SR-latch, which will hold the relay open when tripped by the timing section. It will remain in this state until a reset signal is given, which will be from an ATmega. This reset signal will only be done when the GLV system is first powered on, thus making it non-driver resettable. \\
+
+The schematic can be seen in \fref{fig:bspd_schematic}. \\
 
 	\begin{table}[H]
 	    \centering
@@ -360,11 +367,20 @@ TODO
 
 \subsubsection{Wiring}
 %Describe the wiring, show schematics including the circuit board, show data regarding the cables and connectors used.  If not detailed in section 2.1, be sure to show how the device open the shutdown circuit.
-TODO
+
+The output of the BSPD circuit will low-side drive a relay in series with the shutdown circuit. This board has not been fully designed, but it will utilize components common across other circuits.
+
+  \begin{figure}[H]
+        \centering
+        \includegraphics[width= .75\textheight]{bspd_schematic.png}
+        \caption{Schematic for BSPD circuit}
+        \label{fig:bspd_schematic}
+  \end{figure}
 
 \subsubsection{Position in car/mechanical fastening/mechanical connection}
 %Provide CAD-renderings showing all relevant parts and discuss the mechanical connection of the sensors to the pedal assembly. Mark the parts in the rendering, if necessary.
-TODO
+
+This board is located in the bulkhead enclosure at the front of the car.
 
 \subsection{Reset / Latching for IMD and BMS}\label{reset_latching_for_imd_and_bms}
 \subsubsection{Description/circuitry}
