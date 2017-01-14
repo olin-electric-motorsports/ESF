@@ -455,14 +455,49 @@ TODO
 \subsection{Measurement points}\label{measurement_points}
 \subsubsection{Description}
 %Describe the housing used and how it can be accessed, etc.  Describe how the measurement points protected/covered when not in use and how the electrical connections on the back of the measurement points are protected when the measurement points are being used.
+The TSMPs and GLVS ground measurement points are located on the master switch panel on the side of the vehicle, which also houses the TSAL circuitry in section \ref{tractive_system_active_light}. They will be a set of three clearly labeled and easily accessible shrouded banana jack connectors with hinged panel-mount covers to prevent any unintentional contact. These are visible in \fref{fig:master_switch_panel}. The measurement points provide a means for safe measurement of the tractive system potential , a secondary manual method for detecting isolation faults, and a reference point for system grounding  measurements. 
+
 
 \subsubsection{Wiring, connectors, cables}
 %Describe wiring, show schematics, and describe connectors and cables used and show useful data regarding the wiring.  Include details on the protection resistor including resistance, voltage and power rating.
-TODO
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{TSMP-Schematic.png}
+\caption{Schematic of TSMP wiring, illustrating the circuit with and without the multimeter, showing the protection resistors and the approximate expected resistance of the multimeter.}
+\label{fig:TSMP_schematic}
+\end{figure}
+
+There are three measurement points: TS+, TS_, and GLVS chassis ground. The TSMP connections will protected with 50k$\Omega$ current-limiting resistors. These resistors limit the maximum fault current (a short circuit between the measurement points) to below 0.01A, which is below the level that is harmful to a human.
+
+\begin{align*}
+V = I * R \\
+300V = I * 100,000 \Omega \\
+I = 0.003A
+\end{align*}
+
+\begin{align*}
+P = I * V \\
+P = 0.003A * 300V \\
+P = 0.9W
+\end{align*}
+
+According to the above calculations, the resistors will have to be rated to at least 1W and 300V. We will be using Panasonic ERG-1SJ513 51k 1W resistors. The datasheet can be found in \fref{sec:appendix_TSMP}.
+
+The TSMPs are protected with current-limiting resistors because protecting the wires with fuses introduces the failure mode in which one of the fuses has blown, and a measurement across the TSMPs shows an open circuit even though the tractive system is still energized. 
+
+In case of gross operator error that results in connecting a multimeter from a TS measurement point to the GLVS ground measurement point, the IMD will detect a loss of isolation and open the shutdown circuit. 
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The TSMPs will be located in the master switch panel enclosure shown in \fref{fig:master_switch_panel} along with TSAL circuitry. The housing will be made of non-conductive material, and proper spacing between TS measurement point wiring and any part of the GLVS of 30mm through air will be maintained in accordance with EV 4.1.5.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{img_not_found.jpg}
+\caption{CAD rendering of the master switch panel showing TS and GLVS master switches, and TS and GLVS ground measurement points}
+\label{fig:master_switch_panel}
+\end{figure}
 
 \subsection{Pre-Charge circuitry}\label{pre_charge_circuitry}
 \subsubsection{Description}
@@ -1027,6 +1062,15 @@ We only have one firewall, described in \ref{firewall_1}.
 \end{figure}
 
 \href{http://www.bender-us.com/documents/IR155-10_datasheet_NAE1012821.pdf}{Full IMD datasheet here.}
+
+\subsection{Measurement points (TSMPs)}\label{sec:appendix_TSMP}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{TSMP_resistor_ratings}
+	\caption{Ratings for Panasonic ERG series resistors. The TSMP resistors are ERG-1SJ513, shown in the second row}
+\end{figure}
+\href{https://www.gossenmetrawatt.com/resources/tt/hit27/db_gb.pdf}{Example multimeter for TS measurement. Link to datasheet.}
+\href{http://media.digikey.com/pdf/Data%20Sheets/Panasonic%20Resistors%20Thermistors%20PDFs/ERX_GxS_F_Series.pdf}{Complete datasheet for TSMP current limiting resistors.}
 
 \setcounter{subsection}{11}
 \subsection{Ready to Drive Sound}\label{Ready to Drive}
