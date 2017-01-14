@@ -446,7 +446,7 @@ The TSAL will be mounted to the underside of the highest point of the main roll 
 
 %Need to add rendering here
 TODO
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=1]{img_not_found.jpg}
 \caption{CAD rendering of TSAL position}
@@ -461,14 +461,14 @@ The TSMPs and GLVS ground measurement points are located on the master switch pa
 \subsubsection{Wiring, connectors, cables}
 %Describe wiring, show schematics, and describe connectors and cables used and show useful data regarding the wiring.  Include details on the protection resistor including resistance, voltage and power rating.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[scale=1]{TSMP-Schematic.png}
+\includegraphics[scale=0.5]{TSMP-Schematic.png}
 \caption{Schematic of TSMP wiring, illustrating the circuit with and without the multimeter, showing the protection resistors and the approximate expected resistance of the multimeter.}
 \label{fig:TSMP_schematic}
 \end{figure}
 
-There are three measurement points: TS+, TS_, and GLVS chassis ground. The TSMP connections will protected with 50k$\Omega$ current-limiting resistors. These resistors limit the maximum fault current (a short circuit between the measurement points) to below 0.01A, which is below the level that is harmful to a human.
+There are three measurement points: TS+, TS-, and GLVS chassis ground. The TSMP connections will protected with 50k$\Omega$ current-limiting resistors. These resistors limit the maximum fault current (a short circuit between the measurement points) to below 0.01A, which is below the level that is harmful to a human.
 
 \begin{align*}
 V = I * R \\
