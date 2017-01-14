@@ -527,7 +527,7 @@ TODO
 \subsection{Discharge circuitry}\label{discharge_circuitry}
 \subsubsection{Description}
 %Describe your concept of the discharge circuitry.
-TODO
+When the car is shut down, and the AIRs have disconnected the accumulator from the rest of the tractive system, there is still energy stored in the capacitive load of tractive system components like the motor controller that could be harmful to the driver, team members, or first responders. The discharge circuit dissipates the energy found on the vehicle side of the tractive system after a shutdown. The circuit is designed to operate even if the vehicle looses all power. When the shutdown circuit is opened, the normally closed discharge relay connects a power resistor across the two poles of the tractive system.  
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
@@ -535,19 +535,41 @@ TODO
 %Give the formula describing this behavior
 %Give a plot “Discharge current” vs. time
 %Give the formula describing your plot
-TODO
+
+Since the power resistor limits the current on the discharge circuit, a fuse is not needed to protect the wiring. It is also dangerous for the discharge circuit to not operate if a fuse were to blow. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.7 \textwidth]{Discharge.png}
+    \caption{Schematic of the discharge system}
+    \label{discharge_schem}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.7 \textwidth]{discharge_voltage}
+    \caption{Theoretical discharge of the 440 $\mu F$ capacitive load of the motor controller across the 3 k$\Omega$ resistor. This was calculated using the equation $V(t) = V_{0} * e^{-t/RC}$.}
+    \label{discharge_voltage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.7 \textwidth]{discharge_current}
+    \caption{Current of the theoretical discharge from Figure \ref{discharge_voltage}. This was computed using the voltage exponential and the equation $I = \frac{V}{R}$.}
+    \label{discharge_current}
+\end{figure}
 
 	\begin{table}[H]
 		\centering
 		\begin{tabular}{|l|l|}
 		\hline
-		Resistor type & TODO \\ \hline
-		Resistance & TODO \ohm \\ \hline
-		Continuous power rating & TODO W \\ \hline
-		Overload power rating & TODO \\ \hline
-		Maximum expected current & TODO \\ \hline
-		Average current & TODO\\ \hline
-		Cross-sectional area of the wire used & TODO mm$^2$ \\ \hline
+		Resistor type & Ohmite AP101 TO-247-2 \\ \hline
+		Resistance & 3 k\ohm \\ \hline
+		Continuous power rating & 100 W \\ \hline
+		Overload power rating & 1.5 times rated power for 5 seconds \\ \hline
+		Maximum expected current & 0.1 A \\ \hline
+		Average current & 0.0261 A\\ \hline
+		Cross-sectional area of the wire used & 0.83mm$^2$ (18 AWG) \\ \hline
 		\end{tabular}
 		\caption{General data of the discharge circuit}
 		\label{dctable}
@@ -555,7 +577,7 @@ TODO
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The discharge circuit is located within the Energy Meter enclosure, in close proximity to the motor controller which is the main capacitive load in the tractive system. 
 
 \subsection{HV Disconnect (HVD)}\label{hv_disconnect}
 \subsubsection{Description}
