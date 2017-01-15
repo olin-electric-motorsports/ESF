@@ -538,7 +538,16 @@ TODO
 
 \subsubsection{Accumulator indicator}
 %Describe the indicator, show wiring, provide tables with operation, PCB design, etc. 
-TODO
+The Accumulator Indicator Light (AIL) will be powered directly by the TS voltage using two Zener diodes which will allow enough current to flow through the AIL to turn it on when the supply exceeds 60V. This PCB has not been designed yet but the general schematic can be seen below in \fref{fig:AILcircuit}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.4]{AIL}
+\caption{Schematic for the AIL}
+\label{fig:AILcircuit}
+\end{figure}
+
+The AIL will be located on the AIR control board PCB, fused to 1A, and have traces of 20 mil, which are rated for 1.4A. All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A.
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe the internal wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
