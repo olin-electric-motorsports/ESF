@@ -181,3 +181,6 @@ TSWLatexianTemp*
 
 # Our main PDF file
 esf_main.pdf
+
+# For the Elite VIM users
+*.swp
