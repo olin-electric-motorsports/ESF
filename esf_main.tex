@@ -395,23 +395,21 @@ This board is located in the bulkhead enclosure at the front of the car.
 
 Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.
 
-
-% find out details of BMS
+The BMS is latched with identical circuitry to the IMD, as shown in \fref{fig:IMDLatch_Schematic}, and is also reset by a GLVS power cycle. The BMS latch circuitry, however, will be on the master BMS PCB in the accumulator, and will control a separate on-board relay to open the shutdown circuit. In the case that the BMS detects a fault in cell temperature or voltage that requires a vehicle shutdown, the ATmega16m1 on the board will pull the BMS latch output pin low, latching the BMS latch circuit into a low state and opening the shutdown circuit. The master BMS will also serve as a CAN network monitor, and if another node in the vehicle detects a fault condition that requires vehicle shutdown that is not rules-required to be analog circuity, that node will send a shutdown message to the master BMS that will open the shutdown circuit. 
 
 \subsubsection{Wiring/cables/connectors}
 TODO
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
-%TODO
+The IMD latch will be connected to the accumulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the IMD connector using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. This provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmission. The 18 wire will be rated for at least 90 \textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).
 
-The IMD latch will be connected to the acummulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the ?? board using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. This is provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmision. The 18 wire will be rated for at least 90 \textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).
-
+Similarly to the IMD latch, the BMS latch will be housed in the accumulator, and thus all of the shutdown circuit connections to and from it will be made with 18AWG wire rated to over 300V and 90 \textdegree C in order to handle the maximum of 8A inrush current to the AIRs and maintain compliance with accumulator wiring regulations. PCB traces will also be appropriately sized to handle 8A peak current. 
 % connects to IMD through either accumulator interface or AIR control.
 
 
 \subsubsection{Position in car}
 TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{fig:accumulator_cad}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD.
+The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{fig:accumulator_cad}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD, which is located in the accumulator for continual monitoring of pack isolation while the accumulator is removed for charging. 
 
 \subsection{Shutdown System Interlocks}\label{shutdown_system_interlocks}
 \subsubsection{Description/circuitry}
