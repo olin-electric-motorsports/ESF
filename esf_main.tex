@@ -106,8 +106,9 @@
 \section*{List of Abbreviations} \label{list_of_abbreviations}
 \addcontentsline{toc}{section}{III List of Abbreviations}
 \begin{itemize}
-    \item MSD- Manual Service Disconnect
-    \item CONN- Main accumulator connector
+    \item MSD - Manual Service Disconnect
+    \item CONN - Main accumulator connector
+    \item TS+ / TS- - High and Low pole of the tractive system  
 \end{itemize}
 
     Any other abbreviations used in this document are those used in the 2016 Formula SAE Rules and those used in the FSAE ESF template document.
@@ -197,13 +198,13 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
         \label{switchlist}
     \end{table}
 
-\subsubsection{Wiring / additional circuitry}
-	Figure \ref{shutdown_circuit} shows the wiring of the shutdown circuit.
+\subsubsection{Wiring / additional circuitry} \label{sec:shutdown_wiring}
+	\Fref{fig:shutdown_circuit} shows the wiring of the shutdown circuit.
 
 	\begin{sidewaysfigure}[p]
         \includegraphics[width= 1\textheight]{shutdown_circuit}
         \caption{Block Diagram of Shutdown Circuit}
-        \label{shutdown_circuit}
+        \label{fig:shutdown_circuit}
     \end{sidewaysfigure}
 
 	\begin{table}[H]
@@ -330,12 +331,18 @@ The Sensata Resettable crash sensor (6-11g version) will trigger due to an impac
 	\end{table}
 
 \subsubsection{Wiring/cables/connectors/}
-%Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
-TODO
+            The Inertia switch will be wired to open the shutdown circuit in the case that there is a crash. The inertia switch is wired in-line with the shutdown circuit to be normally closed. Please see \fref{fig:shutdown_circuit} for the position of the inertia switch relative to the other shutdown system components.
 
 \subsubsection{Position in car}
-%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+ The inertia switch will be located on the dashboard, in reach of the driver as to fit EV5.7.4. It is mounted downwards, so it can be triggered and reset while underneath the body panels, as seen in \fref{fig:inertia_switch_mount}.
+
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width = 0.9 \textwidth]{Inertia_Switch_Mount.png}
+  \caption{Positioning of the inertia switch alongside the dashboard enclosure}
+  \label{fig:inertia_switch_mount}
+  \end{figure}
+
 
 \subsection{Brake Plausibility Device (BSPD)}\label{brake_plausibility_device}
 \subsubsection{Description/additional circuitry}
@@ -410,15 +417,37 @@ The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the Shutdown System Interlocks.
 %Note: Interlocks are circuits used to open the shutdown circuit if a connector is disconnected or enclosure is opened.  This is not the entire shutdown circuit.
-TODO
+The vehicle's tractive system connectors are all lever action locking connectors from the TE Connectivity HVP 800 series. Their arrangement in the tractive system can be seen in \fref{fig:HV_connector_diagram}. These connectors can be removed without tools. In compliance with EV 3.3.6, these connectors all contain an interlock that opens the shutdown circuit when they are not installed. 
+
+  \begin{figure}[H]
+        \centering
+        \includegraphics[width=.75\textwidth]{HV_connector_diagram.png}
+        \caption{Diagram of HV connectors in the tractive system. They are labelled with TE Connectivity part numbers.}
+        \label{fig:HV_connector_diagram}
+  \end{figure}
+
+In order to close the shutdown circuit during charging when the accumulator is removed from the vehicle, a connection must be made that overrides the interlocks in the HV connectors that remain with the vehicle. Our solution is a shunt in the LV charging connector that bypasses the circuit that normally connects to the energy meter, HVD, and motor connector interlocks. The main accumulator connector interlock is still required to close the shutdown circuit, so EV 3.3.6 compliance is maintained. A schematic of this interlock circuitry can be seen in \fref{fig:HV_connector_schematic}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = .75\textwidth]{HV-connector-schematic.png}
+\caption{Schematic of the HV interlocks in the vehicle. Note the LV connector that allows the shutdown circuit to close the AIRs when the vehicle is charging.}
+\label{fig:HV_connector_schematic}
+\end{figure}
 
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
-TODO
+The shutdown circuit interlock wires will be 20 or 22 AWG and rated to over 300V and 90\textdegree C and are protected by the main shutdown circuit breaker as in \fref{sec:shutdown_wiring}. 
 
 \subsubsection{Position in car}
-%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+Interlocks are built in to each HV connector. The connectors are panel-mounted to the accumulator housing, the energy meter housing, and the motor housing. See the render of the rear of the car in \fref{fig:rear_of_car}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = .75\textwidth]{img_not_found.jpg}
+\caption{Render of the rear of the vehicle showing location of HV connectors.}
+\label{fig:rear_of_car}
+\end{figure}
 
 \subsection{Tractive system active light}\label{tractive_system_active_light}
 \subsubsection{Description/circuitry}
@@ -559,15 +588,29 @@ TODO
 \subsection{HV Disconnect (HVD)}\label{hv_disconnect}
 \subsubsection{Description}
 %Describe your concept of the HVD and how it can be operated.
-TODO
+We will be using the shunt version of a TE Connectivity AMP+ Manual Service Disconnect as our HVD. Shown in \fref{fig:TE_MSD}, it is a sealed, lever operated panel mount device and can be removed without tools. To protect technicians, it has no exposed conductors and provides internal HV interlocking in compliance with EV4.7.5. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.7]{TE_Manual_Service_Disconnect.jpg}
+\caption{The TE Manual Service Disconnect}
+\label{fig:TE_MSD}
+\end{figure}
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.  Include information on the working voltage and current rating of the HVD.
-TODO
+The Manual Service Disconnect is rated for 495V and contains a 630A fuse, which is more than our maximum current of 225A as shown in table \ref{batterytable}. This fuse is superfluous to the TS main fuse, and is simply included as part of the disconnect.  It has a dual lever action, which first disconnects the shutdown circuit interlock inside the plug before disconnecting the high power terminals, which causes the AIRs to open and the tractive system to de-energize. The Manual Service Disconnect is a sealed panel mount device, which prevents the ingress of any water or debris. 
+
+The datasheet can be found in \fref{sec:appendix_hvd}.
+
+The HVD is in series with the negative pole of the tractive system, on the vehicle side of the AIRs, as shown in \fref{fig:TS_block_diagram}. 
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The HVD is mounted at the rear of the vehicle, on the rear-facing side of the energy meter enclosure, however this enclosure is yet to be designed. It is bright orange, and will be clearly marked and easily accessible from the rear of the vehicle. In accordance with EV 4.7.1, the HVD will be mounted more than 350mm from the ground.  
+
+TODO add render and positioning info
+
 
 \subsection{Ready-To-Drive-Sound (RTDS)}\label{ready_to_drive_sound}
 \subsubsection{Description}
@@ -647,7 +690,7 @@ TODO
 	        Maximum nominal output current & 125 A \\ \hline
 	        Maximum charging current & 180 A \\ \hline
 	        Maximum Cell Temperature (discharging) & 45 \degree C \\ \hline
-	        Maximum Cell Temperature (charging) & 45 \degree C \\ \hline
+	        Maximum Cell Temperature (charging) & 45 \degree C \\ \hline 
 	        Cell Chemistry & NMC/LMO\\ \hline
 	    \end{tabular}
 	    \caption{Main cell specification}
@@ -676,7 +719,17 @@ TODO
 
 \subsubsection{Accumulator indicator}\label{accumulator_indicator}
 %Describe the indicator, show wiring, provide tables with operation, PCB design, etc.
-TODO
+The Accumulator Indicator Light (AIL) will be powered directly by the TS voltage using two Zener diodes which will allow enough current to flow through the AIL to turn it on when the supply exceeds 60V. This PCB has not been designed yet but the general schematic can be seen below in \fref{fig:AILcircuit}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.4]{AIL}
+\caption{Schematic for the AIL}
+\label{fig:AILcircuit}
+\end{figure}
+
+The AIL will be located on the AIR control board PCB, fused to 1A, and have traces of 20 mil, which are rated for 1.4A. All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A.
+
 
 \subsubsection{Wiring, cables, current calculations, connectors}\label{accumulator_wiring}
 %Describe the internal wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
@@ -824,7 +877,7 @@ TODO
 \begin{figure} [!ht]
 	\centering  % this centers the image
 	
-	\includegraphics[width=0.6\textwidth]{img_not_found.jpg}
+	\includegraphics[width=0.6\textwidth]{render_not_available.png}
 	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
 	
 	\caption{The CAD for the accumulator}
@@ -838,15 +891,49 @@ We only have one accumulator, described in \ref{accumulator_pack_1}.
 \section{Energy meter mounting} \label{energy_meter_mounting}
 \subsection{Description}
 %Describe where the energy meter is mounted and how, etc.
-TODO
+The vehicle's energy meter is mounted in a dedicated tractive system enclosure at the rear of the car that we call the energy meter enclosure. As is visible in \fref{fig:TS_block_diagram}, the energy meter enclosure is a pass-through enclosure that connects in series with both poles of the tractive system between the accumulator and the motor controller. Inside are the energy meter, the high-voltage low-current fuses that protect the TSAL (section \ref{tractive_system_active_light}), the current-limiting resistors that protect the TSMPs (section \ref{measurement_points}), and the discharge circuit (section \ref{discharge}). 
 
 \subsection{Wiring, cables, current calculations, connectors}
 %Describe the wiring, show schematics, provide calculations for currents and voltages, and show data regarding the cables and connectors used.
-TODO
+
+The energy meter current calculations require it to be connected in series with the low pole of the tractive system. It is bolted onto custom-made copper bus bars with serrated fasteners to ensure electrical connection. Voltage measurement connections to TS+ for the energy meter, and connections for the TSAL fuses and TSMP current-limiting resistors are made via ring terminals to the corresponding bus bars. The wires for the TSMPs, the TSAL, and the energy meter will all be 20AWG rated to 300V and 90 \textdegree C. The energy meter itself also requires GLVS power, which means that proper HV wire spacing of 30mm will be upheld. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Energy-Meter-Schematic-w-HVD.png}
+\caption{Schematic of the internals of the energy meter. Fuses S1 and S2 are Littelfuse 80812000000s, and resistors R1 and R2 are the TSMP resistors from section \ref{measurement_points}.}
+\label{fig:energy_meter_schematic}
+\end{figure}
+
+\Fref{fig:energy_meter_schematic} shows the internals of the energy meter box. The GLVS connector contains the shutdown circuit power for the discharge circuit, the interlock from the HVD, and GLVS power for the energy meter. The high voltage low power connector contains TSMP and TSAL high voltage connections to the master switch panel. High power connections are shown in orange.
+
+The energy meter TS+ connection and the TSAL TS+ measurement wire share the same fused connection, and the TSAL TS- measurement wire has its own fuse. The fuse specifications can be found in \fref{tab:TSAL_and_EM_fuse}. The datasheet for the fuse can be found in \fref{tab:TSAL_and_EM_fuse}.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+	\hline
+	Fuse manufacturer and type & Littelfuse 80812000000 \\ \hline
+	Continuous current rating & 2.00 A \\ \hline
+	Maximum operating voltage & 450VDC \\ \hline
+	Type of fuse & Fast-acting \\ \hline
+	I2T & 0.0610 A$^{2}$sec \\ \hline
+	Interrupt current rating & 10,000 A \\ \hline
+	\end{tabular}
+	\caption{TS+ fuse for energy meter and TSAL TS+ measurement wire}
+	\label{tab:TSAL_and_EM_fuse}
+\end{table}
 
 \subsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The energy meter housing is mounted to the chassis at the rear of the vehicle, in close proximity to the motor, motor controller, and accumulator, and with the HVD easily visible and accessible from the rear. See \fref{fig:energy_meter_mounting_render}.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{render_not_available.png}
+\caption{Render of the rear of the vehicle showing the mounting for the energy meter enclosure at the rear of the vehicle}
+\label{fig:energy_meter_mounting_render}
+\end{figure}
 
 
 \section{Motor controller}\label{motor_controller}
@@ -982,22 +1069,22 @@ TODO
 \section{Additional LV-parts interfering with the tractive system}
 \subsection{LV part 1}
 %Describe those parts here which interfere or influence the tractive system, for example a controlling unit that measures wheel speeds and steering angle and calculates a target torque for each motor or a DC/DC-Converter providing power for the LV-system from the HV-system, etc.
-TODO
+There are preliminary design ideas for adding a DC/DC converter into the energy meter enclosure for recharging the GLVS battery, but that design has not yet been considered, and will only appear in a later revision of the ESF if it is included in the vehicle. As of yet all LV parts interfering with the tractive system have been adequately described in other sections.
 
 \subsubsection{Description}
 %Describe the parts used and their circuitry, and provide main operation parameters, use tables or figures, etc.
-TODO
+All LV parts interfering with the tractive system have been adequately described. 
 
 \subsubsection*{Wiring, cables}
 %Describe the wiring, show schematics, etc.
-TODO
+All LV parts interfering with the tractive system have been adequately described. 
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+All LV parts interfering with the tractive system have been adequately described. 
 
 \subsection{LV part 2}
-TODO
+All LV parts interfering with the tractive system have been adequately described. 
 
 \section{Overall Grounding Concept}\label{overall_grounding_concept}
 \subsection{Description of the Grounding Concept}
@@ -1024,9 +1111,26 @@ We only have one firewall, described in \ref{firewall_1}.
 
 \section{Appendix}\label{appendix}
 
+
+\subsection{Shutdown System Interlocks}\label{sec:appendix_interlocks}
+\begin{figure}[H]
+	\includegraphics[width=.7 \linewidth]{HVP_800_ratings.png}
+	\caption{Ratings and interlock description for TE HVP 800 connectors}
+	\label{fig:hvp_800_ratings}
+\end{figure}
+\href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-1-hvp-800.pdf}{TE HVP 800 complete Datasheet}
+
 \hypertarget{TSALdatasheet}{}
 \subsection{Tractive System Active Light}
 \href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
+
+\subsection{HV disconnect (HVD)}\label{sec:appendix_hvd}
+TE AMP+ Manual Service Disconnect \href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-2-msd.pdf}{datasheet}.
+
+\begin{figure}[H]
+	\includegraphics[width=0.7\linewidth]{MSD_Ratings.png}
+	\caption{Rating information for the TE AMP+ Manual Service Disconnect}
+\end{figure}
 
 \subsection{IMD Datasheet}\label{IMD_datasheet}
 
@@ -1057,5 +1161,21 @@ Ready to drive buzzer \href{http://www.mallory-sonalert.com/specifications/STA20
 \end{figure}
 
 For calculation of sound attenuation over distance, see \href{http://www.sengpielaudio.com/calculator-distance.htm}{SengpielAudio Distance Law Equation}
+
+\subsection{Energy Meter Mounting}\label{appendix_energy_meter_mounting}
+
+\begin{figure} [!ht]
+	\centering  % this centers the image	
+	\includegraphics[width=\textwidth]{Littelfuse_808_electrical_characteristics.png}
+	\caption{Electrical characteristics snapshot for Littelfuse 808 series fast-acting fuses. The high-voltage low-power fuse we use is the 80812000000.}	
+	\label{fig:littelfuse_808}
+\end{figure}
+
+\href{http://www.littelfuse.com/~/media/c635bf51279f4ef6bedee5deb356e102.ashx}{Littelfuse 808 Series datasheet.}
+
+\subsection{HV Disconnect (HVD)}\label{appendix_hvd}
+\href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-2-msd.pdf}{TE AMP+ Manual Service Disconnect Overview here.}
+\href{http://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Specification+Or+Standard%7F108-127000%7FA%7Fpdf%7FEnglish%7FENG_SS_108-127000_A.pdf%7FN-A}{TE Manual Service Disconnect Test Parameters datasheet here.}
+
 
 \end{document}
