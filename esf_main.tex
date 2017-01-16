@@ -198,12 +198,12 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
     \end{table}
 
 \subsubsection{Wiring / additional circuitry} \label{sec:shutdown_wiring}
-	Figure \ref{shutdown_circuit} shows the wiring of the shutdown circuit.
+	\Fref{fig:shutdown_circuit} shows the wiring of the shutdown circuit.
 
 	\begin{sidewaysfigure}[p]
         \includegraphics[width= 1\textheight]{shutdown_circuit}
         \caption{Block Diagram of Shutdown Circuit}
-        \label{shutdown_circuit}
+        \label{fig:shutdown_circuit}
     \end{sidewaysfigure}
 
 	\begin{table}[H]
@@ -330,12 +330,18 @@ The Sensata Resettable crash sensor (6-11g version) will trigger due to an impac
 	\end{table}
 
 \subsubsection{Wiring/cables/connectors/}
-%Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
-TODO
+            The Inertia switch will be wired to open the shutdown circuit in the case that there is a crash. The inertia switch is wired in-line with the shutdown circuit to be normally closed. Please see \fref{fig:shutdown_circuit} for the position of the inertia switch relative to the other shutdown system components.
 
 \subsubsection{Position in car}
-%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+ The inertia switch will be located on the dashboard, in reach of the driver as to fit EV5.7.4. It is mounted downwards, so it can be triggered and reset while underneath the body panels, as seen in \fref{fig:inertia_switch_mount}.
+
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width = 0.9 \textwidth]{Inertia_Switch_Mount.png}
+  \caption{Positioning of the inertia switch alongside the dashboard enclosure}
+  \label{fig:inertia_switch_mount}
+  \end{figure}
+
 
 \subsection{Brake Plausibility Device (BSPD)}\label{brake_plausibility_device}
 \subsubsection{Description/additional circuitry}
