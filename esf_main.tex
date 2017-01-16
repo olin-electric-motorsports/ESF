@@ -120,12 +120,12 @@
 \newpage
 \pagenumbering{arabic}
 \section{System Overview}\label{system_overview}
-The vehicle's electrical system is designed to support all necessary functions of electric vehicle locomotion, while simultaneously ensuring driver and team member safety. The vehicle's electrical system is comprised of two major galvanically isolated subsystems: a 298.8V maximum high power tractive system and a 14V maximum sensing and control system.
+The vehicle's electrical system is designed to support all necessary functions of electric vehicle locomotion, while simultaneously ensuring driver and team member safety. The vehicle's electrical system is comprised of two major galvanically isolated subsystems: a 298.8V maximum high power tractive system and a 14V maximum sensing and control system. 
+\medskip
 
-The tractive system consists of a custom-designed and fabricated accumulator container which houses 72 LG Chem proprietary pouch cells, as well as a Rinehart Motion Systems PM100DX motor controller driving an Emrax 228 Medium Voltage outrunner motor. Communication to the motor controllers is achieved via the CAN network built into the low voltage system.
+ The tractive system consists of a custom-designed and fabricated accumulator container which houses 72 LG Chem proprietary pouch cells, as well as a Rinehart Motion Systems PM100DX motor controller driving an Emrax 228 Medium Voltage outrunner motor. Communication to the motor controllers is achieved via the CAN network built into the low voltage system. \newline
 
-The low voltage system consists primarily of a shutdown circuit and a series of peripheral sensors to gather data about vehicle state and performance, all powered by a 12V nominal sealed lead acid battery that is recharged by a DC/DC converter. The Shutdown circuit monitors the vehicle for dangerous conditions such as impacts or isolation faults of the Tractive System, and de-energizes the vehicle in case of emergency. The low voltage system also contains a CAN communication network between Atmel ATmega16m1 microcontrollers that fulfill several rules-required functions like the Ready-to-Drive sound, as well as collecting data and serving as a debugging tool for both high and low power electrical systems.
-
+The low voltage system consists primarily of a shutdown circuit and a series of peripheral sensors to gather data about vehicle state and performance, all powered by a 12V nominal sealed lead acid battery that is recharged by a DC/DC converter. The Shutdown circuit monitors the vehicle for dangerous conditions such as impacts or isolation faults of the Tractive System, and de-energizes the vehicle in case of emergency. The low voltage system also contains a CAN communication network between Atmel ATmega16m1 microcontrollers that fulfill several rules-required functions like the Ready-to-Drive sound, as well as collecting data and serving as a debugging tool for both high and low power electrical systems. \newline
 See \fref{fig:TS_block_diagram} for a block diagram of the Tractive System and interfacing GLVS parts.
 
 	%Rough Schematic (blocks) showing all parts affected with the electrical systems and function of the tractive-system
@@ -160,7 +160,7 @@ See \fref{fig:TS_block_diagram} for a block diagram of the Tractive System and i
 
 \subsection{Shutdown Circuit}\label{shutdown_circuit}
 
-\subsubsection{Description/concept}
+\subsubsection{Description/ concept}
 %Describe your concept of the shutdown circuit, the master switches, shut down buttons, brake over travel switch, etc.
 
 The shutdown circuit directly controls the current that closes the AIRs. Since each switch/relay on the shutdown circuit is connected in series, that current must pass through every switch and safety check. If any device on the circuit is triggered by an unsafe condition, the current to the AIRs is cut off and the AIRs open, disconnecting the accumulator from the tractive system. Any capacitive load on the tractive system outside the accumulator is then discharged to ensure that all high voltage is contained inside the accumulator. 
@@ -228,15 +228,13 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the renderings, if necessary.
-The shutdown circuit passes through five major enclosures on the vehicle. It originates in the master switch panel, then passes through the BSPD in the bulkhead enclosure, then through the cockpit E-stop in the dashboard, and into the IMD and the BMS latches in the accumulator, finally going to the AIRs and out to the discharge circuit in the energy meter enclosure. It also passes through the side E-stop switches along the way. 
+The shutdown circuit passes through five major enclosures on the vehicle. It originates in the master switch panel, then passes through the BSPD in the bulkhead enclosure, then through the cockpit E-stop in the dashboard, and into the IMD and the BMS latches in the accumulator, finally going to the AIRs and out to the discharge circuit in the energy meter enclosure. It also passes through the side E-stop switches along the way. \newline
 
 The shutdown circuit is wired between enclosures through waterproof TE Ampseal automotive connectors, is wrapped in abrasion-resistant mesh, and positively retained to chassis members with zip ties. Low voltage wiring is independently retained from high voltage wiring, and a minimum of 30mm separation is maintained. 
 
 
-
-
 \subsection{IMD}\label{imd}
-\subsubsection{Description (type, operation parameters)}TODO
+\subsubsection{Description (type, operation parameters)}%TODO
 The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s. Further information on the IMD can be found in the appendix, section \ref{IMD_datasheet}.
 
 
@@ -274,7 +272,8 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 
 \subsubsection{Wiring/cables/connectors/}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
-TODO
+%TODO 
+
 The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. There is a 1 amp fuse protecting the high voltage wiring of the IMD (details of the fuse are in the appendix, section ??). % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
 
 
@@ -297,7 +296,7 @@ The IMD latch shown in figure~\ref{fig:IMDLatch_Schematic} uses the signal from 
 
 
 \subsubsection*{2.2.3 Position in car}
-TODO
+%TODO
 %Position in car
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 
@@ -383,7 +382,7 @@ The output of the BSPD circuit will low-side drive a relay in series with the sh
 
   \begin{figure}[H]
         \centering
-        \includegraphics[width= .75\textheight]{bspd_schematic.png}
+        \includegraphics[width= .6\textheight]{bspd_schematic.png}
         \caption{Schematic for BSPD circuit}
         \label{fig:bspd_schematic}
   \end{figure}
@@ -397,14 +396,14 @@ This board is located in the bulkhead enclosure at the front of the car.
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the latching/reset system for a tripped IMD or BMS.  Describe the method for resetting the IMD and BMS.
 
-Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.
+Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.\\
 
 The BMS is latched with identical circuitry to the IMD, as shown in \fref{fig:IMDLatch_Schematic}, and is also reset by a GLVS power cycle. The BMS latch circuitry, however, will be on the master BMS PCB in the accumulator, and will control a separate on-board relay to open the shutdown circuit. In the case that the BMS detects a fault in cell temperature or voltage that requires a vehicle shutdown, the ATmega16m1 on the board will pull the BMS latch output pin low, latching the BMS latch circuit into a low state and opening the shutdown circuit. The master BMS will also serve as a CAN network monitor, and if another node in the vehicle detects a fault condition that requires vehicle shutdown that is not rules-required to be analog circuity, that node will send a shutdown message to the master BMS that will open the shutdown circuit. 
 
 \subsubsection{Wiring/cables/connectors}
-TODO
+%TODO
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
-The IMD latch will be connected to the accumulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the IMD connector using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. This provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmission. The 18 wire will be rated for at least 90 \textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).
+The IMD latch will be connected to the accumulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the IMD connector using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. This provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmission. The 18 wire will be rated for at least 90 \textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).\\
 
 Similarly to the IMD latch, the BMS latch will be housed in the accumulator, and thus all of the shutdown circuit connections to and from it will be made with 18AWG wire rated to over 300V and 90 \textdegree C in order to handle the maximum of 8A inrush current to the AIRs and maintain compliance with accumulator wiring regulations. PCB traces will also be appropriately sized to handle 8A peak current. 
 % connects to IMD through either accumulator interface or AIR control.
@@ -504,11 +503,11 @@ The TSAL will be mounted to the underside of the highest point of the main roll 
 
 \subsubsection{Wiring, connectors, cables}
 %Describe wiring, show schematics, and describe connectors and cables used and show useful data regarding the wiring.  Include details on the protection resistor including resistance, voltage and power rating.
-TODO
+%TODO
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+%TODO
 
 \subsection{Pre-Charge circuitry}\label{pre_charge_circuitry}
 \subsubsection{Description}
@@ -519,7 +518,7 @@ TODO
 %Give a plot “Percentage of Maximum Voltage” vs. time
 %Give a plot Current vs. time
 %For each plot, give the basic formula describing the plots
-TODO
+%TODO
 
 	\begin{table}[H]
 	    \centering
@@ -552,7 +551,7 @@ TODO
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+%TODO
 
 \subsection{Discharge circuitry}\label{discharge_circuitry}
 \subsubsection{Description}
@@ -623,9 +622,9 @@ We will be using the shunt version of a TE Connectivity AMP+ Manual Service Disc
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.  Include information on the working voltage and current rating of the HVD.
-The Manual Service Disconnect is rated for 495V and contains a 630A fuse, which is more than our maximum current of 225A as shown in table \ref{batterytable}. This fuse is superfluous to the TS main fuse, and is simply included as part of the disconnect.  It has a dual lever action, which first disconnects the shutdown circuit interlock inside the plug before disconnecting the high power terminals, which causes the AIRs to open and the tractive system to de-energize. The Manual Service Disconnect is a sealed panel mount device, which prevents the ingress of any water or debris. 
+The Manual Service Disconnect is rated for 495V and contains a 630A fuse, which is more than our maximum current of 225A as shown in table \ref{batterytable}. This fuse is superfluous to the TS main fuse, and is simply included as part of the disconnect.  It has a dual lever action, which first disconnects the shutdown circuit interlock inside the plug before disconnecting the high power terminals, which causes the AIRs to open and the tractive system to de-energize. The Manual Service Disconnect is a sealed panel mount device, which prevents the ingress of any water or debris. \\
 
-The datasheet can be found in \fref{sec:appendix_hvd}.
+The datasheet can be found in \fref{sec:appendix_hvd}.\\
 
 The HVD is in series with the negative pole of the tractive system, on the vehicle side of the AIRs, as shown in \fref{fig:TS_block_diagram}. 
 
@@ -679,7 +678,7 @@ loud enough. The speaker is waterproof, so it doesn't require any extra protecti
 \subsection{Accumulator pack 1}\label{accumulator_pack_1}
 \subsubsection{Overview/description/parameters}\label{accumulator_overview}
 %Describe concept of accumulator pack, provide table with main parameters like number of cells, cell stacks separated by maintenance plugs, cell configuration, resulting voltages->minimum, maximum, nominal, currents, capacity etc.
-TODO
+%TODO
 
 	\begin{table}[H]
 	    \centering
@@ -702,7 +701,7 @@ TODO
 
 \subsubsection{Cell description}\label{accumulator_cell_description}
 %Describe the cell type used and the chemistry, provide table with main parameters.
-TODO
+%TODO
 
 	\begin{table}[H]
 	    \centering
@@ -729,11 +728,11 @@ TODO
 
 \subsubsection{Cell configuration}\label{accumulator_cell_configuration}
 %Describe cell configuration, cell interconnect, show schematics of electrical configuration and CAD of connection techniques, cover additional parts like internal cell fuses etc.
-TODO
+%TODO
 
 \subsubsection{Cell temperature monitoring}\label{accumulator_cell_temperature_monitoring}
 %Describe how the temperature of the cells is monitored, where the temperature sensors are placed, how many cells are monitored, etc. Show schematics, cover additional parts, etc.
-TODO
+%TODO
 
 \subsubsection{Battery management system}\label{accumulator_battery_management_system}
 %Describe the BMS used including at least the following:
@@ -745,11 +744,11 @@ TODO
 %-	Describe how the BMS is able to open the AIRs if any error is detected
 %-	Describe where galvanic isolation occurs between TS and GLV system connections.
 
-TODO
+%TODO
 
 \subsubsection{Accumulator indicator}\label{accumulator_indicator}
 %Describe the indicator, show wiring, provide tables with operation, PCB design, etc.
-The Accumulator Indicator Light (AIL) will be powered directly by the TS voltage using two Zener diodes which will allow enough current to flow through the AIL to turn it on when the supply exceeds 60V. This PCB has not been designed yet but the general schematic can be seen below in \fref{fig:AILcircuit}.
+The Accumulator Indicator Light (AIL) will be powered directly by the TS voltage using two Zener diodes which will allow enough current to flow through the AIL to turn it on when the supply exceeds 60V. This PCB has not been designed yet but the general schematic can be seen below in \fref{fig:AILcircuit}. \\
 
 \begin{figure}[h]
 \centering
@@ -769,7 +768,7 @@ The AIL will be located on the AIR control board PCB, fused to 1A, and have trac
 % Describe your maintenance plugs, provide pictures
 % Use tables like the one shown below:
 
-TODO
+%TODO
 
 	\begin{table}[H]
 	    \centering
@@ -791,7 +790,7 @@ TODO
 	    \label{tslowcurrentwire}
 	\end{table}
 
-TODO
+%TODO
 
   \begin{table}[H]
       \centering
@@ -816,7 +815,7 @@ TODO
 
 \subsubsection{Accumulator insulation relays}
 %Describe the AIRs used and their main operation parameters, use tables, etc.
-TODO
+%TODO
 
 	\begin{table}[H]
 	    \centering
@@ -838,7 +837,7 @@ TODO
 \subsubsection{Fusing}
 %Describe the fuses used and their main operation parameters, use tables, etc.
 %Additionally, fill out the following table for each fuse type used:
-TODO
+%TODO
 
 	\begin{table}[H]
 	    \centering
@@ -878,7 +877,7 @@ TODO
 
 \subsubsection{Charging}
 %Describe how the accumulator will be charged. How will the charger be connected? How will the accumulator be supervised during charging? Show schematics, CAD-Renderings, etc., if needed
-TODO
+%TODO
 
 	\begin{table}[H]
 	    \centering
