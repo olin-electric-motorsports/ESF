@@ -197,7 +197,7 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
         \label{switchlist}
     \end{table}
 
-\subsubsection{Wiring / additional circuitry}
+\subsubsection{Wiring / additional circuitry} \label{sec:shutdown_wiring}
 	Figure \ref{shutdown_circuit} shows the wiring of the shutdown circuit.
 
 	\begin{sidewaysfigure}[p]
@@ -410,15 +410,37 @@ The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the Shutdown System Interlocks.
 %Note: Interlocks are circuits used to open the shutdown circuit if a connector is disconnected or enclosure is opened.  This is not the entire shutdown circuit.
-TODO
+The vehicle's tractive system connectors are all lever action locking connectors from the TE Connectivity HVP 800 series. Their arrangement in the tractive system can be seen in \fref{fig:HV_connector_diagram}. These connectors can be removed without tools. In compliance with EV 3.3.6, these connectors all contain an interlock that opens the shutdown circuit when they are not installed. 
+
+  \begin{figure}[H]
+        \centering
+        \includegraphics[width=.75\textwidth]{HV_connector_diagram.png}
+        \caption{Diagram of HV connectors in the tractive system. They are labelled with TE Connectivity part numbers.}
+        \label{fig:HV_connector_diagram}
+  \end{figure}
+
+In order to close the shutdown circuit during charging when the accumulator is removed from the vehicle, a connection must be made that overrides the interlocks in the HV connectors that remain with the vehicle. Our solution is a shunt in the LV charging connector that bypasses the circuit that normally connects to the energy meter, HVD, and motor connector interlocks. The main accumulator connector interlock is still required to close the shutdown circuit, so EV 3.3.6 compliance is maintained. A schematic of this interlock circuitry can be seen in \fref{fig:HV_connector_schematic}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = .75\textwidth]{HV-connector-schematic.png}
+\caption{Schematic of the HV interlocks in the vehicle. Note the LV connector that allows the shutdown circuit to close the AIRs when the vehicle is charging.}
+\label{fig:HV_connector_schematic}
+\end{figure}
 
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
-TODO
+The shutdown circuit interlock wires will be 20 or 22 AWG and rated to over 300V and 90\textdegree C and are protected by the main shutdown circuit breaker as in \fref{sec:shutdown_wiring}. 
 
 \subsubsection{Position in car}
-%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+Interlocks are built in to each HV connector. The connectors are panel-mounted to the accumulator housing, the energy meter housing, and the motor housing. See the render of the rear of the car in \fref{fig:rear_of_car}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = .75\textwidth]{img_not_found.jpg}
+\caption{Render of the rear of the vehicle showing location of HV connectors.}
+\label{fig:rear_of_car}
+\end{figure}
 
 \subsection{Tractive system active light}\label{tractive_system_active_light}
 \subsubsection{Description/circuitry}
@@ -1033,6 +1055,15 @@ TODO
 We only have one firewall, described in \ref{firewall_1}.
 
 \section{Appendix}\label{appendix}
+
+
+\subsection{Shutdown System Interlocks}\label{sec:appendix_interlocks}
+\begin{figure}[H]
+	\includegraphics[width=.7 \linewidth]{HVP_800_ratings.png}
+	\caption{Ratings and interlock description for TE HVP 800 connectors}
+	\label{fig:hvp_800_ratings}
+\end{figure}
+\href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-1-hvp-800.pdf}{TE HVP 800 complete Datasheet}
 
 \hypertarget{TSALdatasheet}{}
 \subsection{Tractive System Active Light}
