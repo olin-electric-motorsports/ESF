@@ -631,7 +631,13 @@ The HVD is in series with the negative pole of the tractive system, on the vehic
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 The HVD is mounted at the rear of the vehicle, on the rear-facing side of the energy meter enclosure, however this enclosure is yet to be designed. It is bright orange, and will be clearly marked and easily accessible from the rear of the vehicle. In accordance with EV 4.7.1, the HVD will be mounted more than 350mm from the ground.  
 
-TODO add render and positioning info
+%TODO add render and positioning info
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.7]{hvd.png}
+\caption{The HVD's location in the car.}
+\label{fig:hvd}
+\end{figure}
 
 
 \subsection{Ready-To-Drive-Sound (RTDS)}\label{ready_to_drive_sound}
@@ -1156,11 +1162,26 @@ All conductive components within 100 mm of any Tractive System or GLVS component
 \subsection{Firewall 1}\label{firewall_1}
 \subsubsection{Description/materials}
 %Describe the concept, layer structure and the materials used for the firewall. Show how the low resistance Control System ground connection is achieved.
-TODO
+The firewall is constructed of two layers. The layer facing the tractive system is 24 gauge Aluminum sheet metal, and the layer facing the cockpit is 24 gauge Flame-Retardant Multipurpose Garolite. The assembly is attached with marine epoxy between the two layers and nylon fasteners. The chassis has welded sheet metal tabs that fasten to the firewall with bolts and lock nuts. Because the firewall is fastened to the chassis using conductive fasteners it is connected to GLV ground. The firewall is attached to the seat through epoxied 3D printed spacers and foam sprayed between the seat and firewall, seen in \fref{fig:firewall_exploded}.
+All high voltage and high temperature systems are contained in the rear of the vehicle, so only one firewall will be used. There are GLV systems in the dashboard and pedal box so a small grommet hole will be made in the firewall for GLV wiring.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 1 \textwidth]{firewall_exploded.png}
+    \caption{An exploded view of the firewall and seat. }
+    \label{firewall_exploded}
+\end{figure}
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The firewall is located between the driver and accumulator, to protect the driver from the tractive system. \fref{fig:firewall_in_car} shows the cockpit view without the seat for visual aid. The seat is between the wheel and the firewall, with the firewall cushioning the the seat.  The firewall is attached to the frame so that its top corners are flush, eliminating a concern of sharp edges.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 1 \textwidth]{firewall_in_car.png}
+    \caption{A view of the firewall in the car without the seat. }
+    \label{firewall_in_car}
+\end{figure}
 
 \subsection{Firewall 2}\label{firewall_2}
 We only have one firewall, described in \ref{firewall_1}.
