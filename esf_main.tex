@@ -581,15 +581,29 @@ TODO
 \subsection{HV Disconnect (HVD)}\label{hv_disconnect}
 \subsubsection{Description}
 %Describe your concept of the HVD and how it can be operated.
-TODO
+We will be using the shunt version of a TE Connectivity AMP+ Manual Service Disconnect as our HVD. Shown in \fref{fig:TE_MSD}, it is a sealed, lever operated panel mount device and can be removed without tools. To protect technicians, it has no exposed conductors and provides internal HV interlocking in compliance with EV4.7.5. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.7]{TE_Manual_Service_Disconnect.jpg}
+\caption{The TE Manual Service Disconnect}
+\label{fig:TE_MSD}
+\end{figure}
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.  Include information on the working voltage and current rating of the HVD.
-TODO
+The Manual Service Disconnect is rated for 495V and contains a 630A fuse, which is more than our maximum current of 225A as shown in table \ref{batterytable}. This fuse is superfluous to the TS main fuse, and is simply included as part of the disconnect.  It has a dual lever action, which first disconnects the shutdown circuit interlock inside the plug before disconnecting the high power terminals, which causes the AIRs to open and the tractive system to de-energize. The Manual Service Disconnect is a sealed panel mount device, which prevents the ingress of any water or debris. 
+
+The datasheet can be found in \fref{sec:appendix_hvd}.
+
+The HVD is in series with the negative pole of the tractive system, on the vehicle side of the AIRs, as shown in \fref{fig:TS_block_diagram}. 
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The HVD is mounted at the rear of the vehicle, on the rear-facing side of the energy meter enclosure, however this enclosure is yet to be designed. It is bright orange, and will be clearly marked and easily accessible from the rear of the vehicle. In accordance with EV 4.7.1, the HVD will be mounted more than 350mm from the ground.  
+
+TODO add render and positioning info
+
 
 \subsection{Ready-To-Drive-Sound (RTDS)}\label{ready_to_drive_sound}
 \subsubsection{Description}
@@ -669,7 +683,7 @@ TODO
 	        Maximum nominal output current & 125 A \\ \hline
 	        Maximum charging current & 180 A \\ \hline
 	        Maximum Cell Temperature (discharging) & 45 \degree C \\ \hline
-	        Maximum Cell Temperature (charging) & 45 \degree C \\ \hline
+	        Maximum Cell Temperature (charging) & 45 \degree C \\ \hline 
 	        Cell Chemistry & NMC/LMO\\ \hline
 	    \end{tabular}
 	    \caption{Main cell specification}
@@ -1069,6 +1083,14 @@ We only have one firewall, described in \ref{firewall_1}.
 \subsection{Tractive System Active Light}
 \href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
 
+\subsection{HV disconnect (HVD)}\label{sec:appendix_hvd}
+TE AMP+ Manual Service Disconnect \href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-2-msd.pdf}{datasheet}.
+
+\begin{figure}[H]
+	\includegraphics[width=0.7\linewidth]{MSD_Ratings.png}
+	\caption{Rating information for the TE AMP+ Manual Service Disconnect}
+\end{figure}
+
 \subsection{IMD Datasheet}\label{IMD_datasheet}
 
 \begin{figure} [!ht]
@@ -1098,5 +1120,10 @@ Ready to drive buzzer \href{http://www.mallory-sonalert.com/specifications/STA20
 \end{figure}
 
 For calculation of sound attenuation over distance, see \href{http://www.sengpielaudio.com/calculator-distance.htm}{SengpielAudio Distance Law Equation}
+
+\subsection{HV Disconnect (HVD)}\label{appendix_hvd}
+\href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-2-msd.pdf}{TE AMP+ Manual Service Disconnect Overview here.}
+\href{http://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Specification+Or+Standard%7F108-127000%7FA%7Fpdf%7FEnglish%7FENG_SS_108-127000_A.pdf%7FN-A}{TE Manual Service Disconnect Test Parameters datasheet here.}
+
 
 \end{document}
