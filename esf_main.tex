@@ -502,14 +502,14 @@ In order to prevent inrush current that could damage the motor controller or AIR
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.8 \textwidth]{precharge_voltage}
-    \caption{}
+    \caption{Theoretical pre-charge of the 440$\mu$F motor controller capacitance using a 1$k\Omega$ resistor. This plot was created using the equation, $V(t) = V_{BAT}(1 - e^{-t/RC})$ where $V_{BAT}$ is our maximum pack voltage of just under 300VDC. Our motor controller is expecting an approximately 95\% pre-charge within 3 seconds, so this circuit covers the needs of our motor contoller and is in compliance with EV4.11.1 }
     \label{precharge_voltage}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.8 \textwidth]{precharge_current}
-    \caption{}
+    \caption{The current of the theoretical pre-charge from Figure \ref{precharge_voltage}. This plot was created using the equation $I(t) = \frac{V(t)}{R}$ where $V(t)$ is the voltage across the pre-charge resistor found by the equation $V(t) = V_{BAT} * e^{-t/RC}$ }
     \label{precharge_current}
 \end{figure}
 
@@ -517,11 +517,11 @@ In order to prevent inrush current that could damage the motor controller or AIR
 	    \centering
 	    \begin{tabular}{|l|l|}
 	    \hline
-	    Resistor type & TODO \\ \hline
-	    Resistance & TODO \ohm \\ \hline
-	    Continous power rating & TODO W \\ \hline
-	    Overload power rating & TODO W \\ \hline
-	    Voltage rating & TODO VDC \\ \hline
+	    Resistor type & Riedon PF2470 Power Film Resistor \\ \hline
+	    Resistance & 1 $k\Omega$ \\ \hline
+	    Continous power rating & 100 W \\ \hline
+	    Overload power rating & 140 W \\ \hline
+	    Voltage rating & 700 V \\ \hline
 	    Cross-sectional area of wire used & TODO mm$^2$\\ \hline
 	    \end{tabular}
 	    \caption{General data of pre-charge resistor}
@@ -532,10 +532,10 @@ In order to prevent inrush current that could damage the motor controller or AIR
 	    \centering
 	    \begin{tabular}{|l|l|}
 	    \hline
-	    Relay type & TODO \\ \hline
+	    Relay type & Omron G2RL-1-E DC12 \\ \hline
 	    Contact arrangement & SPDT \\ \hline
-	    Continous DC current & TODO A \\ \hline
-	    Voltage rating & TODO VDC \\ \hline
+	    Continous DC current & 16A \\ \hline
+	    Voltage rating & 300VDC \\ \hline
 	    Cross-sectional area of wire used & TODO mm$^2$ \\ \hline
 	    \end{tabular}
 	    \caption{General data of the pre-charge relay}
