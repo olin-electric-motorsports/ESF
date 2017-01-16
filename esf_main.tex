@@ -106,8 +106,9 @@
 \section*{List of Abbreviations} \label{list_of_abbreviations}
 \addcontentsline{toc}{section}{III List of Abbreviations}
 \begin{itemize}
-    \item MSD- Manual Service Disconnect
-    \item CONN- Main accumulator connector
+    \item MSD - Manual Service Disconnect
+    \item CONN - Main accumulator connector
+    \item TS+ / TS- - High and Low pole of the tractive system  
 \end{itemize}
 
     Any other abbreviations used in this document are those used in the 2016 Formula SAE Rules and those used in the FSAE ESF template document.
@@ -838,15 +839,47 @@ We only have one accumulator, described in \ref{accumulator_pack_1}.
 \section{Energy meter mounting} \label{energy_meter_mounting}
 \subsection{Description}
 %Describe where the energy meter is mounted and how, etc.
-TODO
+The vehicle's energy meter is mounted in a dedicated tractive system enclosure at the rear of the car that we call the energy meter enclosure. As is visible in \fref{fig:TS_block_diagram}, the energy meter enclosure is a pass-through enclosure that connects in series with both poles of the tractive system between the accumulator and the motor controller. Inside are the energy meter, the high-voltage low-current fuses that protect the TSAL (section \ref{tractive_system_active_light}), the current-limiting resistors that protect the TSMPs (section \ref{measurement_points}), and the discharge circuit (section \ref{discharge}). 
 
 \subsection{Wiring, cables, current calculations, connectors}
 %Describe the wiring, show schematics, provide calculations for currents and voltages, and show data regarding the cables and connectors used.
-TODO
+
+The energy meter current calculations require it to be connected in series with the low pole of the tractive system. It is bolted onto custom-made copper bus bars with serrated fasteners to ensure electrical connection. Voltage measurement connections to TS+ for the energy meter, and connections for the TSAL fuses and TSMP current-limiting resistors are made via ring terminals to the corresponding bus bars. The wires for the TSMPs, the TSAL, and the energy meter will all be 20AWG rated to 300V and 90 \textdegree C. The energy meter itself also requires GLVS power, which means that proper HV wire spacing of 30mm will be upheld. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Energy-Meter-Schematic.png}
+\caption{Schematic of the internals of the energy meter. Fuses S1 and S2 are Littelfuse 80812000000s, and resistors R1 and R2 are the TSMP resistors from section \ref{measurement_points}. The GLVS connector contains the shutdown circuit power for the discharge circuit and GLVS power for the energy meter. The high voltage low power connector contains TSMP and TSAL high voltage connections to the master switch panel.}
+\label{fig:energy_meter_schematic}
+\end{figure}
+
+The energy meter TS+ connection and the TSAL TS+ measurement wire share the same fused connection, and the TSAL TS- measurement wire has its own fuse. The fuse specifications can be found in \fref{tab:TSAL_and_EM_fuse}. The datasheet for the fuse can be found in \fref{tab:TSAL_and_EM_fuse}.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+	\hline
+	Fuse manufacturer and type & Littelfuse 80812000000 \\ \hline
+	Continuous current rating & 2.00 A \\ \hline
+	Maximum operating voltage & 450VDC \\ \hline
+	Type of fuse & Fast-acting \\ \hline
+	I2T & 0.0610 A$^{2}$sec \\ \hline
+	Interrupt current rating & 10,000 A \\ \hline
+	\end{tabular}
+	\caption{TS+ fuse for energy meter and TSAL TS+ measurement wire}
+	\label{tab:TSAL_and_EM_fuse}
+\end{table}
 
 \subsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The energy meter housing is mounted to the chassis at the rear of the vehicle, in close proximity to the motor, motor controller, and accumulator, and with the HVD easily visible and accessible from the rear. See \fref{fig:energy_meter_mounting_render}.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{render_not_available.png}
+\caption{Render of the rear of the vehicle showing the mounting for the energy meter enclosure at the rear of the vehicle}
+\label{fig:energy_meter_mounting_render}
+\end{figure}
 
 
 \section{Motor controller}\label{motor_controller}
@@ -1057,5 +1090,16 @@ Ready to drive buzzer \href{http://www.mallory-sonalert.com/specifications/STA20
 \end{figure}
 
 For calculation of sound attenuation over distance, see \href{http://www.sengpielaudio.com/calculator-distance.htm}{SengpielAudio Distance Law Equation}
+
+\subsection{Energy Meter Mounting}\label{appendix_energy_meter_mounting}
+
+\begin{figure} [!ht]
+	\centering  % this centers the image	
+	\includegraphics[width=\textwidth]{Littelfuse_808_electrical_characteristics.png}
+	\caption{Electrical characteristics snapshot for Littelfuse 808 series fast-acting fuses. The high-voltage low-power fuse we use is the 80812000000.}	
+	\label{fig:littelfuse_808}
+\end{figure}
+
+\href{http://www.littelfuse.com/~/media/c635bf51279f4ef6bedee5deb356e102.ashx}{Littelfuse 808 Series datasheet.}
 
 \end{document}
