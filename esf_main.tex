@@ -649,7 +649,9 @@ loud enough. The speaker is waterproof, so it doesn't require any extra protecti
 \subsection{Accumulator pack 1}\label{accumulator_pack_1}
 \subsubsection{Overview/description/parameters}\label{accumulator_overview}
 %Describe concept of accumulator pack, provide table with main parameters like number of cells, cell stacks separated by maintenance plugs, cell configuration, resulting voltages->minimum, maximum, nominal, currents, capacity etc.
-TODO
+The accumulator pack is based on 72 LG Chem P2.7 LiNiMnCoO$_{2}}$ pouch cells, in a 72s1p configuration. It is divided into six segments of 12 cells each, which each have their own distributed voltage management and temperature management systems that communicate to a master BMS node that interacts with the car's CAN network and can open the shutdown circuit. Each cell has nominal characteristics seen in table \ref{cells}, and together they form an accumulator with a max voltage of 298.8A, and a max output current of 225A, with \~27.8 MJ total capacity. Details can be found in table \ref{batterytable}. 
+
+Since we are using proprietary cells, we are not allowed to publish the complete datasheet for the LG Model P2.7 cells. We have been approved to share the ratings found in table \ref{cells}. 
 
 	\begin{table}[H]
 	    \centering
@@ -663,7 +665,7 @@ TODO
 	        Maximum charging current & 180 A \\ \hline
 	        Total number of cells & 72 \\ \hline
 	        Cell configuration & 72s1p \\ \hline
-	        Total capacity & 25.9 Ah TODO convert to MJ \\ \hline
+	        Total capacity & 27.785 MJ \\ \hline
 	        Number of cell stacks (segments) & 6 \\ \hline
 	    \end{tabular}
 	    \caption{Main accumulator parameters}
