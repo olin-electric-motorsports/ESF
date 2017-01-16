@@ -484,13 +484,20 @@ TODO
 \subsubsection{Description}
 %Describe your concept of the pre-charge circuitry.
 
-In order to prevent inrush current that could damage the motor controller or AIRs, and to comply with EV4.11.1, our pre-charge circuit slowly charges the capacitive load of the motor controller through a power limiting resistor before closing the TS+ AIR. 
+In order to prevent inrush current that could damage the motor controller or AIRs, and to comply with EV4.11.1, our pre-charge circuit slowly charges the capacitive load of the motor controller through a power limiting resistor before closing the TS+ AIR. When the shutdown circuit closes, the TS- AIR is immediately closed, but the software controlled MOSFETs seen in Figure \ref{precharge_schem} will prevent the pre-charge relay and TS+ AIR from closing. After a short delay, the pre-charge relay is allowed to close. This delay is included to allow detection of a welded pre-charge relay. The motor controller tracks its pre-charge state, and signals over the CAN network to allow the TS+ AIR to close when pre-charge is complete. 
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
 %Give a plot “Percentage of Maximum Voltage” vs. time
 %Give a plot Current vs. time
 %For each plot, give the basic formula describing the plots
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.7 \textwidth]{precharge_schem}
+    \caption{Schematic of the pre-charge circuit. Although the TS+ AIR and pre-charge relay are software controlled, the circuit is designed such that they cannot close if the shutdown circuit is open.}
+    \label{precharge_schem}
+\end{figure}
 
 \begin{figure}[H]
     \centering
