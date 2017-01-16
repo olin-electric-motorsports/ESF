@@ -484,14 +484,29 @@ TODO
 \subsubsection{Description}
 %Describe your concept of the pre-charge circuitry.
 
+In order to prevent inrush current that could damage the motor controller or AIRs, and to comply with EV4.11.1, our pre-charge circuit slowly charges the capacitive load of the motor controller through a power limiting resistor before closing the TS+ AIR. 
+
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
 %Give a plot “Percentage of Maximum Voltage” vs. time
 %Give a plot Current vs. time
 %For each plot, give the basic formula describing the plots
-TODO
 
-	\begin{table}[H]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{precharge_voltage}
+    \caption{}
+    \label{precharge_voltage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{precharge_current}
+    \caption{}
+    \label{precharge_current}
+\end{figure}
+
+    \begin{table}[H]
 	    \centering
 	    \begin{tabular}{|l|l|}
 	    \hline
