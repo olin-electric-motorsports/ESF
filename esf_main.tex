@@ -396,7 +396,7 @@ TODO
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
 %TODO
 
-The IMD latch will be connected to the acummulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the ?? board using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. This is provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmision. The 18 wire will be rated for at least 90 \textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).
+The IMD latch will be connected to the accumulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the ?? board using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. This is provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmision. The 18 wire will be rated for at least 90 \textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).
 
 % connects to IMD through either accumulator interface or AIR control.
 
@@ -551,6 +551,8 @@ TODO
 		\caption{General data of the discharge circuit}
 		\label{dctable}
 	\end{table}
+
+
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
@@ -811,17 +813,33 @@ TODO
 	    \centering
 	    \begin{tabular}{|l|l|}
 	        \hline
-	        Charger Type: & TODO \\ \hline
-	        Maximum charging power & TODO W \\ \hline
-	        Maximum charging voltage & TODO V \\ \hline
-	        Maximum charging current & TODO A \\ \hline
-	        Interface with accumulator & TODO \\ \hline
-	        Input voltage & TODO \\ \hline
-	        Input current & TODO \\ \hline
+	        Charger Type: & ELCON PFC 2000+ TCCH-288-6  \\ \hline
+	        Maximum charging power & 24.9 A \\ \hline
+	        Maximum charging voltage & 4.15 V (Per Cell) \\ \hline
+	        Maximum charging current & 6 A \\ \hline
+	        Interface with accumulator & CAN-Bus \\ \hline
+	        Input voltage & 125VAC or 230VAC \\ \hline
+	        Input current & 15A @ 125VAC or 8A @ 230VAC  \\ \hline
 	    \end{tabular}
 	    \caption{General Charger data}
 	    \label{charger}
 	\end{table}
+
+
+ 	\begin{figure}[H]
+		\centering
+		\includegraphics[width = 0.4 \textwidth]{Battery_Charger.jpg}
+		\caption{Elcon PFC 2000+ Battery Charger}
+		\label{Elcon Battery Charger}
+	\end{figure}
+	
+	This CE-Listed charger supplies constant current at 6A until cell voltages reach 4.15V. Then, constant voltage is supplied at 4.15V per cell, summing to 298.8 volts, until ??? TODO determine this behavior - we can program it???. The charging power lines ???TODO: Talk to Alex about fusing???. 
+	
+	The accumulator will only be charged on the charging cart. It will be able to support the full weight of the accumulator and only move when a dead man's switch is activated.
+	
+	The accumulator cart will contain a specialized shutdown and monitoring circuit that allows the accumulator to be charged through the main pack connector. The AMS will be active during charging and have the ability to open the AIRS and stop charging in the event of dangerous battery conditions. This shutdown circuit will contain a clearly labeled emergency stop push button with a minimum diameter of 25mm which opens the AIRS.  
+	
+	???Interlock and IMD TODO ???
 
 \subsubsection{Mechanical Configuration/materials}
 %Describe the concept of the container, show how the cells are mounted, use CAD-Renderings, show data regarding materials used, etc.
