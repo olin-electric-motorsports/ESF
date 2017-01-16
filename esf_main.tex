@@ -877,21 +877,21 @@ TODO
 
 	The charging system consists of two main components:  A charger that connects to the main pack connector and supplies the current needed to charge the accumulator, and a charging circuit that provides power to the AMS, opens the AIRS if the shutdown button is pressed, and displays critical information while charging. 
 	
-	This CE-Listed charger supplies constant current at 6A until cell voltages reach 4.15V. Then, constant voltage is supplied at 4.15V per cell, summing to 298.8 volts, until the cells are fully charged. The charging power lines are protected via the charger's short-circuit protection, which automatically stops charging if short-circuit is encountered across the output.
+	This CE-Listed charger supplies constant current at 6A until cell voltages reach 4.15V. Then, constant voltage is supplied at 4.15V per cell, summing to 298.8 volts, until the cells are fully charged. The charging power lines are protected via the charger's short-circuit protection, which automatically stops charging if a short-circuit condition occurs.
 	
-	The charger interfaces with the accumulator through a lever action locking connector from TE Connectivity's HVP 800 series (P/Ns 2141227(accumulator side) and 2141154(charger side)). These connectors contain an interlock that opens the AIRS when not engaged to maintain compliance with EV8.3.3. The charger has an interlock function that stops charging when the connector is not engaged, shown in figure \fref{Charger Interlock}. 
+	The charger interfaces with the accumulator through a lever action locking connector from TE Connectivity's HVP 800 series (P/Ns 2141227(accumulator side) and 2141154(charger side)). These connectors contain an interlock that opens the shutdown circuit, preventing the AIRS from closing when not engaged to maintain compliance with EV8.3.3. The charger has an interlock function that stops charging when the connector is not engaged, shown in the figure below.
 	
 	 \begin{figure}[H]
 		\centering
 		\includegraphics[width = 0.4 \textwidth]{charger_interlock.png}
 		\caption{Charger-Side Interlock}
-		\label{Charger Interlock}
+		\label{fig:ChargerInterlock}
 	\end{figure}
 	
 	
 	The accumulator will only be charged on the charging cart. The cart will be able to support the full weight of the accumulator and only move when a dead man's switch is activated.
 	
-	The accumulator cart will contain a specialized charging circuit that allows the accumulator to be charged through the main pack connector.The charging circuit will contain a clearly labeled emergency stop push button with a minimum diameter of 25mm which opens the AIRS ands stops charging. It will also communicate with the AMS over CAN and display critical information during charging.
+	The accumulator cart will contain a specialized charging circuit that allows the accumulator to be charged through the main pack connector. The charging circuit mimics the shutdown circuit in the vehicle.The charging circuit will contain a clearly labeled emergency stop push button with a minimum diameter of 25mm which opens the AIRS ands stops charging. It will also communicate with the AMS over CAN and display critical information during charging.
 	
 	The AMS will be active during charging and have the ability to open the AIRS and stop charging in the event of dangerous battery conditions.The AMS will communicate with the Charger over CAN and turn off the charger in the event of a fault to maintain compliance with EV8.3.5. 
 	
