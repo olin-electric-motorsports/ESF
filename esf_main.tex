@@ -2,6 +2,7 @@
 \usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{chngcntr}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
@@ -45,8 +46,11 @@
 \graphicspath{{img/}}
 \counterwithin{table}{section} %number tables with section#.table#
 
-\begin{document}
 
+\counterwithin{table}{section} %number tables with section#.table#
+
+
+\begin{document}
 \renewcommand{\headrulewidth}{0pt}
 \lhead{Olin College of Engineering, E238}
 \chead{}
@@ -193,7 +197,7 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
         \label{switchlist}
     \end{table}
 
-\subsubsection{Wiring / additional circuitry}
+\subsubsection{Wiring / additional circuitry} \label{sec:shutdown_wiring}
 	\Fref{fig:shutdown_circuit} shows the wiring of the shutdown circuit.
 
 	\begin{sidewaysfigure}[p]
@@ -220,40 +224,95 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the renderings, if necessary.
 TODO
 
-\subsection{IMD}\label{imd}
-\subsubsection{Description (type, operation parameters)}
-%Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also, describe how the IMD indicator light is wired, etc.
-TODO
 
+
+
+
+
+
+\subsection{IMD}\label{imd}
+\subsubsection{Description (type, operation parameters)}TODO
+The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it does not detect a ground fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a strart up time of $\leq$ 2s. Further information on the IMD can be found in the appendix, section \ref{IMD_datasheet}.
+
+
+
+%Describe the IMD used and use a table for the common operation parameters, like supply voltage, set point, etc. Also describe how the IMD indicator light is wired, etc.
+
+
+\begin{center}
 	\begin{table}[H]
-	    \centering
-	    \begin{tabular}{|l|l|}
-	    \hline
-	        Supply voltage range: & 10...36VDC \\ \hline
-	        Supply voltage & 12VDC \\ \hline
-	        Environmental temperature range: & Unknown \\ \hline
-	        Selftest interval: & Every 5 minutes \\ \hline
-	        High voltage range: & 0-1000 VDC \\ \hline
-	        Set response value: & 100 k\ohm TODO:double check this\\ \hline
-	        Max. operation current: & 150 mA \\ \hline
-	        Approximate time to shut down at 50$\%$ of the response value: & $\leq$ 40 sec \\ \hline
-	    \end{tabular}
-	    \caption{Parameters of the IMD}
-	    \label{IMDparameters}
+		\begin{tabular}{|l|l|}
+			\hline
+			Supply voltage range: &  10..36VDC \\
+			\hline
+			Supply voltage: &  12VDC\\
+			\hline
+			Environmental temperature range: &  -40..105$^{\circ}$C \\
+			\hline
+			Selftest interval: &  Always at startup, then every 5 minutes \\
+			\hline
+			High voltage range: &  DC 0..1000V \\
+			\hline
+			Set response value: &  100k$\Omega$ \\
+			\hline
+			Max. operation current: &  150mA \\
+			\hline
+			Approximate time to shut down at 50\% of the response value:&  $\leq$ 40s \\
+			\hline
+		\end{tabular}
+		\caption{Parameters of the IMD}
+		\label{IMDParameters}
 	\end{table}
+\end{center}
+
+
 
 \subsubsection{Wiring/cables/connectors/}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 TODO
+The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. There is a 1 amp fuse protecting the high voltage wiring of the IMD (details of the fuse are in the appendix, section ??). % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
 
-\subsubsection{Position in car}
-%Provide CAD-renderings showing the relevant parts. Mark the parts in the renderings, if necessary.
+
+
+% I am not sure if this is actually how we are doing it, but I am assuming it is correct until I have time to check. I think it might be more convenient to route it through the AIR control board, if possible, as it already needs to connect to the Atmega on that board. 
+
+\begin{figure} [!ht]
+	\centering  % this centers the image
+	
+	\includegraphics[width=0.6\textwidth]{IMD_Latch_Rev2_AltiumSchematic.png}
+	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+	
+	\caption{The schematic for the IMD Latch.}
+	
+	\label{fig:IMDLatch_Schematic}
+\end{figure}
+
+The IMD latch shown in figure~\ref{fig:IMDLatch_Schematic} uses the signal from the IMD to close a relay in the shutdown circuit. In order for the shutdown relay to close a second relay needs to be closed. The second relay is initially powered by a one shot 4 second pulse from the GLV system. After the first four seconds the sicnal from the IMD is used to keep the secondary relay closed. If the IMD signal goes low the secondary relay will close. This opens the shutdown relay and makes it impossible for the IMD to close the shutdown relay again until the latch has been manually reset. The initial 4 second pulse is necessary to ensure that anomalous start up behavior from the IMD does not cause the secondary relay to open and force a manual reset.
+%Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
+
+
+\subsubsection*{2.2.3 Position in car}
 TODO
+%Position in car
+%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
+
+The IMD will be located inside the accumulator, as shown in figure~\ref{fig:accumulator_cad}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Inertia Switch}\label{inertia_switch}
 \subsubsection{Description (type, operation parameters)}
 %Describe the Inertia Switch used and use a table for the common operation parameters, like supply voltage, temperature, etc.
 The Sensata Resettable crash sensor (6-11g version) will trigger due to an impact that decelerates the vehicle between 6-11g.
+
 
 	\begin{table}[H]
 	    \centering
@@ -284,10 +343,17 @@ The Sensata Resettable crash sensor (6-11g version) will trigger due to an impac
   \end{figure}
 
 
-\subsection{Brake Plausibility Device}\label{brake_plausibility_device}
+\subsection{Brake Plausibility Device (BSPD)}\label{brake_plausibility_device}
 \subsubsection{Description/additional circuitry}
 %Describe how your electronic hardware brake plausibility system works (this is in addition to your ECU controlled brake plausibility software), provide tables with main operation parameters, and describe additional circuitry used to check or for an implausibility. Describe how the system reacts if an implausibility or error is detected.
-TODO
+
+The Brake System Plausibility Device (BSPD) is a custom circuit designed to open a relay in the shutdown circuit if the brakes are being pressed while there is positive-current being delivered to the motors for more than 0.5 seconds. The custom circuit takes in two digital signals, the brake signal and a boolean yes/no whether or not positive-current is being delivered to the motor. The positive-current will be sensed with our BMS using a hall-effect current sensor and a comparator which will output high when positive-current is being delivered to the motors. \\
+
+There are two main sections to the circuit: the timing section and the latching section. The timing section consists of a 555-timer in monostable mode which is configured to be powered from the output of an AND-gate which takes in both the brake signal and the positive-current signal. This 555-timer will output a high pulse if the AND gate outputs a high voltage for more than 0.5 seconds. \\
+
+The latching section of the circuit is a simple SR-latch, which will hold the relay open when tripped by the timing section. It will remain in this state until a reset signal is given, which will be from an ATmega. This reset signal will only be done when the GLV system is first powered on, thus making it non-driver resettable. \\
+
+The schematic can be seen in \fref{fig:bspd_schematic}. \\
 
 	\begin{table}[H]
 	    \centering
@@ -304,74 +370,134 @@ TODO
 	    \label{TorqueEncoder1}
 	\end{table}
 
+
 \subsubsection{Wiring}
 %Describe the wiring, show schematics including the circuit board, show data regarding the cables and connectors used.  If not detailed in section 2.1, be sure to show how the device open the shutdown circuit.
-TODO
+
+The output of the BSPD circuit will low-side drive a relay in series with the shutdown circuit. This board has not been fully designed, but it will utilize components common across other circuits.
+
+  \begin{figure}[H]
+        \centering
+        \includegraphics[width= .75\textheight]{bspd_schematic.png}
+        \caption{Schematic for BSPD circuit}
+        \label{fig:bspd_schematic}
+  \end{figure}
 
 \subsubsection{Position in car/mechanical fastening/mechanical connection}
 %Provide CAD-renderings showing all relevant parts and discuss the mechanical connection of the sensors to the pedal assembly. Mark the parts in the rendering, if necessary.
-TODO
+
+This board is located in the bulkhead enclosure at the front of the car.
 
 \subsection{Reset / Latching for IMD and BMS}\label{reset_latching_for_imd_and_bms}
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the latching/reset system for a tripped IMD or BMS.  Describe the method for resetting the IMD and BMS.
-TODO
+
+Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.
+
+
+% find out details of BMS
 
 \subsubsection{Wiring/cables/connectors}
-%Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
 TODO
+%Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
+%TODO
+
+The IMD latch will be connected to the acummulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the ?? board using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. This is provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmision. The 18 wire will be rated for at least 90 \textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).
+
+% connects to IMD through either accumulator interface or AIR control.
+
 
 \subsubsection{Position in car}
-%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
+%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
+The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{fig:accumulator_cad}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD.
 
 \subsection{Shutdown System Interlocks}\label{shutdown_system_interlocks}
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the Shutdown System Interlocks.
 %Note: Interlocks are circuits used to open the shutdown circuit if a connector is disconnected or enclosure is opened.  This is not the entire shutdown circuit.
-TODO
+The vehicle's tractive system connectors are all lever action locking connectors from the TE Connectivity HVP 800 series. Their arrangement in the tractive system can be seen in \fref{fig:HV_connector_diagram}. These connectors can be removed without tools. In compliance with EV 3.3.6, these connectors all contain an interlock that opens the shutdown circuit when they are not installed. 
+
+  \begin{figure}[H]
+        \centering
+        \includegraphics[width=.75\textwidth]{HV_connector_diagram.png}
+        \caption{Diagram of HV connectors in the tractive system. They are labelled with TE Connectivity part numbers.}
+        \label{fig:HV_connector_diagram}
+  \end{figure}
+
+In order to close the shutdown circuit during charging when the accumulator is removed from the vehicle, a connection must be made that overrides the interlocks in the HV connectors that remain with the vehicle. Our solution is a shunt in the LV charging connector that bypasses the circuit that normally connects to the energy meter, HVD, and motor connector interlocks. The main accumulator connector interlock is still required to close the shutdown circuit, so EV 3.3.6 compliance is maintained. A schematic of this interlock circuitry can be seen in \fref{fig:HV_connector_schematic}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = .75\textwidth]{HV-connector-schematic.png}
+\caption{Schematic of the HV interlocks in the vehicle. Note the LV connector that allows the shutdown circuit to close the AIRs when the vehicle is charging.}
+\label{fig:HV_connector_schematic}
+\end{figure}
 
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
-TODO
+The shutdown circuit interlock wires will be 20 or 22 AWG and rated to over 300V and 90\textdegree C and are protected by the main shutdown circuit breaker as in \fref{sec:shutdown_wiring}. 
 
 \subsubsection{Position in car}
-%Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+Interlocks are built in to each HV connector. The connectors are panel-mounted to the accumulator housing, the energy meter housing, and the motor housing. See the render of the rear of the car in \fref{fig:rear_of_car}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = .75\textwidth]{img_not_found.jpg}
+\caption{Render of the rear of the vehicle showing location of HV connectors.}
+\label{fig:rear_of_car}
+\end{figure}
 
 \subsection{Tractive system active light}\label{tractive_system_active_light}
 \subsubsection{Description/circuitry}
 %Describe the tractive system active light and additional circuitry.
-TODO
+The TSAL illuminates when the tractive system is active, which is defined as the tractive system voltage being over 60V.
 
 	\begin{table}[H]
 	    \centering
 	    \begin{tabular}{|l|l|}
 	    \hline
 	    Supply voltage: & 12V \\ \hline
-	    Max. operational current: &  0.04A\\ \hline
-	    Lamp type & LEDs \\ \hline
-	    Power consumption: & 0.48 W\\ \hline
-	    Brightness & Unknown\\ \hline
-	    Frequency: & Manual with 555 timer, 2.4 Hz \\ \hline
-	    Size (length x height x width): & 103x27x51 mm \\ \hline
+	    Max. operational current: &  2A\\ \hline
+	    Lamp type: & LEDs \\ \hline
+	    Power consumption: & 24W (max)\\ \hline
+	    Brightness: & Unknown\\ \hline
+	    Frequency: & 2 Hz \\ \hline
+	    Size (length x height x width): & 41x41x32 mm \\ \hline
 	    \end{tabular}
 	    \caption{Parameters of the TSAL}
 	    \label{TSALparameters}
 	\end{table}
+	
+See the appendix \hyperlink{TSALdatasheet}{here} for a link to the TSAL Datasheet.
 
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  Include gauge, voltage and temperature rating of wiring used and any fuses or other overcurrent protection used.
-TODO
+The circuitry designed has a TS-controlled optocoupler. When the TS is over 60V, Zener diodes with a breakdown voltage of 58V and 3.6V respectively power the photodiode side which switches the MOSFET side allowing current to flow from the GLV to power the TSAL. The frequency of the TSAL will be controlled by built in settings to flash at 2Hz. See \fref{fig:TSALcircuit} for a schematic diagram of the TSAL circuit.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.7]{TSAL}
+\caption{Schematic for the TSAL}
+\label{fig:TSALcircuit}
+\end{figure}
+
+All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A, while all PCB traces will be a minimum of 12 mil, but nominally 20 mil in width. The TS voltage will be fused to 1A on the power line. The GLV voltage will be fused to 2A and its traces will be 50 mil in width and 2 oz per square foot in thickness, able to handle 2.3A of current due to the 2A max current draw of the TSAL.
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The TSAL will be mounted to the underside of the highest point of the main roll hoop, per EV 4.12.3 and 4.12.4 using a robust 3D printed (Kevlar reinforced Nylon) bracket integrating the light and necessary wiring. This enclosure has not been designed yet. The PCB will be located in the master switch panel enclosure.
+
+%Need to add rendering here
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{TSAL_mounting.png}
+\caption{CAD rendering of TSAL position under apex of main roll hoop}
+\end{figure}
 
 \subsection{Measurement points}\label{measurement_points}
 \subsubsection{Description}
 %Describe the housing used and how it can be accessed, etc.  Describe how the measurement points protected/covered when not in use and how the electrical connections on the back of the measurement points are protected when the measurement points are being used.
-TODO
 
 \subsubsection{Wiring, connectors, cables}
 %Describe wiring, show schematics, and describe connectors and cables used and show useful data regarding the wiring.  Include details on the protection resistor including resistance, voltage and power rating.
@@ -461,28 +587,56 @@ TODO
 \subsection{HV Disconnect (HVD)}\label{hv_disconnect}
 \subsubsection{Description}
 %Describe your concept of the HVD and how it can be operated.
-TODO
+We will be using the shunt version of a TE Connectivity AMP+ Manual Service Disconnect as our HVD. Shown in \fref{fig:TE_MSD}, it is a sealed, lever operated panel mount device and can be removed without tools. To protect technicians, it has no exposed conductors and provides internal HV interlocking in compliance with EV4.7.5. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.7]{TE_Manual_Service_Disconnect.jpg}
+\caption{The TE Manual Service Disconnect}
+\label{fig:TE_MSD}
+\end{figure}
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.  Include information on the working voltage and current rating of the HVD.
-TODO
+The Manual Service Disconnect is rated for 495V and contains a 630A fuse, which is more than our maximum current of 225A as shown in table \ref{batterytable}. This fuse is superfluous to the TS main fuse, and is simply included as part of the disconnect.  It has a dual lever action, which first disconnects the shutdown circuit interlock inside the plug before disconnecting the high power terminals, which causes the AIRs to open and the tractive system to de-energize. The Manual Service Disconnect is a sealed panel mount device, which prevents the ingress of any water or debris. 
+
+The datasheet can be found in \fref{sec:appendix_hvd}.
+
+The HVD is in series with the negative pole of the tractive system, on the vehicle side of the AIRs, as shown in \fref{fig:TS_block_diagram}. 
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The HVD is mounted at the rear of the vehicle, on the rear-facing side of the energy meter enclosure, however this enclosure is yet to be designed. It is bright orange, and will be clearly marked and easily accessible from the rear of the vehicle. In accordance with EV 4.7.1, the HVD will be mounted more than 350mm from the ground.  
+
+TODO add render and positioning info
+
 
 \subsection{Ready-To-Drive-Sound (RTDS)}\label{ready_to_drive_sound}
 \subsubsection{Description}
 %Describe your concept of the RTDS, how is the sound produced, what are the parameters for activating the RTDS, etc.
-TODO
-
+The Ready to Drive sound is located as a component of the dashboard subsystem, and contains a buzzer (\href{http://www.mallory-sonalert.com/specifications/STA20502.PDF}{Link: Mallory Sonalert Products Inc. STA20502})\ref{Ready to Drive}. The buzzer automatically makes a noise when given power, with the loudness proportional
+to the voltage. The BMS will notify the Dashboard CAN system when shutdown circuit is complete. This will then provide voltage to the gate of an N-FET which will provide a ground path for the buzzer.
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.
-TODO
+When the shutdown circuit closes and activates the AIRs, the car is in ready to drive mode. As soon as the
+car is in this mode, the CAN system will activate the ready to drive sound node to send a positive output
+that provides voltage to the N-FET for 2 seconds, thus letting the buzzer sound for 2 seconds. 
 
+
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{RTDS_Schematic_Simplified}
+	\caption{Ready to Drive Sound Schematic as a subsystem of the dashboard's PCB}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{FormulasForDistanceAndSoundLevel}
+	\caption{Inverse Square Law equations needed to calculate the volume at a certain distance}
+\end{figure}
+Using the inverse square law as referenced in the appendix  for sound pressure levels \ref{Ready to Drive}, 97db at 122cm will translate to 93db at 2m which is a loud enough volume without inducing harm to the listener. 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-TODO
+The ready to drive sound will be located in the dashboard enclosure referenced in figure \ref{fig:Dashboard Render}. The buzzer will be mounted
+to the exterior and front side of this enclosure. It must be contained outside of the box so that the buzzer is
+loud enough. The speaker is waterproof, so it doesn't require any extra protection besides using an RTV silicone seal for final instillation. 
 
 
 
@@ -535,7 +689,7 @@ TODO
 	        Maximum nominal output current & 125 A \\ \hline
 	        Maximum charging current & 180 A \\ \hline
 	        Maximum Cell Temperature (discharging) & 45 \degree C \\ \hline
-	        Maximum Cell Temperature (charging) & 45 \degree C \\ \hline
+	        Maximum Cell Temperature (charging) & 45 \degree C \\ \hline 
 	        Cell Chemistry & NMC/LMO\\ \hline
 	    \end{tabular}
 	    \caption{Main cell specification}
@@ -564,7 +718,17 @@ TODO
 
 \subsubsection{Accumulator indicator}\label{accumulator_indicator}
 %Describe the indicator, show wiring, provide tables with operation, PCB design, etc.
-TODO
+The Accumulator Indicator Light (AIL) will be powered directly by the TS voltage using two Zener diodes which will allow enough current to flow through the AIL to turn it on when the supply exceeds 60V. This PCB has not been designed yet but the general schematic can be seen below in \fref{fig:AILcircuit}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.4]{AIL}
+\caption{Schematic for the AIL}
+\label{fig:AILcircuit}
+\end{figure}
+
+The AIL will be located on the AIR control board PCB, fused to 1A, and have traces of 20 mil, which are rated for 1.4A. All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A.
+
 
 \subsubsection{Wiring, cables, current calculations, connectors}\label{accumulator_wiring}
 %Describe the internal wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
@@ -708,6 +872,17 @@ TODO
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.  Ensure that the required mechanical structure to protect the accumulator and other electrical components is clearly identified.
 TODO
+
+\begin{figure} [!ht]
+	\centering  % this centers the image
+	
+	\includegraphics[width=0.6\textwidth]{render_not_available.png}
+	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+	
+	\caption{The CAD for the accumulator}
+	
+	\label{fig:accumulator_cad}
+\end{figure}
 
 \subsection{Accumulator pack 2}\label{accumulator_pack_2}
 We only have one accumulator, described in \ref{accumulator_pack_1}.
@@ -900,6 +1075,61 @@ TODO
 We only have one firewall, described in \ref{firewall_1}.
 
 \section{Appendix}\label{appendix}
-TODO
+
+
+\subsection{Shutdown System Interlocks}\label{sec:appendix_interlocks}
+\begin{figure}[H]
+	\includegraphics[width=.7 \linewidth]{HVP_800_ratings.png}
+	\caption{Ratings and interlock description for TE HVP 800 connectors}
+	\label{fig:hvp_800_ratings}
+\end{figure}
+\href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-1-hvp-800.pdf}{TE HVP 800 complete Datasheet}
+
+\hypertarget{TSALdatasheet}{}
+\subsection{Tractive System Active Light}
+\href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
+
+\subsection{HV disconnect (HVD)}\label{sec:appendix_hvd}
+TE AMP+ Manual Service Disconnect \href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-2-msd.pdf}{datasheet}.
+
+\begin{figure}[H]
+	\includegraphics[width=0.7\linewidth]{MSD_Ratings.png}
+	\caption{Rating information for the TE AMP+ Manual Service Disconnect}
+\end{figure}
+
+\subsection{IMD Datasheet}\label{IMD_datasheet}
+
+\begin{figure} [!ht]
+	\centering  % this centers the image
+	
+	\includegraphics[width=\textwidth]{Formula_IMD_Datasheet.png}
+	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+	
+	\caption{The datasheet for the IMD.}
+	
+	\label{fig:IMD_Datasheet}
+\end{figure}
+
+\href{http://www.bender-us.com/documents/IR155-10_datasheet_NAE1012821.pdf}{Full IMD datasheet here.}
+
+\setcounter{subsection}{11}
+\subsection{Ready to Drive Sound}\label{Ready to Drive}
+Ready to drive buzzer \href{http://www.mallory-sonalert.com/specifications/STA20502.PDF}{datasheet}. \newline
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{Buzzer_Specifications}
+	\caption{Specification for Mallory Sonalert STA20502 Buzzer}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{Dashboard_Rendering_Rear}
+	\caption{Rendering of the dashboard module as seen from the back} \label{fig:Dashboard Render}
+\end{figure}
+
+For calculation of sound attenuation over distance, see \href{http://www.sengpielaudio.com/calculator-distance.htm}{SengpielAudio Distance Law Equation}
+
+\subsection{HV Disconnect (HVD)}\label{appendix_hvd}
+\href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-2-msd.pdf}{TE AMP+ Manual Service Disconnect Overview here.}
+\href{http://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Specification+Or+Standard%7F108-127000%7FA%7Fpdf%7FEnglish%7FENG_SS_108-127000_A.pdf%7FN-A}{TE Manual Service Disconnect Test Parameters datasheet here.}
+
 
 \end{document}
