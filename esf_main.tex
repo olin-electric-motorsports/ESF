@@ -848,10 +848,12 @@ The energy meter current calculations require it to be connected in series with 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{Energy-Meter-Schematic.png}
-\caption{Schematic of the internals of the energy meter. Fuses S1 and S2 are Littelfuse 80812000000s, and resistors R1 and R2 are the TSMP resistors from section \ref{measurement_points}. The GLVS connector contains the shutdown circuit power for the discharge circuit and GLVS power for the energy meter. The high voltage low power connector contains TSMP and TSAL high voltage connections to the master switch panel.}
+\includegraphics[width=0.6\textwidth]{Energy-Meter-Schematic-w-HVD.png}
+\caption{Schematic of the internals of the energy meter. Fuses S1 and S2 are Littelfuse 80812000000s, and resistors R1 and R2 are the TSMP resistors from section \ref{measurement_points}.}
 \label{fig:energy_meter_schematic}
 \end{figure}
+
+\Fref{fig:energy_meter_schematic} shows the internals of the energy meter box. The GLVS connector contains the shutdown circuit power for the discharge circuit, the interlock from the HVD, and GLVS power for the energy meter. The high voltage low power connector contains TSMP and TSAL high voltage connections to the master switch panel. High power connections are shown in orange.
 
 The energy meter TS+ connection and the TSAL TS+ measurement wire share the same fused connection, and the TSAL TS- measurement wire has its own fuse. The fuse specifications can be found in \fref{tab:TSAL_and_EM_fuse}. The datasheet for the fuse can be found in \fref{tab:TSAL_and_EM_fuse}.
 
