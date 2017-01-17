@@ -470,11 +470,11 @@ See the appendix \hyperlink{TSALdatasheet}{here} for a link to the TSAL Datashee
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  Include gauge, voltage and temperature rating of wiring used and any fuses or other overcurrent protection used.
 The circuitry designed has a TS-controlled optocoupler. When the TS is over 60V, Zener diodes with a breakdown voltage of 58V and 3.6V respectively power the photodiode side which switches the MOSFET side allowing current to flow from the GLV to power the TSAL. The frequency of the TSAL will be controlled by built in settings to flash at 2Hz. See \fref{fig:TSALcircuit} for a schematic diagram of the TSAL circuit.
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=.7]{TSAL}
-\caption{Schematic for the TSAL}
-\label{fig:TSALcircuit}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.7]{TSAL}
+    \caption{Schematic for the TSAL}
+    \label{fig:TSALcircuit}
 \end{figure}
 
 All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A, while all PCB traces will be a minimum of 12 mil, but nominally 20 mil in width. The TS voltage will be fused to 1A on the power line. The GLV voltage will be fused to 2A and its traces will be 50 mil in width and 2 oz per square foot in thickness, able to handle 2.3A of current due to the 2A max current draw of the TSAL.
@@ -532,7 +532,7 @@ In case of gross operator error that results in connecting a multimeter from a T
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 The TSMPs will be located in the master switch panel enclosure shown in \fref{fig:master_switch_panel} along with TSAL circuitry. The housing will be made of non-conductive material, and proper spacing between TS measurement point wiring and any part of the GLVS of 30mm through air will be maintained in accordance with EV 4.1.5.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=1]{img_not_found.jpg}
 \caption{CAD rendering of the master switch panel showing TS and GLVS master switches, and TS and GLVS ground measurement points}
@@ -606,7 +606,7 @@ In order to prevent inrush current that could damage the motor controller or AIR
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 The pre-charge circuit will be located within the accumulator. 
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=1]{img_not_found.jpg}
     \caption{CAD rendering of the position of the pre-charge circuit in the accumulator.}
@@ -675,7 +675,7 @@ The discharge circuit is located within the Energy Meter enclosure detailed in \
 %Describe your concept of the HVD and how it can be operated.
 We will be using the shunt version of a TE Connectivity AMP+ Manual Service Disconnect as our HVD. Shown in \fref{fig:TE_MSD}, it is a sealed, lever operated panel mount device and can be removed without tools. To protect technicians, it has no exposed conductors and provides internal HV interlocking in compliance with EV4.7.5. 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.7]{TE_Manual_Service_Disconnect.jpg}
 \caption{The TE Manual Service Disconnect}
@@ -695,7 +695,7 @@ The HVD is in series with the negative pole of the tractive system, on the vehic
 The HVD is mounted at the rear of the vehicle, on the rear-facing side of the energy meter enclosure, however this enclosure is yet to be designed. It is bright orange, and will be clearly marked and easily accessible from the rear of the vehicle. In accordance with EV 4.7.1, the HVD will be mounted more than 350mm from the ground.  
 
 %TODO add render and positioning info
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=.75\textwidth]{hvd.png}
 \caption{The HVD's location in the car.}
@@ -902,7 +902,7 @@ The BMS reacts to critical low voltage of 2.8012V by shutting down the vehicle. 
 %Describe the indicator, show wiring, provide tables with operation, PCB design, etc.
 The Accumulator Indicator Light (AIL) will be powered directly by the TS voltage using two Zener diodes which will allow enough current to flow through the AIL to turn it on when the supply exceeds 60V. This PCB has not been designed yet but the general schematic can be seen below in \fref{fig:AILcircuit}. \\
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.4]{AIL}
 \caption{Schematic for the AIL}
@@ -1060,13 +1060,12 @@ TODO
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.  Ensure that the required mechanical structure to protect the accumulator and other electrical components is clearly identified.
-TODO
 
-\begin{figure} [!ht]
+\begin{figure}[H]
 	\centering  % this centers the image
 	
 	\includegraphics[width=0.6\textwidth]{accumulator.png}
-	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+    %\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
 	
 	\caption{The CAD for the accumulator}
 	
@@ -1171,7 +1170,7 @@ The PM100DX has five high voltage connections (DC+, DC-, Phase A, Phase B, Phase
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 TODO
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=1]{img_not_found.jpg}
     \caption{CAD rendering of Motor Controller position}
