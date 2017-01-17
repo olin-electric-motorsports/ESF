@@ -729,7 +729,33 @@ TODO
 
 \subsubsection{Cell configuration}\label{accumulator_cell_configuration}
 %Describe cell configuration, cell interconnect, show schematics of electrical configuration and CAD of connection techniques, cover additional parts like internal cell fuses etc.
-TODO
+The P2.7 pouch cells are connected in six segments of 12 cells in series, for a total configuration of 72s1p, as shown in \fref{fig:cell_configuration_schematic}. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Cell-configuration-schematic.png}
+\caption{A schematic of the accumulator's cell configuration showing cells in series and manual service disconnects}
+\label{fig:cell_configuration_schematic}
+\end{figure}
+
+To connect the cells into segments, they are stacked on one another with 1mm 6061 aluminum heat sinks and neoprene compression foam to distribute load, as shown in \fref{fig:cell_stack}. The cells are alternated in polarity for easy tab connection. Data on the foam can be found in the appendix, in section \ref{appendix_accumulator_cell_configuration}.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{accumulator_cross_section.jpg}
+\caption{Cross section of the segment cell stacks showing the layers of foam and aluminum heat sink between the cells for heat dissipation}
+\label{fig:cell_stack}
+\end{figure}
+
+To connect the cell tabs, a mounting plate is placed over the alternating cells, as seen in \fref{fig:cell_tabs}, and a clamping plate with wedge-shaped protrusions aligned with the tabs is fastened over the top of the mounting plate, pressing the tabs together to form an electrical connection. This is a safer assembly technique than welding the cell tabs together, and allows for replacement of damaged cells if necessary. 
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{accumulator_tabs.png}
+\caption{Render of the cell mounting plate showing cell tabs protruding through clamping holes.}
+\label{fig:cell_tabs}
+\end{figure}
+
 
 \subsubsection{Cell temperature monitoring}\label{accumulator_cell_temperature_monitoring}
 %Describe how the temperature of the cells is monitored, where the temperature sensors are placed, how many cells are monitored, etc. Show schematics, cover additional parts, etc.
@@ -1160,7 +1186,7 @@ The vehicle's steel chassis is uses as GLVS ground. This ground will be establis
 %Describe which measurements you will take to ensure that EV4.3 is achieved
 All conductive components within 100 mm of any Tractive System or GLVS component will be measured by Kelvin ohmmeter to have a resistance of less tham 300 m$\omega$ to chassis ground, measured at the chassis ground measurement point on the master switch panel. All fastened mechanical components and enclosures will be individually measured to ensure proper ground connection. Chassis ground continuity will be tested during and after assembly to ensure complete coverage. Any carbon fiber components will be exhaustively measured to ensure resistance compliance.
 
-\section{Firewall(s)}\label{firewalls}
+\section{Firewall(s)}\label{firewalls}c
 \subsection{Firewall 1}\label{firewall_1}
 \subsubsection{Description/materials}
 %Describe the concept, layer structure and the materials used for the firewall. Show how the low resistance Control System ground connection is achieved.
@@ -1240,6 +1266,19 @@ Ready to drive buzzer \href{http://www.mallory-sonalert.com/specifications/STA20
 \end{figure}
 
 For calculation of sound attenuation over distance, see \href{http://www.sengpielaudio.com/calculator-distance.htm}{SengpielAudio Distance Law Equation}
+
+\subsection{Accumulator}\label{appendix_accumulator}
+
+\subsubsection{Cell Configuration}\label{appendix_accumulator_cell_configuration}
+
+\begin{figure} [!ht]
+	\centering  % this centers the image	
+	\includegraphics[width=\textwidth]{Cell_neoprene_stats.png}
+	\caption{Specifications for the neoprene compression foam that goes in the cell stack.}	
+	\label{fig:cell_neoprene_stats}
+\end{figure}
+\href{http://www.kvc.com.my/StorageAttachment/Kvcsb/datasheet/898/mcmaster-8694K154.pdf}{Complete neoprene information sheet.}
+
 
 \subsection{Energy Meter Mounting}\label{appendix_energy_meter_mounting}
 
