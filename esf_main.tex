@@ -291,7 +291,7 @@ The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate.
 	\label{fig:IMDLatch_Schematic}
 \end{figure}
 
-The IMD latch shown in figure~\ref{fig:IMDLatch_Schematic} uses the signal from the IMD to close a relay in the shutdown circuit. In order for the shutdown relay to close a second relay needs to be closed. The second relay is initially powered by a one shot 4 second pulse from the GLV system. After the first four seconds the signal from the IMD is used to keep the secondary relay closed. If the IMD signal goes low the secondary relay will close. This opens the shutdown relay and makes it impossible for the IMD to close the shutdown relay again until the latch has been manually reset. The initial 4 second pulse is necessary to ensure that anomalous start up behavior from the IMD does not cause the secondary relay to open and force a manual reset.
+The IMD latch shown in \fref{fig:IMDLatch_Schematic} uses the signal from the IMD to close a relay in the shutdown circuit. In order for the shutdown relay to close a second relay needs to be closed. The second relay is initially powered by a one shot 4 second pulse from the GLV system. After the first four seconds the signal from the IMD is used to keep the secondary relay closed. If the IMD signal goes low the secondary relay will close. This opens the shutdown relay and makes it impossible for the IMD to close the shutdown relay again until the latch has been manually reset. The initial 4 second pulse is necessary to ensure that anomalous start up behavior from the IMD does not cause the secondary relay to open and force a manual reset.
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 
 
@@ -300,7 +300,7 @@ The IMD latch shown in figure~\ref{fig:IMDLatch_Schematic} uses the signal from 
 %Position in car
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 
-The IMD will be located inside the accumulator, as shown in figure~\ref{fig:accumulator_cad}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
+The IMD will be located inside the accumulator, as shown in \fref{fig:accumulator_cad}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
 
 \subsection{Inertia Switch}\label{inertia_switch}
 \subsubsection{Description (type, operation parameters)}
@@ -386,7 +386,7 @@ This board is located in the bulkhead enclosure at the front of the car.
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the latching/reset system for a tripped IMD or BMS.  Describe the method for resetting the IMD and BMS.
 
-Resetting the IMD latch, which is shown in figure~\ref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.\\
+Resetting the IMD latch, which is shown in \fref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.\\
 
 The BMS is latched with identical circuitry to the IMD, as shown in \fref{fig:IMDLatch_Schematic}, and is also reset by a GLVS power cycle. The BMS latch circuitry, however, will be on the master BMS PCB in the accumulator, and will control a separate on-board relay to open the shutdown circuit. In the case that the BMS detects a fault in cell temperature or voltage that requires a vehicle shutdown, the ATmega16m1 on the board will pull the BMS latch output pin low, latching the BMS latch circuit into a low state and opening the shutdown circuit. The master BMS will also serve as a CAN network monitor, and if another node in the vehicle detects a fault condition that requires vehicle shutdown that is not rules-required to be analog circuity, that node will send a shutdown message to the master BMS that will open the shutdown circuit. 
 
@@ -402,7 +402,7 @@ Similarly to the IMD latch, the BMS latch will be housed in the accumulator, and
 \subsubsection{Position in car}
 TODO
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-The IMD, IMD latch, and the BMS are in the accumulator, as shown in figure~\ref{fig:accumulator_cad}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD, which is located in the accumulator for continual monitoring of pack isolation while the accumulator is removed for charging. 
+The IMD, IMD latch, and the BMS are in the accumulator, as shown in \fref{fig:accumulator_cad}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD, which is located in the accumulator for continual monitoring of pack isolation while the accumulator is removed for charging. 
 
 \subsection{Shutdown System Interlocks}\label{shutdown_system_interlocks}
 \subsubsection{Description/circuitry}
@@ -503,7 +503,7 @@ The TSAL will be mounted to the underside of the highest point of the main roll 
 \subsubsection{Description}
 %Describe your concept of the pre-charge circuitry.
 
-In order to prevent inrush current that could damage the motor controller or AIRs, and to comply with EV4.11.1, our pre-charge circuit slowly charges the capacitive load of the motor controller through a power limiting resistor before closing the TS+ AIR. When the shutdown circuit closes, the TS- AIR is immediately closed, but the software controlled MOSFETs seen in Figure \ref{precharge_schem} will prevent the pre-charge relay and TS+ AIR from closing. After a short delay, the pre-charge relay is allowed to close. This delay is included to allow detection of a welded pre-charge relay. The motor controller tracks its pre-charge state, and signals over the CAN network to allow the TS+ AIR to close when pre-charge is complete. 
+In order to prevent inrush current that could damage the motor controller or AIRs, and to comply with EV4.11.1, our pre-charge circuit slowly charges the capacitive load of the motor controller through a power limiting resistor before closing the TS+ AIR. When the shutdown circuit closes, the TS- AIR is immediately closed, but the software controlled MOSFETs seen in \fref{fig:precharge_schem} will prevent the pre-charge relay and TS+ AIR from closing. After a short delay, the pre-charge relay is allowed to close. This delay is included to allow detection of a welded pre-charge relay. The motor controller tracks its pre-charge state, and signals over the CAN network to allow the TS+ AIR to close when pre-charge is complete. 
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
@@ -515,21 +515,21 @@ In order to prevent inrush current that could damage the motor controller or AIR
     \centering
     \includegraphics[width = 0.7 \textwidth]{precharge_schem}
     \caption{Schematic of the pre-charge circuit. Although the TS+ AIR and pre-charge relay are software controlled, the circuit is designed such that they cannot close if the shutdown circuit is open.}
-    \label{precharge_schem}
+    \label{fig:precharge_schem}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.8 \textwidth]{precharge_voltage}
     \caption{Theoretical pre-charge of the 440$\mu$F motor controller capacitance using a 1$k\Omega$ resistor. This plot was created using the equation, $V(t) = V_{BAT}(1 - e^{-t/RC})$ where $V_{BAT}$ is our maximum pack voltage of just under 300VDC. Our motor controller is expecting an approximately 95\% pre-charge within 3 seconds, so this circuit covers the needs of our motor controller and is in compliance with EV4.11.1 }
-    \label{precharge_voltage}
+    \label{fig:precharge_voltage}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.8 \textwidth]{precharge_current}
-    \caption{The current of the theoretical pre-charge from Figure \ref{precharge_voltage}. This plot was created using the equation $I(t) = \frac{V(t)}{R}$ where $V(t)$ is the voltage across the pre-charge resistor found by the equation $V(t) = V_{BAT} * e^{-t/RC}$ }
-    \label{precharge_current}
+    \caption{The current of the theoretical pre-charge from \fref{fig:precharge_voltage}. This plot was created using the equation $I(t) = \frac{V(t)}{R}$ where $V(t)$ is the voltage across the pre-charge resistor found by the equation $V(t) = V_{BAT} * e^{-t/RC}$ }
+    \label{fig:precharge_current}
 \end{figure}
 
     \begin{table}[H]
@@ -597,14 +597,14 @@ Since the power resistor limits the current on the discharge circuit, a fuse is 
     \centering
     \includegraphics[width = 0.7 \textwidth]{discharge_voltage}
     \caption{Theoretical discharge of the 440 $\mu F$ capacitive load of the motor controller across the 3 k$\Omega$ resistor. This was calculated using the equation $V(t) = V_{0} * e^{-t/RC}$.}
-    \label{discharge_voltage}
+    \label{fig:discharge_voltage}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.7 \textwidth]{discharge_current}
-    \caption{Current of the theoretical discharge from Figure \ref{discharge_voltage}. This was computed using the voltage exponential and the equation $I = \frac{V}{R}$.}
-    \label{discharge_current}
+    \caption{Current of the theoretical discharge from \fref{fig:discharge_voltage}. This was computed using the voltage exponential and the equation $I = \frac{V}{R}$.}
+    \label{fig:discharge_current}
 \end{figure}
 
 	\begin{table}[H]
@@ -641,7 +641,7 @@ We will be using the shunt version of a TE Connectivity AMP+ Manual Service Disc
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.  Include information on the working voltage and current rating of the HVD.
-The Manual Service Disconnect is rated for 495V and contains a 630A fuse, which is more than our maximum current of 225A as shown in table \ref{batterytable}. This fuse is superfluous to the TS main fuse, and is simply included as part of the disconnect.  It has a dual lever action, which first disconnects the shutdown circuit interlock inside the plug before disconnecting the high power terminals, which causes the AIRs to open and the tractive system to de-energize. The Manual Service Disconnect is a sealed panel mount device, which prevents the ingress of any water or debris. \\
+The Manual Service Disconnect is rated for 495V and contains a 630A fuse, which is more than our maximum current of 225A as shown in \fref{tab:batterytable}. This fuse is superfluous to the TS main fuse, and is simply included as part of the disconnect.  It has a dual lever action, which first disconnects the shutdown circuit interlock inside the plug before disconnecting the high power terminals, which causes the AIRs to open and the tractive system to de-energize. The Manual Service Disconnect is a sealed panel mount device, which prevents the ingress of any water or debris. \\
 
 The datasheet can be found in \fref{sec:appendix_hvd}.\\
 
@@ -683,7 +683,7 @@ that provides voltage to the N-FET for 2 seconds, thus letting the buzzer sound 
 Using the inverse square law as referenced in the appendix  for sound pressure levels \ref{Ready to Drive}, 97db at 122cm will translate to 93db at 2m which is a loud enough volume without inducing harm to the listener. 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-The ready to drive sound will be located in the dashboard enclosure referenced in figure \ref{fig:Dashboard Render}. The buzzer will be mounted
+The ready to drive sound will be located in the dashboard enclosure referenced in \fref{fig:dashboard_Render}. The buzzer will be mounted
 to the exterior and front side of this enclosure. It must be contained outside of the box so that the buzzer is
 loud enough. The speaker is waterproof, so it doesn't require any extra protection besides using an RTV silicone seal for final instillation. 
 
@@ -692,9 +692,9 @@ loud enough. The speaker is waterproof, so it doesn't require any extra protecti
 \subsubsection{Overview/description/parameters}\label{accumulator_overview}
 %Describe concept of accumulator pack, provide table with main parameters like number of cells, cell stacks separated by maintenance plugs, cell configuration, resulting voltages->minimum, maximum, nominal, currents, capacity etc.
 
-The accumulator pack is based on 72 LG Chem P2.7 LiNiMnCoO$_{2}$ pouch cells, in a 72s1p configuration. It is divided into six segments of 12 cells each, which each have their own distributed voltage management and temperature management systems that communicate to a master BMS node that interacts with the car's CAN network and can open the shutdown circuit. Each cell has nominal characteristics seen in table \ref{cells}, and together they form an accumulator with a max voltage of 298.8A, and a max output current of 225A, with \~27.8 MJ total capacity. Details can be found in table \ref{batterytable}. 
+The accumulator pack is based on 72 LG Chem P2.7 LiNiMnCoO$_{2}$ pouch cells, in a 72s1p configuration. It is divided into six segments of 12 cells each, which each have their own distributed voltage management and temperature management systems that communicate to a master BMS node that interacts with the car's CAN network and can open the shutdown circuit. Each cell has nominal characteristics seen in \fref{tab:cells}, and together they form an accumulator with a max voltage of 298.8A, and a max output current of 225A, with \~27.8 MJ total capacity. Details can be found in \fref{tab:batterytable}. 
 
-Since we are using proprietary cells, we are not allowed to publish the complete datasheet for the LG Model P2.7 cells. We have been approved to share the ratings found in table \ref{cells}. 
+Since we are using proprietary cells, we are not allowed to publish the complete datasheet for the LG Model P2.7 cells. We have been approved to share the ratings found in \fref{tab:cells}. 
 
 
 	\begin{table}[H]
@@ -713,7 +713,7 @@ Since we are using proprietary cells, we are not allowed to publish the complete
 	        Number of cell stacks (segments) & 6 \\ \hline
 	    \end{tabular}
 	    \caption{Main accumulator parameters}
-	    \label{batterytable}
+	    \label{tab:batterytable}
 	\end{table}
 
 \begin{figure}[H]
@@ -747,7 +747,7 @@ Since we are using proprietary cells, we are not allowed to publish the complete
 	        Cell Chemistry & NMC/LMO\\ \hline
 	    \end{tabular}
 	    \caption{Main cell specification}
-	    \label{cells}
+	    \label{tab:cells}
 	\end{table}
 
 \subsubsection{Cell configuration}\label{accumulator_cell_configuration}
@@ -1056,7 +1056,7 @@ The motor controller regulates the power delivered to the motor. This motor cont
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe the wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
 
-The PM100DX has five high voltage connections (DC+, DC-, Phase A, Phase B, Phase C) as seen in Figure \ref{fig:TS_block_diagram}. Each connection is done with a cable gland that provides strain relief, environmental sealing, and shield termination for the dual insulated shielded 4 AWG cable. The manufacturer recommends this particular cable from Champlain Cable. 
+The PM100DX has five high voltage connections (DC+, DC-, Phase A, Phase B, Phase C) as seen in \fref{fig:TS_block_diagram}. Each connection is done with a cable gland that provides strain relief, environmental sealing, and shield termination for the dual insulated shielded 4 AWG cable. The manufacturer recommends this particular cable from Champlain Cable. 
 
 \begin{table}[H]
 	\centering
@@ -1297,7 +1297,8 @@ Ready to drive buzzer \href{http://www.mallory-sonalert.com/specifications/STA20
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{Dashboard_Rendering_Rear}
-	\caption{Rendering of the dashboard module as seen from the back} \label{fig:Dashboard Render}
+	\caption{Rendering of the dashboard module as seen from the back} 
+    \label{fig:dashboard_Render}
 \end{figure}
 
 For calculation of sound attenuation over distance, see \href{http://www.sengpielaudio.com/calculator-distance.htm}{SengpielAudio Distance Law Equation}
