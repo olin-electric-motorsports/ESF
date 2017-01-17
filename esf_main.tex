@@ -1223,7 +1223,8 @@ We only have one motor, described in \ref{motor_1}.
 \section{Torque encoder}\label{torque_encoder}
 \subsection{Description/additional circuitry}
 %Describe the type of the torque encoder(s) used, provide tables with main operation parameters, and describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how the system reacts if an implausibility or error (e.g. short circuit or open circuit or equivalent) is detected.
-TODO
+
+Two rotary potentiometers are mechanically housed in one unit from Active Sensors (P/N MHR5621) and mounted to the rotating shaft of the throttle pedal assembly. The use of a single housing eliminates concerns regarding mechanical backlash and misalignment. Each output from the potentiometers will go to a CAN connected ATmega16M1, which will compare the two outputs and send a message via CAN bus to the motor controllers with the requested torque.
 
 \begin{table}[H]
 	\centering
@@ -1242,15 +1243,39 @@ TODO
 
 \subsection{Torque Encoder Plausibility Check}\label{torque_encoder_plausibility_check}
 %Describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how failures (e.g. Implausibility, short circuit or open circuit or equivalent) are detected and how the system reacts if an implausibility or errors is detected.
-TODO
+
+Two potentiometers are mounted on the torque pedal. A CAN node probes the voltage dividers which are amplified in different transfer functions using a Texas Instruments Operational Amplifier, part number LMV341QDCKRQ1. One transfer function amplifies the voltage of one potentiometer by a factor of two and the other amplifies the voltage from the potentiometer by a factor of one half. The ATmega will compare the two independent voltages and if an implausibility occurs, a difference in voltage from the Torque Encoder besides what is expected from the transfer function, and persists for more than 100msecc, the power to the motor(s) must be immediately shut down completely. If a short circuit or wiring failure with either potentiometer occurs, the input will be outside the normal operating range, and the power to the motor controllers will be shut down. The node will log the error in the CAN bus. There will also be a Pegasus Brake light pressure switch (part number 3601, recommended by Formula Hybrid) on the brakes, wired to a CAN node with 22 gauge wire. If the pressure switch indicates actuation of the brake and the potentiometers measure more than 25 percent pedal travel, the power to the motors will be completely stopped until the accelerator pedal indicates less than 5 percent pedal travel. 
 
 \subsection{Wiring}
 %Describe the wiring, show schematics, show data regarding the cables and connectors used.
-TODO
+
+Two potentiometers are wired with their each input wired through an operational amplifier with a specific amplification, one with an amplification of two and one with an amplification of one half, and their output to the CAN analog input pins. The potentiometers are given separate power lines of 5V, parallel, to the supply power of the CAN node itself. The brake switch is positioned to trip at a level of hard braking, and when triggered will deliver 5V to a CAN input pin. The CAN node is wired to send and receive messages to the other nodes.
 
 \subsection{Position in car/mechanical fastening/mechanical connection}
 %Provide CAD-renderings showing all relevant parts and discuss the mechanical connection of the sensors to the pedal assembly. Mark the parts in the rendering, if necessary.
-TODO
+The torque encoder is bolted to the accelerator pedal assembly with 4x ¼”-20 bolts. The bolts are safetywired to prevent loosening. The torque encoder is manufactured with a D-shaft. This is rotationally fixed to the accelerator pedal axle by a 4-40 set screw. The set screw is bonded with Loctite Purple to prevent loosening. This allows the torque encoder to measure the angular position of the accelerator pedal axle. The accelerator pedal axle is prevented from moving axially by retaining rings. The mounting of the torque encoder does not affect the relative plausibility check. The sensor used contains two independent encoders, each measuring the position of the single shaft 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{encoder_connection.png}
+    \caption{Mechanical fastening and connection to the throttle pedal. Note that the torque encoders are two encoders housed in one package}
+    \label{fig:encoder_position}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{encoder_mount}
+    \caption{Location of the encoder on the throttle pedal}
+    \label{fig:encoder_mount}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{encoder_car_location}
+    \caption{Location of torque encoder in car} 
+    \label{fig:encoder_car}
+\end{figure}
+
 
 \section{Additional LV-parts interfering with the tractive system}
 \subsection{LV part 1}
