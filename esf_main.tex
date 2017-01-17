@@ -878,11 +878,25 @@ The maximum cell operating temperature is 45 \textdegree C. Our thermistors are 
 %-	What upper and lower voltage does the BMS react at and how does it react?
 %-	What cell temperature does the BMS react at and how does it react?
 %-	Show tables of operation parameters
-%-	Describe how many cells are sensed by each BMS board, the configuration of the cells, the configuration of the boards and how any comms wiring between boards is protected
+%-	Describe how many cells are sensed by each BMS board, the configuration of the cells, the configuration of the boards and how any comms wiring between boards is protected 
 %-	Describe how the BMS is able to open the AIRs if any error is detected
 %-	Describe where galvanic isolation occurs between TS and GLV system connections.
 
-%TODO
+Each segment of the accumulator will be montitored and controlled for faults by its own distributed battery management system, which in turn communicates with a central master BMS that calculates state of charge, state of health, and monitors power consumption. In the case of a critical fault, the distributed segment BMS will send error messages over CAN to the master BMS, which has a relay that can open the shutdown circuit. In order to ensure that all segments remain in working order, the master BMS will employ a software watchdog timer, which will shut down the car if it fails to receive communication of nominal operation from each segment after a period of time. 
+
+The distributed BMS is connected to the negative terminal of each cell in the segment by a small custom PCB containing a PTC fuse for sense wire protection, which will be riveted to a copper tab that is compressed into the cell terminal by the segment clamping plate (see section \ref{accumulator_cell_configuration}).
+
+The distributed segment BMS is implemented using the Linear Technology LTC6804-1, which communicates over a daisy-chainable galvanically-isolated SPI interface called isoSPI. The LTC6804 is capable of measuring the voltages of up to 12 lithium-ion batteries, and is also capable of measuring up to 16 analog inputs with its analog multiplexer. We are using the analog inputs to measure cell temperatures as referenced in section \ref{accumulator_cell_temperature_monitoring}. The LTC6804 datasheet can be found in the appendix under section \ref{appendix_accumulator_temperature}. 
+
+Communication wiring between the distributed segment BMS boards and the master BMS is achieved in a daisy chain via isoSPI, which terminates on the master BMS with an isoSPI interpreting ICs. The communication wiring will be properly retained to maintain spacing of 30mm from any TS voltage. 
+
+The master BMS will be a node on the vehicle's CAN system, implemented using an ATmega16m1, a robust CAN-enabled automotive microcontroller. Its primary duties are measuring current leaving the pack via current-sensing coils, estimating state of charge and state of health, and opening the shutdown circuit if the distributed BMS boards sense a fault or fail to report nominal operational parameters. 
+
+The maximum Total Measurement Error (TME) of the LTC6804 is 1.2 mV, so in order to account for this error, the max voltage the BMS will react to is 4.1488V, and the minimum voltage is 2.8012V. 
+
+The BMS reacts to an upper voltage of 4.100V when charging by shunting excess power from that cell across a discharge resistor. This gives us a 48.8 mV leeway before we approach the max voltage of the cell, corrected for the maximum TME of 1.2 mV. If any cells ever reach 4.1488 V, the BMS will shut down the car by opening the shutdown circuit. This could occur during charging or regeneration in a rare case. 
+
+The BMS reacts to critical low voltage of 2.8012V by shutting down the vehicle. This case is harder to remedy, because we can't recharge individual cells on the fly, so to avoid damaging the electrodes inside the cells, the BMS opens the shutdown circuit and de-energizes the vehicle. 
 
 \subsubsection{Accumulator indicator}\label{accumulator_indicator}
 %Describe the indicator, show wiring, provide tables with operation, PCB design, etc.
@@ -908,47 +922,21 @@ The AIL will be located on the AIR control board PCB, fused to 1A, and have trac
 
 %TODO
 
-	\begin{table}[H]
-	    \centering
-	    \begin{tabular}{|l|l|}
-	        \hline
-	        Wire type & Company A \\ \hline
-	        Current rating & 150A TODO \\ \hline
-	        Cross sectional area & 0.326 mm$^2$ TODO \\ \hline
-	        Maximum voltage & 600VDC TODO \\ \hline
-	        Temperature rating & 120\degree C TODO \\ \hline
-	        \begin{tabular}[c]{@{}l@{}}
-	            Wire connects the\\ following components:
-	        \end{tabular} &
-	        \begin{tabular}[c]{@{}l@{}}
-	            Cell and BMS \\ other \\ TODO
-	        \end{tabular} \\ \hline
-	    \end{tabular}
-	    \caption{Wire data of the company: A, 0.326 mm$^{2}$ TODO}
-	    \label{tslowcurrentwire}
-	\end{table}
+This wire is used for high power connections in the accumulator. High power connectors are documented in section \ref{shutdown_system_interlocks}. 
 
-%TODO
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+    Wire type & 4 AWG Cable\\ \hline
+    Current rating & 190 A \\ \hline
+    Maximum operating voltage & 1 kV \\ \hline
+    Temperature rating & -55\degree C to 150\degree C \\ \hline
+    \end{tabular}
+    \caption{Wire data of the company: Champlain Cable, EXRAD SAE 150 XLE Shielded Cable}
+    \label{motortomcwire}
+\end{table}
 
-  \begin{table}[H]
-      \centering
-      \begin{tabular}{|l|l|}
-          \hline
-          Wire type & Company A \\ \hline
-          Current rating & 150A TODO \\ \hline
-          Cross sectional area & 0.326 mm$^2$ TODO \\ \hline
-          Maximum voltage & 600VDC TODO \\ \hline
-          Temperature rating & 120\degree C TODO \\ \hline
-          \begin{tabular}[c]{@{}l@{}}
-              Wire connects the\\ following components:
-          \end{tabular} &
-          \begin{tabular}[c]{@{}l@{}}
-              Cell and BMS \\ other \\ TODO
-          \end{tabular} \\ \hline
-      \end{tabular}
-      \caption{Wire data of the company: A, 0.326 mm$^{2}$ TODO}
-      \label{tshighcurrentwire}
-  \end{table}
 
 
 \subsubsection{Accumulator Insulation Relays (AIRs)}
@@ -987,33 +975,34 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 	        Continuous current rating & 150 A \\ \hline
 	        Maximum operating voltage & 600 V \\ \hline
 	        Type of fuse & Time delay \\ \hline
-	        I2t rating & TODO \\ \hline
+	        I2t rating & Not Listed \\ \hline
 	        \begin{tabular}[c]{@{}l@{}}Interrupt Current (max. current\\ at which the fuse can interrupt\\ the circuit)\end{tabular} & 300 kA \\ \hline
 	    \end{tabular}
-	    \caption{Tractive system main fuse, LPJ type}
+	    \caption{Tractive system main fuse, LPJ type. \href{http://www.cooperindustries.com/content/dam/public/bussmann/Electrical/Resources/product-datasheets-b/Bus_Ele_DS_1007_LPJ_70-600.pdf}{Datasheet here.}}
 	    \label{tsfuse}
 	\end{table}
 
 %Create a table with components and wires protected by the fuse(s) and the according continuous current rating, below is an example table with some potential entries.  Complete this table with information for your design and add/remove additional locations as applicable.  Ensure that the rating of all the components is greater than the rating of the fuse such that none of the other components become the fuse.
 
-	\begin{table}[H]
-		\centering
-		\begin{tabular}{|l|l|l|l|l|}
-		    \hline
-		    Location & Wire Size & Wire Ampacity & Fuse type & Fuse rating \\ \hline
-		    \begin{tabular}[c]{@{}l@{}}TS Main fuse (before HVD,\\ on pos pole)\end{tabular} & 2 AWG & 181A & LPJ type & 175A \\ \hline
-		    TS+ to GLV DC-DC converter & 20 AWG & 7A & MIN fuse & 5A \\ \hline
-		    GLV 12V+ & 20 AWG & 7A & MIN fuse & 2A \\ \hline
-		    GLV 12V+ to PCBs & trace width 12mil & 1A & 0zck series & 1A \\ \hline
-		    Shutdown pos pole & 22 AWG & 7A & MIN fuse & 2A \\ \hline
-		    \begin{tabular}[c]{@{}l@{}}TS+ to IMD, TSMPs TSAL's DC-DC\\ converter\end{tabular} & 22 AWG & 7A & ABC fuse & 1A \\ \hline
-		    \begin{tabular}[c]{@{}l@{}}GLV 12V to 5V regulator \\ (CAN system)\end{tabular} & 22 AWG & 7A & ABC fuse & 1A \\ \hline
-		    \begin{tabular}[c]{@{}l@{}}Keyswitch, in parallel with\\ TS voltage\end{tabular} & 18 AWG & 16A & AC fuse & 7A \\ \hline
-		    Cell to BMS x28 & \begin{tabular}[c]{@{}l@{}}PCB\\          trace\end{tabular} & \begin{tabular}[c]{@{}l@{}}Trace\\ ampacity: 7.6 A \\ (open air)\end{tabular} & \begin{tabular}[c]{@{}l@{}}CIQ\\           Fuse x28\end{tabular} & 3A \\ \hline
-		\end{tabular}
-		\caption{Fuse Protection Table TODO:this is just fuses within the accumulator}
-		\label{allfuses}
-	\end{table}
+
+	% \begin{table}[H]
+	% 	\centering
+	% 	\begin{tabular}{|l|l|l|l|l|}
+	% 	    \hline
+	% 	    Location & Wire Size & Wire Ampacity & Fuse type & Fuse rating \\ \hline
+	% 	    \begin{tabular}[c]{@{}l@{}}TS Main fuse (before HVD,\\ on pos pole)\end{tabular} & 2 AWG & 181A & LPJ type & 175A \\ \hline
+	% 	    TS+ to GLV DC-DC converter & 20 AWG & 7A & MIN fuse & 5A \\ \hline
+	% 	    GLV 12V+ & 20 AWG & 7A & MIN fuse & 2A \\ \hline
+	% 	    GLV 12V+ to PCBs & trace width 12mil & 1A & 0zck series & 1A \\ \hline
+	% 	    Shutdown pos pole & 22 AWG & 7A & MIN fuse & 2A \\ \hline
+	% 	    \begin{tabular}[c]{@{}l@{}}TS+ to IMD, TSMPs TSAL's DC-DC\\ converter\end{tabular} & 22 AWG & 7A & ABC fuse & 1A \\ \hline
+	% 	    \begin{tabular}[c]{@{}l@{}}GLV 12V to 5V regulator \\ (CAN system)\end{tabular} & 22 AWG & 7A & ABC fuse & 1A \\ \hline
+	% 	    \begin{tabular}[c]{@{}l@{}}Keyswitch, in parallel with\\ TS voltage\end{tabular} & 18 AWG & 16A & AC fuse & 7A \\ \hline
+	% 	    Cell to BMS x28 & \begin{tabular}[c]{@{}l@{}}PCB\\          trace\end{tabular} & \begin{tabular}[c]{@{}l@{}}Trace\\ ampacity: 7.6 A \\ (open air)\end{tabular} & \begin{tabular}[c]{@{}l@{}}CIQ\\           Fuse x28\end{tabular} & 3A \\ \hline
+	% 	\end{tabular}
+	% 	\caption{Fuse Protection Table TODO:this is just fuses within the accumulator}
+	% 	\label{allfuses}
+	% \end{table}
 
 \subsubsection{Charging}
 %Describe how the accumulator will be charged. How will the charger be connected? How will the accumulator be supervised during charging? Show schematics, CAD-Renderings, etc., if needed
