@@ -796,9 +796,36 @@ In between the segments, there will be a 4AWG jumper made of the vehicle's HV ca
 
 \subsubsection{Cell temperature monitoring}\label{accumulator_cell_temperature_monitoring}
 %Describe how the temperature of the cells is monitored, where the temperature sensors are placed, how many cells are monitored, etc. Show schematics, cover additional parts, etc.
-%TODO
 
-\subsubsection{Battery management system}\label{accumulator_battery_management_system}
+In compliance with EV3.6.3 and EV3.6.6 the temperature of every cell will be measured within 10cm of the negative terminal. We will achieve this by gluing an NTC thermistor to the insulated section of the negative terminal of each cell, as close as possible to the body of the cell. The thermistors will be electrically isolated from the terminal by the insulating foil of the cell, and the temperature measurement will most closely approximate the internal temperature of the electrode by being close to the body of the cell. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{accumulator_temp_sense}
+    \caption{Approximate positioning of the thermistors (seen here with red and black leads) relative to the cells}
+    \label{fig:cell_temp_monitor}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\textwidth]{therm_circuit}
+    \caption{Circuit for sensing NTC thermistors}
+    \label{fig:therm_circuit}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{mux_circuit}
+    \caption{Circuit for multiplexing analog inputs for LTC6804 BMS chip}
+    \label{fig:mux_circuit}
+\end{figure}
+
+The NTC thermistors are electrically connected in a voltage divider as shown in \fref{fig:therm_circuit}. Each of the temperature measurement voltages are multiplexed into a single GPIO pin on the LTC6804. See \fref{sec:accumulator_battery_management_system} for a more detailed description of the implementation of the LTC6804 BMS. 
+
+The maximum cell operating temperature is 45 \textdegree C. Our thermistors are 1\% accurate, and the total measurement error of the ADC is $<$0.1\%, then in the worst case we will be reading 44.5 \textdegree C when the temperature is actually over the rating. To give the system a small safety margin, the BMS triggers a shutdown if it ever detects a cell temperature of 44 \textdegree C or higher. 
+
+
+\subsubsection{Battery management system}\label{sec:accumulator_battery_management_system}
 %Describe the BMS used including at least the following:
 %-	Sense wiring protection (fusing / fusible link wire used)
 %-	What upper and lower voltage does the BMS react at and how does it react?
