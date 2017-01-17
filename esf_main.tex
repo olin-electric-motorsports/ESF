@@ -163,7 +163,7 @@ See \fref{fig:TS_block_diagram} for a block diagram of the Tractive System and i
 \subsubsection{Description/ concept}
 %Describe your concept of the shutdown circuit, the master switches, shut down buttons, brake over travel switch, etc.
 
-The shutdown circuit directly controls the current that closes the AIRs. Since each switch/relay on the shutdown circuit is connected in series, that current must pass through every switch and safety check. If any device on the circuit is triggered by an unsafe condition, the current to the AIRs is cut off and the AIRs open, disconnecting the accumulator from the tractive system. Any capacitive load on the tractive system outside the accumulator is then discharged to ensure that all high voltage is contained inside the accumulator. 
+The shutdown circuit directly controls the current that closes the AIRs. Since each switch/relay on the shutdown circuit is connected in series, current must pass through every switch and safety check. If any device on the circuit is triggered by an unsafe condition, the current to the AIRs is cut off and the AIRs open, disconnecting the accumulator from the tractive system. Any capacitive load on the tractive system outside the accumulator is then discharged to ensure that all high voltage is contained inside the accumulator. 
 
 	\begin{itemize}
 		\item The GLV Master Switch (GLVMS) controls power to the entire low voltage system including the AIRs. As a result, high voltage cannot be present when the low voltage system is not active. The GLVMS has a lockout such that the vehicle can be safely worked on. 
@@ -203,7 +203,7 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
 \subsubsection{Wiring / additional circuitry} \label{sec:shutdown_wiring}
 
 %TODO spec the breaker
-	\Fref{fig:shutdown_circuit} shows the wiring of the shutdown circuit except the interlocks, which are detailed in section \ref{shutdown_system_interlocks}. The AIRs can only be closed and the tractive system energized when all of the elements of the shutdown circuit are closed. The shutdown circuit is expected to handle a maximum peak current of under 8A, so the wire gauge being used is 20AWG, protected by an appropriately-rated circuit breaker that is housed in the master switch panel. 
+	\Fref{fig:shutdown_circuit} shows the wiring of the shutdown circuit except the interlocks, which are detailed in section \ref{shutdown_system_interlocks}. The AIRs can only be closed and the tractive system energized when all elements of the shutdown circuit are closed. The shutdown circuit is expected to handle a maximum peak current of under 8A, so 20AWG wire gauge being used, protected by an appropriately-rated circuit breaker that is housed in the master switch panel. 
 
 
 	\begin{sidewaysfigure}[p]
@@ -228,7 +228,7 @@ The shutdown circuit directly controls the current that closes the AIRs. Since e
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the renderings, if necessary.
-The shutdown circuit passes through five major enclosures on the vehicle. It originates in the master switch panel, then passes through the BSPD in the bulkhead enclosure, then through the cockpit E-stop in the dashboard, and into the IMD and the BMS latches in the accumulator, finally going to the AIRs and out to the discharge circuit in the energy meter enclosure. It also passes through the side E-stop switches along the way. \newline
+The shutdown circuit passes through five major enclosures on the vehicle. It originates in the master switch panel, passes through the BSPD in the bulkhead enclosure, then through the cockpit E-stop in the dashboard,into the IMD and the BMS latches in the accumulator, finally going to the AIRs and out to the discharge circuit in the energy meter enclosure. It also passes through the side E-stop switches along the way. \newline
 
 The shutdown circuit is wired between enclosures through waterproof TE Ampseal automotive connectors, is wrapped in abrasion-resistant mesh, and positively retained to chassis members with zip ties. Low voltage wiring is independently retained from high voltage wiring, and a minimum of 30mm separation is maintained. 
 
@@ -1123,37 +1123,64 @@ TODO
 \subsection{Motor 2}\label{motor_2}
 We only have one motor, described in \ref{motor_1}.
 
-\section{Torque encoder}\label{torque_encoder}
-\subsection{Description/additional circuitry}
-%Describe the type of the torque encoder(s) used, provide tables with main operation parameters, and describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how the system reacts if an implausibility or error (e.g. short circuit or open circuit or equivalent) is detected.
-TODO
+\documentclass{article}
+\usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
 
+
+\setcounter{section}{2}
+\setcounter{subsection}{11}
+\subsection{Torque Encoder}
+\subsubsection{Description/Additional Circuitry}
+%Describe your concept of the RTDS, how is the sound produced, what are the parameters for activating the RTDS, etc.
+Two rotary potentiometers are mechanically housed in one unit from Active Sensors (P/N MHR5621) and mounted to the rotating shaft of the throttle pedal assembly. The use of a single housing eliminates concerns regarding mechanical backlash and misalignment. Each output from the potentiometers will go to a CAN connected ATmega16M1, which will compare the two outputs and send a message via CAN bus to the motor controllers with the requested torque. \fref{fig:potentiometer}
 \begin{table}[H]
-	\centering
-	\begin{tabular}{|l|l|}
-	\hline
-	Torque encoder manufacturer and type: & MHR5621 from Active Sensors \\ \hline
-	Torque encoder principle & Potentiometer \\ \hline
-	Supply voltage & 5V \\ \hline
-	Maximum supply current & 15 mA \\ \hline
-	Operating temperature & -55 to 150 \degree C \\ \hline
-	Used output & 0-5V \\ \hline
-	\end{tabular}
-	\caption{Torque Encoder data}
-	\label{encoder}
-\end{table}
+	    \centering
+	        Torque encoder manufacturer and type & MHR5621 from Active Sensors  \\ \hline
+	        Torque encoder principle  & Potentiometer \\ \hline
+	         Supply Voltage & 5V\\ \hline
+	        Minimum Supply Current & 15 mV \\ \hline
+	        Operating Temperature & -55 to 150 °C \\ \hline
+	        Used Output & 0 - V \\ \hline
+	    \end{tabular}
+	    \caption{Table 27: Accelerator Pedal Position Sensor data }
+	    \label{fig:potentiometer}
+	\end{table}
+\subsubsection{Torque Encoder Plausibility Check}
+Two potentiometers are mounted on the torque pedal. A CAN node probes the voltage dividers which are amplified in different transfer functions using a Texas Instruments Operational Amplifier, part number LMV341QDCKRQ1. One transfer function amplifies the voltage of one potentiometer by a factor of two and the other amplifies the voltage from the potentiometer by a factor of one half. The ATmega will compare the two independent voltages and if an implausibility occurs, a difference in voltage from the Torque Encoder besides what is expected from the transfer function, and persists for more than 100msecc, the power to the motor(s) must be immediately shut down completely. If a short circuit or wiring failure with either potentiometer occurs, the input will be outside the normal operating range, and the power to the motor controllers will be shut down. The node will log the error in the CAN bus. There will also be a Pegasus Brake light pressure switch (part number 3601, recommended by Formula Hybrid) on the brakes, wired to a CAN node with 22 gauge wire. If the pressure switch indicates actuation of the brake and the potentiometers measure more than 25 percent pedal travel, the power to the motors will be completely stopped until the accelerator pedal indicates less than 5 percent pedal travel. 
+\subsubsection{Wiring}
+%Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.
+Two potentiometers are wired with their each input wired through an operational amplifier with a specific amplification, one with an amplification of two and one with an amplification of one half, and their output to the CAN analog input pins. The potentiometers are given separate power lines of 5V, parallel, to the supply power of the CAN node itself. The brake switch is positioned to trip at a level of hard braking, and when triggered will deliver 5V to a CAN input pin. The CAN node is wired to send and receive messages to the other nodes. 
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{Schematic_ESF}
+	\caption{Torque encoder schematic of transfer function on PCB}
+\end{figure}
 
-\subsection{Torque Encoder Plausibility Check}\label{torque_encoder_plausibility_check}
-%Describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how failures (e.g. Implausibility, short circuit or open circuit or equivalent) are detected and how the system reacts if an implausibility or errors is detected.
-TODO
+\subsubsection{Position in Car/Mechanical Connection}
+%Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
+The torque encoder is bolted to the accelerator pedal assembly with 4x ¼”-20 bolts. The bolts are safetywired to prevent loosening. The torque encoder is manufactured with a D-shaft. This is rotationally fixed to the accelerator pedal axle by a 4-40 set screw. The set screw is bonded with Loctite Purple to prevent loosening. This allows the torque encoder to measure the angular position of the accelerator pedal axle. The accelerator pedal axle is prevented from moving axially by retaining rings. The mounting of the torque encoder does not affect the relative plausibility check. The sensor used contains two independent encoders, each measuring the position of the single shaft 
 
-\subsection{Wiring}
-%Describe the wiring, show schematics, show data regarding the cables and connectors used.
-TODO
+	\begin{figure}[H]
+        \includegraphics[width=\linewidth]{encoder connection}
+        \caption{Mechanical fastening and connection to the throttle pedal. Note that the torque encoders are
+two encoders housed in one package}
+\end{figure}
 
-\subsection{Position in car/mechanical fastening/mechanical connection}
-%Provide CAD-renderings showing all relevant parts and discuss the mechanical connection of the sensors to the pedal assembly. Mark the parts in the rendering, if necessary.
-TODO
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{encoder mount}
+	\caption{Location of the encoder on the throttle pedal}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{location_car}
+	\caption{Location of torque encoder in car} \label{fig:Dashboard Render}
+\end{figure}
+
 
 \section{Additional LV-parts interfering with the tractive system}
 \subsection{LV part 1}
