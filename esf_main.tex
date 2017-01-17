@@ -274,7 +274,7 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 %TODO 
 
-The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. There is a 1 amp fuse protecting the high voltage wiring of the IMD (details of the fuse are in the appendix, section ??). % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
+The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105\textdegree C, 300 V, and 1.4 amps. There is a 1 amp fuse protecting the high voltage wiring of the IMD (details of the fuse are in the appendix, section ??). % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
 
 
 
@@ -315,7 +315,7 @@ The Sensata Resettable crash sensor (6-11g version) will trigger due to an impac
 	    Inertia switch type & Sensata 6-11g crash sensor \\ \hline
 	    Supply voltage range & 12 VDC \\ \hline
 	    Supply voltage & 12VDC \\ \hline
-	    \begin{tabular}[c]{@{}l@{}}Environmental temperature\\ range\end{tabular} & -10-120 \degree C \\ \hline
+	    \begin{tabular}[c]{@{}l@{}}Environmental temperature\\ range\end{tabular} & -10-120\degree C \\ \hline
 	    Maximum operational current & \begin{tabular}[c]{@{}l@{}}20A for max. duration 30sec, \\ 10A max. continuous\end{tabular} \\ \hline
 	    Trigger characteristics & \begin{tabular}[c]{@{}l@{}}Operate above 11g peak, 60ms duration\\ Not operate below 6g peak, 60ms duration\end{tabular} \\ \hline
 	    \end{tabular}
@@ -357,7 +357,7 @@ The schematic can be seen in \fref{fig:bspd_schematic}. \\
 	    Torque encoder used: &  Active Sensors MHR5621\\ \hline
 	    Supply voltages: & 5V \\ \hline
 	    Maximum supply currents: & 15 mA\\ \hline
-	    Operating temperature: & -55 to 150 \degree C \\ \hline
+	    Operating temperature: & -55 to 150\degree C \\ \hline
 	    Output used to control AIRs: & TODO \\ \hline
 	    \end{tabular}
 	    \caption{Torque Encoder Data}
@@ -393,9 +393,9 @@ The BMS is latched with identical circuitry to the IMD, as shown in \fref{fig:IM
 \subsubsection{Wiring/cables/connectors}
 %TODO
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
-The IMD latch will be connected to the accumulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the IMD connector using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105 \textdegree C, 300 V, and 1.4 amps. This provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmission. The 18 wire will be rated for at least 90 \textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).\\
+The IMD latch will be connected to the accumulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the IMD connector using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105\textdegree C, 300 V, and 1.4 amps. This provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmission. The 18 wire will be rated for at least 90\textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).\\
 
-Similarly to the IMD latch, the BMS latch will be housed in the accumulator, and thus all of the shutdown circuit connections to and from it will be made with 18AWG wire rated to over 300V and 90 \textdegree C in order to handle the maximum of 8A inrush current to the AIRs and maintain compliance with accumulator wiring regulations. PCB traces will also be appropriately sized to handle 8A peak current. 
+Similarly to the IMD latch, the BMS latch will be housed in the accumulator, and thus all of the shutdown circuit connections to and from it will be made with 18AWG wire rated to over 300V and 90\textdegree C in order to handle the maximum of 8A inrush current to the AIRs and maintain compliance with accumulator wiring regulations. PCB traces will also be appropriately sized to handle 8A peak current. 
 % connects to IMD through either accumulator interface or AIR control.
 
 
@@ -742,8 +742,8 @@ Since we are using proprietary cells, we are not allowed to publish the complete
 	        Maximum output current & 225 A \\ \hline
 	        Maximum nominal output current & 125 A \\ \hline
 	        Maximum charging current & 180 A \\ \hline
-	        Maximum Cell Temperature (discharging) & 45 \degree C \\ \hline
-	        Maximum Cell Temperature (charging) & 45 \degree C \\ \hline 
+	        Maximum Cell Temperature (discharging) & 45\degree C \\ \hline
+	        Maximum Cell Temperature (charging) & 45\degree C \\ \hline 
 	        Cell Chemistry & NMC/LMO\\ \hline
 	    \end{tabular}
 	    \caption{Main cell specification}
@@ -838,7 +838,7 @@ The AIL will be located on the AIR control board PCB, fused to 1A, and have trac
 	        Current rating & 150A TODO \\ \hline
 	        Cross sectional area & 0.326 mm$^2$ TODO \\ \hline
 	        Maximum voltage & 600VDC TODO \\ \hline
-	        Temperature rating & 120 \degree C TODO \\ \hline
+	        Temperature rating & 120\degree C TODO \\ \hline
 	        \begin{tabular}[c]{@{}l@{}}
 	            Wire connects the\\ following components:
 	        \end{tabular} &
@@ -860,7 +860,7 @@ The AIL will be located on the AIR control board PCB, fused to 1A, and have trac
           Current rating & 150A TODO \\ \hline
           Cross sectional area & 0.326 mm$^2$ TODO \\ \hline
           Maximum voltage & 600VDC TODO \\ \hline
-          Temperature rating & 120 \degree C TODO \\ \hline
+          Temperature rating & 120\degree C TODO \\ \hline
           \begin{tabular}[c]{@{}l@{}}
               Wire connects the\\ following components:
           \end{tabular} &
@@ -987,7 +987,7 @@ The vehicle's energy meter is mounted in a dedicated tractive system enclosure a
 \subsection{Wiring, cables, current calculations, connectors}
 %Describe the wiring, show schematics, provide calculations for currents and voltages, and show data regarding the cables and connectors used.
 
-The energy meter current calculations require it to be connected in series with the low pole of the tractive system. It is bolted onto custom-made copper bus bars with serrated fasteners to ensure electrical connection. Voltage measurement connections to TS+ for the energy meter, and connections for the TSAL fuses and TSMP current-limiting resistors are made via ring terminals to the corresponding bus bars. The wires for the TSMPs, the TSAL, and the energy meter will all be 20AWG rated to 300V and 90 \textdegree C. The energy meter itself also requires GLVS power, which means that proper HV wire spacing of 30mm will be upheld. 
+The energy meter current calculations require it to be connected in series with the low pole of the tractive system. It is bolted onto custom-made copper bus bars with serrated fasteners to ensure electrical connection. Voltage measurement connections to TS+ for the energy meter, and connections for the TSAL fuses and TSMP current-limiting resistors are made via ring terminals to the corresponding bus bars. The wires for the TSMPs, the TSAL, and the energy meter will all be 20AWG rated to 300V and 90\textdegree C. The energy meter itself also requires GLVS power, which means that proper HV wire spacing of 30mm will be upheld. 
 
 \begin{figure}[H]
 \centering
@@ -1065,7 +1065,7 @@ The PM100DX has five high voltage connections (DC+, DC-, Phase A, Phase B, Phase
 	Wire type & 4 AWG Cable\\ \hline
 	Current rating & 190 A \\ \hline
 	Maximum operating voltage & 1 kV \\ \hline
-	Temperature rating & -55 \degree C to 150 \degree C \\ \hline
+	Temperature rating & -55\degree C to 150\degree C \\ \hline
 	\end{tabular}
 	\caption{Wire data of the company: Champlain Cable, EXRAD SAE 150 XLE Shielded Cable}
 	\label{motortomcwire}
@@ -1172,7 +1172,7 @@ TODO
 	Torque encoder principle & Potentiometer \\ \hline
 	Supply voltage & 5V \\ \hline
 	Maximum supply current & 15 mA \\ \hline
-	Operating temperature & -55 to 150 \degree C \\ \hline
+	Operating temperature & -55 to 150\degree C \\ \hline
 	Used output & 0-5V \\ \hline
 	\end{tabular}
 	\caption{Torque Encoder data}
