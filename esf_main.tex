@@ -513,23 +513,45 @@ The TSAL will be mounted to the underside of the highest point of the main roll 
 \subsubsection{Description}
 %Describe your concept of the pre-charge circuitry.
 
+In order to prevent inrush current that could damage the motor controller or AIRs, and to comply with EV4.11.1, our pre-charge circuit slowly charges the capacitive load of the motor controller through a power limiting resistor before closing the TS+ AIR. When the shutdown circuit closes, the TS- AIR is immediately closed, but the software controlled MOSFETs seen in Figure \ref{precharge_schem} will prevent the pre-charge relay and TS+ AIR from closing. After a short delay, the pre-charge relay is allowed to close. This delay is included to allow detection of a welded pre-charge relay. The motor controller tracks its pre-charge state, and signals over the CAN network to allow the TS+ AIR to close when pre-charge is complete. 
+
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.
 %Give a plot “Percentage of Maximum Voltage” vs. time
 %Give a plot Current vs. time
 %For each plot, give the basic formula describing the plots
-%TODO
 
-	\begin{table}[H]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.7 \textwidth]{precharge_schem}
+    \caption{Schematic of the pre-charge circuit. Although the TS+ AIR and pre-charge relay are software controlled, the circuit is designed such that they cannot close if the shutdown circuit is open.}
+    \label{precharge_schem}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{precharge_voltage}
+    \caption{Theoretical pre-charge of the 440$\mu$F motor controller capacitance using a 1$k\Omega$ resistor. This plot was created using the equation, $V(t) = V_{BAT}(1 - e^{-t/RC})$ where $V_{BAT}$ is our maximum pack voltage of just under 300VDC. Our motor controller is expecting an approximately 95\% pre-charge within 3 seconds, so this circuit covers the needs of our motor contoller and is in compliance with EV4.11.1 }
+    \label{precharge_voltage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{precharge_current}
+    \caption{The current of the theoretical pre-charge from Figure \ref{precharge_voltage}. This plot was created using the equation $I(t) = \frac{V(t)}{R}$ where $V(t)$ is the voltage across the pre-charge resistor found by the equation $V(t) = V_{BAT} * e^{-t/RC}$ }
+    \label{precharge_current}
+\end{figure}
+
+    \begin{table}[H]
 	    \centering
 	    \begin{tabular}{|l|l|}
 	    \hline
-	    Resistor type & TODO \\ \hline
-	    Resistance & TODO \ohm \\ \hline
-	    Continous power rating & TODO W \\ \hline
-	    Overload power rating & TODO W \\ \hline
-	    Voltage rating & TODO VDC \\ \hline
-	    Cross-sectional area of wire used & TODO mm$^2$\\ \hline
+	    Resistor type & Riedon PF2470 Power Film Resistor \\ \hline
+	    Resistance & 1 $k\Omega$ \\ \hline
+	    Continous power rating & 100 W \\ \hline
+	    Overload power rating & 140 W \\ \hline
+	    Voltage rating & 700 V \\ \hline
+	    Cross-sectional area of wire used & 0.83mm$^2$ (18 AWG)\\ \hline
 	    \end{tabular}
 	    \caption{General data of pre-charge resistor}
 	    \label{prechargeresistor}
@@ -539,11 +561,11 @@ The TSAL will be mounted to the underside of the highest point of the main roll 
 	    \centering
 	    \begin{tabular}{|l|l|}
 	    \hline
-	    Relay type & TODO \\ \hline
+	    Relay type & Omron G2RL-1-E DC12 \\ \hline
 	    Contact arrangement & SPDT \\ \hline
-	    Continous DC current & TODO A \\ \hline
-	    Voltage rating & TODO VDC \\ \hline
-	    Cross-sectional area of wire used & TODO mm$^2$ \\ \hline
+	    Continous DC current & 16A \\ \hline
+	    Voltage rating & 300VDC \\ \hline
+	    Cross-sectional area of wire used & 0.83mm$^2$ (18 AWG) \\ \hline
 	    \end{tabular}
 	    \caption{General data of the pre-charge relay}
 	    \label{PCrelay}
@@ -551,7 +573,14 @@ The TSAL will be mounted to the underside of the highest point of the main roll 
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-%TODO
+The pre-charge circuit will be located within the accumulator. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=1]{img_not_found.jpg}
+    \caption{CAD rendering of the position of the pre-charge circuit in the accumulator.}
+\end{figure}
+
 
 \subsection{Discharge circuitry}\label{discharge_circuitry}
 \subsubsection{Description}
