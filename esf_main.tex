@@ -1220,7 +1220,27 @@ Originally designed for aviation use, this out-runner motor delivers remarkable 
 
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe the wiring, show schematics, provide calculations for currents and voltages and show data regarding the cables and connectors used.
-TODO
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+    Wire type & 2 AWG Cable\\ \hline
+    Current rating & 255 A \\ \hline
+    Maximum operating voltage & 1 kV \\ \hline
+    Temperature rating & -55\degree C to 150\degree C \\ \hline
+    \end{tabular}
+    \caption{Wire data of the company: Champlain Cable, EXRAD SAE 150 XLE Shielded Cable. \href{http://www.champcable.com/wp-content/uploads/2016/08/SAE-EXRAD-150-HVFX-Shielded-XLE-150Jacketed-Battery-Cable-1.pdf}{Datasheet here}}
+    \label{motortomcwire}
+\end{table}
+
+Since the motor leads terminate close to the motor with ring terminals close to the motor as seen in figure \ref{motor_pic}, the motor will have a 3D printed enclosure around the leads, with a high power connector found \href{http://www.te.com/usa-en/product-2141230-2.html}{here.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.6 \textwidth]{motor_pic}
+    \caption{Picture of motor, note ring terminal crimps on leads. }
+    \label{motor_pic}
+\end{figure}
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary and clearly identify the structure used to protect all relevant parts.
