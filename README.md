@@ -5,7 +5,7 @@ ESF for Formula Lincoln and Formula North
 
 - Fork the repository (upper right corner)
 - Clone *your* fork of the repo to your local machine.
-- Set up your local repo to track the main repo with `git remote add git@github.com:olin-electric-motorsports/ESF`
+- Set up your local repo to track the main repo with `git remote add upstream git@github.com:olin-electric-motorsports/ESF`
 - Make a branch from master: `git checkout -b name_of_branch`
 - Make your edits/commit/push to your fork of the repo: `git push origin head`
 - Go to Github and generate a *pull-request*
