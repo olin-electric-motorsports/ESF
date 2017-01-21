@@ -277,7 +277,7 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 %TODO 
 
-The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105\textdegree C, 300 V, and 1.4 amps. There is a 1 amp fuse protecting the high voltage wiring of the IMD (details of the fuse are in the appendix, section ??). % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
+The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105\textdegree C, 300 V, and 1.4 amps. There is a 1 amp fuse protecting the high voltage wiring of the IMD, which is the same as the TSAL fuse in section \ref{tractive_system_active_light}. % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
 
 
 
@@ -685,7 +685,7 @@ We will be using the shunt version of a TE Connectivity AMP+ Manual Service Disc
 %Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.  Include information on the working voltage and current rating of the HVD.
 The Manual Service Disconnect is rated for 495V and contains a 630A fuse, which is more than our maximum current of 225A as shown in \fref{tab:batterytable}. This fuse is superfluous to the TS main fuse, and is simply included as part of the disconnect.  It has a dual lever action, which first disconnects the shutdown circuit interlock inside the plug before disconnecting the high power terminals, which causes the AIRs to open and the tractive system to de-energize. The Manual Service Disconnect is a sealed panel mount device, which prevents the ingress of any water or debris. \\
 
-The datasheet can be found in \fref{sec:appendix_hvd}.\\
+The datasheet can be found in section \ref{appendix_hvd}.\\
 
 The HVD is in series with the negative pole of the tractive system, on the vehicle side of the AIRs, as shown in \fref{fig:TS_block_diagram}. 
 
@@ -726,13 +726,15 @@ that provides voltage to the N-FET for 2 seconds, thus letting the buzzer sound 
 Using the inverse square law as referenced in the appendix  for sound pressure levels \ref{Ready to Drive}, 97db at 122cm will translate to 93db at 2m which is a loud enough volume without inducing harm to the listener. 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-The ready to drive sound will be located in the dashboard enclosure referenced in figure \ref{fig:Dashboard Render}. The buzzer will be mounted
-to the exterior and front side of this enclosure, facing the front of the car\ref{Dashboard Right}. It must be contained outside of the box so that the buzzer is
+The ready to drive sound will be located in the dashboard enclosure. The buzzer will be mounted
+to the exterior and front side of this enclosure, facing the front of the car as seen in figure \ref{dashboard_right}. It must be contained outside of the box so that the buzzer is
 loud enough. The speaker is waterproof, so it doesn't require any extra protection besides using an RTV silicone seal for final instillation. 
-\begin{figure}[H]\label{Dashboard Right}
+
+\begin{figure}[H]
 \centering
 	\includegraphics[width=0.6\linewidth]{dashboard_right}
 	\caption{Rendering of Dashboard Right}
+	\label{dashboard_right}
 \end{figure}
 
 \section{Accumulator}\label{accumulator}
@@ -1003,7 +1005,7 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 	% 	\label{allfuses}
 	% \end{table}
 
-\subsubsection{Charging}
+\subsubsection{Charging}\label{accumulator_charging}
 %Describe how the accumulator will be charged. How will the charger be connected? How will the accumulator be supervised during charging? Show schematics, CAD-Renderings, etc., if needed
 %TODO
 
@@ -1074,7 +1076,7 @@ Currently in intensive mechanical design.
 \subsection{Accumulator pack 2}\label{accumulator_pack_2}
 We only have one accumulator, described in \ref{accumulator_pack_1}.
 
-\section{Energy meter mounting} \label{sec:energy_meter_mounting}
+\section{Energy meter mounting} \label{energy_meter_mounting}
 \subsection{Description}
 %Describe where the energy meter is mounted and how, etc.
 The vehicle's energy meter is mounted in a dedicated tractive system enclosure at the rear of the car that we call the energy meter enclosure. As is visible in \fref{fig:TS_block_diagram}, the energy meter enclosure is a pass-through enclosure that connects in series with both poles of the tractive system between the accumulator and the motor controller. Inside are the energy meter, the high-voltage low-current fuses that protect the TSAL (section \ref{tractive_system_active_light}), the current-limiting resistors that protect the TSMPs (section \ref{measurement_points}), and the discharge circuit (section \ref{discharge_circuitry}). 
@@ -1483,12 +1485,12 @@ For calculation of sound attenuation over distance, see \href{http://www.sengpie
 \href{http://www.kvc.com.my/StorageAttachment/Kvcsb/datasheet/898/mcmaster-8694K154.pdf}{Complete neoprene information sheet.}
 
 \subsubsection{Cell Temperature Monitoring}\label{appendix_accumulator_temperature}
-\hlr{Referred from section }\ref{accumulator_temperature}.
+\hlr{Referred from section }\ref{accumulator_cell_temperature_monitoring}.
 
 \href{http://cds.linear.com/docs/en/datasheet/680412fc.pdf}{Link to LTC6804 datasheet used for temperature and voltage measurement}
 
 \setcounter{subsubsection}{9}
-\subsubsection{Charger}\label{Charger}
+\subsubsection{Charging}\label{appendix_accumulator_charger}
 \hlr{Referred from section }\ref{accumulator_charging}.
 
 Charger datasheet [Note: Per Elcom, a PFC2000+ is a PFC2500 reprogrammed for more power on 115V]
