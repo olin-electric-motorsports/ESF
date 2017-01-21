@@ -1388,32 +1388,17 @@ The firewall is located between the driver and accumulator, to protect the drive
 \subsection{Firewall 2}\label{firewall_2}
 We only have one firewall, described in \ref{firewall_1}.
 
+
+% Appendix starts here ------------------------------------------------------------------------------------------------------------------------------------
+
 \section{Appendix}\label{appendix}
+\setcounter{subsection}{1}
+\subsection{Electrical Systems}\label{appendix_electrical_systems}
+\setcounter{subsubsection}{1}
+\subsubsection{IMD Datasheet}\label{IMD_datasheet}
+Referred from section \ref{imd}.
 
-
-\subsection{Shutdown System Interlocks}\label{sec:appendix_interlocks}
-\begin{figure}[H]
-	\includegraphics[width=.7 \linewidth]{HVP_800_ratings.png}
-	\caption{Ratings and interlock description for TE HVP 800 connectors}
-	\label{fig:hvp_800_ratings}
-\end{figure}
-\href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-1-hvp-800.pdf}{TE HVP 800 complete Datasheet}
-
-\hypertarget{TSALdatasheet}{}
-\subsection{Tractive System Active Light}
-\href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
-
-\subsection{HV disconnect (HVD)}\label{sec:appendix_hvd}
-TE AMP+ Manual Service Disconnect \href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-2-msd.pdf}{datasheet}.
-
-\begin{figure}[H]
-	\includegraphics[width=0.7\linewidth]{MSD_Ratings.png}
-	\caption{Rating information for the TE AMP+ Manual Service Disconnect}
-\end{figure}
-
-\subsection{IMD Datasheet}\label{IMD_datasheet}
-
-\begin{figure} [!ht]
+\begin{figure} [H]
 	\centering  % this centers the image
 	
 	\includegraphics[width=\textwidth]{Formula_IMD_Datasheet.png}
@@ -1426,7 +1411,26 @@ TE AMP+ Manual Service Disconnect \href{http://www.te.com/content/dam/te-com/doc
 
 \href{http://www.bender-us.com/documents/IR155-10_datasheet_NAE1012821.pdf}{Full IMD datasheet here.}
 
-\subsection{Measurement points (TSMPs)}\label{sec:appendix_TSMP}
+\setcounter{subsubsection}{5}
+\subsubsection{Shutdown System Interlocks}\label{sec:appendix_interlocks}
+Referred from section \ref{shutdown_system_interlocks}.
+
+\begin{figure}[H]
+	\includegraphics[width=.7 \linewidth]{HVP_800_ratings.png}
+	\caption{Ratings and interlock description for TE HVP 800 connectors}
+	\label{fig:hvp_800_ratings}
+\end{figure}
+\href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-1-hvp-800.pdf}{TE HVP 800 complete Datasheet}
+
+\hypertarget{TSALdatasheet}{}
+\subsubsection{Tractive System Active Light}
+Referred from section \ref{tractive_system_active_light}.
+
+\href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
+
+\subsubsection{Measurement points (TSMPs)}\label{sec:appendix_TSMP}
+Referred from section \ref{measurement_points}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{TSMP_resistor_ratings}
@@ -1436,8 +1440,21 @@ TE AMP+ Manual Service Disconnect \href{http://www.te.com/content/dam/te-com/doc
 \href{http://media.digikey.com/pdf/Data%20Sheets/Panasonic%20Resistors%20Thermistors%20PDFs/ERX_GxS_F_Series.pdf}{Complete datasheet for TSMP current limiting resistors.}
 \href{http://www.mouser.com/ds/2/159/D72930_02_10_06-21562.pdf}{Datasheet for TSMP banana jack connectors here.}
 
-\setcounter{subsection}{11}
-\subsection{Ready to Drive Sound}\label{Ready to Drive}
+\setcounter{subsubsection}{10}
+\subsubsection{HV Disconnect (HVD)}\label{appendix_hvd}
+Referred from section \ref{hv_disconnect}.
+
+\href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-2-msd.pdf}{TE AMP+ Manual Service Disconnect Overview here.}
+\href{http://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Specification+Or+Standard%7F108-127000%7FA%7Fpdf%7FEnglish%7FENG_SS_108-127000_A.pdf%7FN-A}{TE Manual Service Disconnect Test Parameters datasheet here.}
+	
+\begin{figure}[H]
+	\includegraphics[width=0.7\linewidth]{MSD_Ratings.png}
+	\caption{Rating information for the TE AMP+ Manual Service Disconnect}
+\end{figure}
+
+\subsubsection{Ready to Drive Sound}\label{Ready to Drive}
+Referred from section \ref{ready_to_drive_sound}.
+
 Ready to drive buzzer \href{http://www.mallory-sonalert.com/specifications/STA20502.PDF}{datasheet}. \newline
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{Buzzer_Specifications}
@@ -1453,10 +1470,11 @@ Ready to drive buzzer \href{http://www.mallory-sonalert.com/specifications/STA20
 For calculation of sound attenuation over distance, see \href{http://www.sengpielaudio.com/calculator-distance.htm}{SengpielAudio Distance Law Equation}
 
 \subsection{Accumulator}\label{appendix_accumulator}
-
+\setcounter{subsubsection}{2}
 \subsubsection{Cell Configuration}\label{appendix_accumulator_cell_configuration}
+Referred from section \ref{accumulator_cell_configuration}.
 
-\begin{figure} [!ht]
+\begin{figure} [H]
 	\centering  % this centers the image	
 	\includegraphics[width=\textwidth]{Cell_neoprene_stats.png}
 	\caption{Specifications for the neoprene compression foam that goes in the cell stack.}	
@@ -1465,24 +1483,14 @@ For calculation of sound attenuation over distance, see \href{http://www.sengpie
 \href{http://www.kvc.com.my/StorageAttachment/Kvcsb/datasheet/898/mcmaster-8694K154.pdf}{Complete neoprene information sheet.}
 
 \subsubsection{Cell Temperature Monitoring}\label{appendix_accumulator_temperature}
+Referred from section \ref{accumulator_temperature}.
+
 \href{http://cds.linear.com/docs/en/datasheet/680412fc.pdf}{Link to LTC6804 datasheet used for temperature and voltage measurement}
 
-\subsection{Energy Meter Mounting}\label{appendix_energy_meter_mounting}
+\setcounter{subsubsection}{9}
+\subsubsection{Charger}\label{Charger}
+Referred from section \ref{accumulator_charging}.
 
-\begin{figure} [!ht]
-	\centering  % this centers the image	
-	\includegraphics[width=\textwidth]{Littelfuse_808_electrical_characteristics.png}
-	\caption{Electrical characteristics snapshot for Littelfuse 808 series fast-acting fuses. The high-voltage low-power fuse we use is the 80812000000.}	
-	\label{fig:littelfuse_808}
-\end{figure}
-
-\href{http://www.littelfuse.com/~/media/c635bf51279f4ef6bedee5deb356e102.ashx}{Littelfuse 808 Series datasheet.}
-
-\subsection{HV Disconnect (HVD)}\label{appendix_hvd}
-\href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-2-msd.pdf}{TE AMP+ Manual Service Disconnect Overview here.}
-\href{http://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Specification+Or+Standard%7F108-127000%7FA%7Fpdf%7FEnglish%7FENG_SS_108-127000_A.pdf%7FN-A}{TE Manual Service Disconnect Test Parameters datasheet here.}
-	
-\subsection{Charger}\label{Charger}
 Charger datasheet [Note: Per Elcom, a PFC2000+ is a PFC2500 reprogrammed for more power on 115V]
 \href{http://www.elconchargers.com/f/PFC2500.pdfF}{Datasheet}. \newline
 Charger Information Page
@@ -1496,6 +1504,19 @@ Charger Information Page
 	\includegraphics[width=\linewidth]{charger_input}
 	\caption{Charger Input and Protection Features} 
 \end{figure}
+
+\subsection{Energy Meter Mounting}\label{appendix_energy_meter_mounting}
+Referred from section \ref{energy_meter_mounting}.
+
+\begin{figure} [H]
+	\centering  % this centers the image	
+	\includegraphics[width=\textwidth]{Littelfuse_808_electrical_characteristics.png}
+	\caption{Electrical characteristics snapshot for Littelfuse 808 series fast-acting fuses. The high-voltage low-power fuse we use is the 80812000000.}	
+	\label{fig:littelfuse_808}
+\end{figure}
+
+\href{http://www.littelfuse.com/~/media/c635bf51279f4ef6bedee5deb356e102.ashx}{Littelfuse 808 Series datasheet.}
+
 
 \end{document}
 
