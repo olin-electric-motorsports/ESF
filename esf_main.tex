@@ -22,6 +22,8 @@
 \usepackage{epstopdf}
 \usepackage{gensymb}
 \usepackage{listings}
+
+
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{pdfpages}
@@ -43,7 +45,7 @@
 \pagenumbering{roman}
 \pagestyle{fancy}
 \addto\captionsenglish{\renewcommand*\contentsname{Table of Contents}}
-\DeclareRobustCommand{\hlr}[1]{{\sethlcolor{red}\hl{#1}}}
+\DeclareRobustCommand{\hlr}[1]{{\sethlcolor{pink}\hl{#1}}}
 \graphicspath{{img/}}
 \counterwithin{table}{section} %number tables with section#.table#
 
@@ -845,7 +847,7 @@ In between the segments, there will be a 4AWG jumper made of the vehicle's HV ca
 \subsubsection{Cell temperature monitoring}\label{accumulator_cell_temperature_monitoring}
 %Describe how the temperature of the cells is monitored, where the temperature sensors are placed, how many cells are monitored, etc. Show schematics, cover additional parts, etc.
 
-In compliance with EV3.6.3 and EV3.6.6 the temperature of every cell will be measured within 10cm of the negative terminal. We will achieve this by gluing an NTC thermistor to the insulated section of the negative terminal of each cell, as close as possible to the body of the cell. The thermistors will be electrically isolated from the terminal by the insulating foil of the cell, and the temperature measurement will most closely approximate the internal temperature of the electrode by being close to the body of the cell. 
+In compliance with EV3.6.3 and EV3.6.6 the temperature of every cell will be measured within \hlr{10mm} of the negative terminal. We will achieve this by gluing an NTC thermistor to the insulated section of the negative terminal of each cell, as close as possible to the body of the cell. The thermistors will be electrically isolated from the terminal by the insulating foil of the cell, and the temperature measurement will most closely approximate the internal temperature of the electrode by being close to the body of the cell. 
 
 \begin{figure}[H]
     \centering
