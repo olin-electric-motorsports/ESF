@@ -1086,7 +1086,27 @@ The vehicle's energy meter is mounted in a dedicated tractive system enclosure a
 \subsection{Wiring, cables, current calculations, connectors}
 %Describe the wiring, show schematics, provide calculations for currents and voltages, and show data regarding the cables and connectors used.
 
-The energy meter current calculations require it to be connected in series with the low pole of the tractive system. It is bolted onto custom-made copper bus bars with serrated fasteners to ensure electrical connection. Voltage measurement connections to TS+ for the energy meter, and connections for the TSAL fuses and TSMP current-limiting resistors are made via ring terminals to the corresponding bus bars. The wires for the TSMPs, the TSAL, and the energy meter will all be 20AWG rated to 300V and 90\textdegree C. The energy meter itself also requires GLVS power, which means that proper HV wire spacing of 30mm will be upheld. 
+The energy meter current calculations require it to be connected in series with the low pole of the tractive system. It is bolted onto custom-made copper bus bars with \hlr{serrated, distorted-thread locking }fasteners to ensure electrical connection, \hlr{which can be seen in }\fref{fig:energy_meter_internals}. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{EnergyMeterExposedInternalsCovered}
+\caption{\hlr{Rendering of the internal geometry of the energy meter enclosure. The energy meter itself is visible in red. The blue solids are insulating covers to separate the individual HV bus bars from one another and to protect the LV energy meter circuitry at the base of the enclosure. See }\fref{fig:energy_meter_mounting_render}\hlr{ for a render of the enclosure in the vehicle}}
+\label{fig:energy_meter_internals}
+\end{figure}
+
+\Fref{fig:energy_meter_internals_enclosure} \hlr{shows the internals of the energy meter enclosure from another angle, also including the housing. Internal covers are removed to show bus bar geometry. Bus bars will be wrapped in Kapton polyimide tape with a protective heat-shrink sleeve.}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{EnergyMeterInternalsNoCovers}
+\caption{\hlr{Rendering of the energy meter enclosure showing the housing. Internal bus bar covers have been hidden to show bus bar structure.}}
+\label{fig:energy_meter_internals_enclosure}
+\end{figure}
+
+Voltage measurement connections to TS+ for the energy meter, and connections for the TSAL fuses and TSMP current-limiting resistors are made via ring terminals to the corresponding bus bars. The wires for the TSMPs, the TSAL, and the energy meter will all be 20AWG rated to 300V and 90\textdegree C. The energy meter itself also requires GLVS power, which means that proper HV wire spacing of 30mm will be upheld. 
+
+
 
 \begin{figure}[H]
 \centering
@@ -1095,7 +1115,7 @@ The energy meter current calculations require it to be connected in series with 
 \label{fig:energy_meter_schematic}
 \end{figure}
 
-\Fref{fig:energy_meter_schematic} shows the internals of the energy meter box. The GLVS connector contains the shutdown circuit power for the discharge circuit, the interlock from the HVD, and GLVS power for the energy meter. The high voltage low power connector contains TSMP and TSAL high voltage connections to the master switch panel. High power connections are shown in orange.
+\Fref{fig:energy_meter_schematic} shows the internals of the energy meter box \hlr{in electrical schematic form}. The GLVS connector contains the shutdown circuit power for the discharge circuit, the interlock from the HVD, and GLVS power for the energy meter. The high voltage low power connector contains TSMP and TSAL high voltage connections to the master switch panel. High power connections are shown in orange.
 
 The energy meter TS+ connection and the TSAL TS+ measurement wire share the same fused connection, and the TSAL TS- measurement wire has its own fuse. The fuse specifications can be found in \fref{tab:TSAL_and_EM_fuse}. The datasheet for the fuse can be found in \fref{tab:TSAL_and_EM_fuse}.
 
