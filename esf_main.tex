@@ -509,21 +509,21 @@ The TSMPs and GLVS ground measurement points are located on the master switch pa
 \label{fig:TSMP_schematic}
 \end{figure}
 
-There are three measurement points: TS+, TS-, and GLVS chassis ground. The TSMP connections will protected with 50k$\Omega$ current-limiting resistors. These resistors limit the maximum fault current (a short circuit between the measurement points) to below 0.01A, which is below the level that is harmful to a human.
+There are four measurement points: HV+, HV-, GLVS+, and GLVS chassis ground. The HV TSMP connections will protected with 10k$\Omega$ current-limiting resistors. These resistors limit the maximum fault current (a short circuit between the measurement points) in accordance with EV4.4.6. 
 
 \begin{align*}
 V = I * R \\
-300V = I * 100,000 \Omega \\
-I = 0.003A
+300V = I * 20,000 \Omega \\
+I = 0.015A
 \end{align*}
 
 \begin{align*}
 P = I * V \\
-P = 0.003A * 300V \\
-P = 0.9W
+P = 0.015A * 300V \\
+P = 4.5W
 \end{align*}
 
-According to the above calculations, the resistors will have to be rated to at least 1W and 300V. We will be using Panasonic ERG-1SJ513 51k 1W resistors. The datasheets for the resistors, the connectors, and an example multimeter can be found in \fref{sec:appendix_TSMP}.
+According to the above calculations, the resistors will have to be rated to at least 5W and 300V. We will be using Vishay PAC500001002FAC000 10k 5W resistors. The datasheets for the resistors, the connectors, and an example multimeter can be found in \fref{sec:appendix_TSMP}.
 
 The TSMPs are protected with current-limiting resistors because protecting the wires with fuses introduces the failure mode in which one of the fuses has blown, and a measurement across the TSMPs shows an open circuit even though the tractive system is still energized. 
 
@@ -1438,10 +1438,10 @@ We only have one firewall, described in \ref{firewall_1}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{TSMP_resistor_ratings}
-	\caption{Ratings for Panasonic ERG series resistors. The TSMP resistors are ERG-1SJ513, shown in the second row}
+	\caption{Ratings for Vishay PAC series resistors. The TSMP resistors are PAC05 (PAC500001002FAC000), shown in the fifth row}
 \end{figure}
 \href{https://www.gossenmetrawatt.com/resources/tt/hit27/db_gb.pdf}{Example multimeter for TS measurement. Link to datasheet.}
-\href{http://media.digikey.com/pdf/Data%20Sheets/Panasonic%20Resistors%20Thermistors%20PDFs/ERX_GxS_F_Series.pdf}{Complete datasheet for TSMP current limiting resistors.}
+\href{http://www.vishay.com/docs/28731/pacserie.pdf}{Complete datasheet for TSMP current limiting resistors.}
 \href{http://www.mouser.com/ds/2/159/D72930_02_10_06-21562.pdf}{Datasheet for TSMP banana jack connectors here.}
 
 \setcounter{subsubsection}{10}
