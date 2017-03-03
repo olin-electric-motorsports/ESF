@@ -277,11 +277,10 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 %TODO 
 
-The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105\textdegree C, 300 V, and 1.4 amps. There is a 1 amp fuse protecting the high voltage wiring of the IMD, which is the same as the TSAL fuse in section \ref{tractive_system_active_light}. % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
+The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. \hlr{It connects to the IMD latch using 5-pin Molex LLC 1722861105 connectors. The signal is also sent to the accumulator interface board using the same type of connectors. The 18 AWG wire is more than sufficient for 150mA current draw of the IMD. The 18 AWG ribbon cable has a cross sectional area of .83mm$^2$, and is rated for at least 90\textdegree C, 300 V, and 16 amps.} There is a 1 amp fuse protecting the high voltage wiring of the IMD, which is the same as the TSAL fuse in section \ref{tractive_system_active_light}. % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
 
 
 
-% I am not sure if this is actually how we are doing it, but I am assuming it is correct until I have time to check. I think it might be more convenient to route it through the AIR control board, if possible, as it already needs to connect to the Atmega on that board. 
 
 \begin{figure} [!ht]
 	\centering  % this centers the image
@@ -289,7 +288,7 @@ The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate.
 	\includegraphics[width=0.6\textwidth]{IMD_Latch_Rev2_AltiumSchematic.png}
 	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
 	
-	\caption{\colorbox{red}{The schematic for the IMD Latch.}}
+	\caption{\hlr{The schematic for the IMD Latch.}}
 	
 	\label{fig:IMDLatch_Schematic}
 \end{figure}
@@ -396,7 +395,7 @@ The BMS is latched with identical circuitry to the IMD, as shown in \fref{fig:IM
 \subsubsection{Wiring/cables/connectors}
 %TODO
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
-The IMD latch will be connected to the accumulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the IMD connector using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105\textdegree C, 300 V, and 1.4 amps. This provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmission. The 18 wire will be rated for at least 90\textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).\\
+The IMD latch will be connected to the accumulator interface board board via a \hlr{5-pin Molex LLC Ultrafit 1722861105 with 18 AWG wire, and the IMD connector using another 5-pin Molex LLC Ultrafit of the same type. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for at least 90\textdegree C, 300 V, and 16 amps.} This provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmission. The 18 wire will be rated for at least 90\textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).\\
 
 Similarly to the IMD latch, the BMS latch will be housed in the accumulator, and thus all of the shutdown circuit connections to and from it will be made with 18AWG wire rated to over 300V and 90\textdegree C in order to handle the maximum of 8A inrush current to the AIRs and maintain compliance with accumulator wiring regulations. PCB traces will also be appropriately sized to handle 8A peak current. 
 % connects to IMD through either accumulator interface or AIR control.
