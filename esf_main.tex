@@ -620,13 +620,9 @@ In order to prevent inrush current that could damage the motor controller or AIR
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-The pre-charge circuit will be located within the accumulator. 
+\hl{The pre-charge circuit will be located within the top section of the accumulator, seen in} \fref{fig:accumulator_hero}.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=1]{render_not_available.png}
-    \caption{CAD rendering of the position of the pre-charge circuit in the accumulator.}
-\end{figure}
+
 
 
 \subsection{Discharge circuitry}\label{discharge_circuitry}
@@ -816,8 +812,8 @@ Since we are using proprietary cells, we are not allowed to publish the complete
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{accumulator_hero.png}
-\caption{Render of the accumulator with one panel removed to show cell arrangement.}
+\includegraphics[width=1\textwidth]{accumulator_front}
+\caption{\hl{Render of the accumulator with one panel removed to show cell arrangement.}}
 \label{fig:accumulator_hero}
 \end{figure}
 
@@ -861,26 +857,18 @@ The P2.7 pouch cells are connected in six segments of 12 cells in series, for a 
 \label{fig:cell_configuration_schematic}
 \end{figure}
 
-To connect the cells into segments, they are stacked on one another with 1mm 6061 aluminum heat sinks and neoprene compression foam to distribute load, as shown in \fref{fig:cell_stack}. The cells are alternated in polarity for easy tab connection. Data on the foam can be found in the appendix, in section \ref{appendix_accumulator_cell_configuration}.
+To connect the cells into segments, they are stacked on one another with 1mm 6061 aluminum heat sinks and neoprene compression foam to distribute load. The cells are alternated in polarity for easy tab connection. Data on the foam can be found in the appendix, in section \ref{appendix_accumulator_cell_configuration}.
+
+\hl{Individual cells are connected by squeezing their tabs together with bolted copper plates. Voltage sensing is done using wires connected to these plates. Each bolted plate assembly is isolated with a 3d-printed cover. This cover protects each terminal from shorts during assembly and maintenance. Each cover is retained with a zip-tie. This is a safer assembly technique than welding the cell tabs together, and allows for replacement of damaged cells if necessary.} 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{accumulator_cross_section}
-\caption{Cross section of the segment cell stacks showing the layers of foam and aluminum heat sink between the cells for heat dissipation}
-\label{fig:cell_stack}
-\end{figure}
-
-To connect the cell tabs, a mounting plate is placed over the alternating cells, as seen in \fref{fig:cell_tabs}, and a clamping plate with wedge-shaped protrusions aligned with the tabs is fastened over the top of the mounting plate, pressing the tabs together to form an electrical connection. This is a safer assembly technique than welding the cell tabs together, and allows for replacement of damaged cells if necessary. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.6\textwidth]{accumulator_tabs.png}
-\caption{Render of the cell mounting plate showing cell tabs protruding through clamping holes.}
+\includegraphics[width=1\textwidth]{module_iso_method_2}
+\caption{\hl{Single segment of 12 cells with 3d-printed covers over clamped cell tabs.}}
 \label{fig:cell_tabs}
 \end{figure}
 
 In between the segments, there will be a 4AWG jumper made of the vehicle's HV cable, with a 1-position connector on each end. These will be on the tops of the cell segments, and will be easily removable, so as to act as the manual service disconnects between segments. We are currently in communication with sales representatives from Amphenol about an appropriate connector for our application, and we are considering the Radlok connector system, seen in \fref{fig:radlok}.
-
 
 \begin{figure}[H]
 \centering
@@ -893,12 +881,12 @@ In between the segments, there will be a 4AWG jumper made of the vehicle's HV ca
 \subsubsection{Cell temperature monitoring}\label{accumulator_cell_temperature_monitoring}
 %Describe how the temperature of the cells is monitored, where the temperature sensors are placed, how many cells are monitored, etc. Show schematics, cover additional parts, etc.
 
-In compliance with EV3.6.3 and EV3.6.6 the temperature of every cell will be measured within \hlr{10mm} of the negative terminal. We will achieve this by gluing an NTC thermistor to the insulated section of the negative terminal of each cell, as close as possible to the body of the cell. The thermistors will be electrically isolated from the terminal by the insulating foil of the cell, and the temperature measurement will most closely approximate the internal temperature of the electrode by being close to the body of the cell. 
+In compliance with EV3.6.3 and EV3.6.6 the temperature of every cell will be measured within \hlr{10mm} of the negative terminal. We will achieve this by \hl{epoxying} an NTC thermistor to the insulated section of the negative terminal of each cell, as close as possible to the body of the cell. The thermistors will be electrically isolated from the terminal by the insulating foil of the cell, and the temperature measurement will most closely approximate the internal temperature of the electrode by being close to the body of the cell. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{accumulator_temp_sense}
-    \caption{Approximate positioning of the thermistors (seen here with red and black leads) relative to the cells}
+    \includegraphics[width=1\textwidth]{thermistor}
+    \caption{\hl{Approximate positioning of the thermistors (seen here with red and black leads) relative to the cells}}
     \label{fig:cell_temp_monitor}
 \end{figure}
 
@@ -931,11 +919,23 @@ The maximum cell operating temperature is 45 \textdegree C. Our thermistors are 
 %-	Describe how the BMS is able to open the AIRs if any error is detected
 %-	Describe where galvanic isolation occurs between TS and GLV system connections.
 
-Each segment of the accumulator will be montitored and controlled for faults by its own distributed battery management system, which in turn communicates with a central master BMS that calculates state of charge, state of health, and monitors power consumption. In the case of a critical fault, the distributed segment BMS will send error messages over CAN to the master BMS, which has a relay that can open the shutdown circuit. In order to ensure that all segments remain in working order, the master BMS will employ a software watchdog timer, which will shut down the car if it fails to receive communication of nominal operation from each segment after a period of time. 
+Each segment of the accumulator will be monitored and controlled for faults by its own distributed battery management system, which in turn communicates with a central master BMS that calculates state of charge, state of health, and monitors power consumption. In the case of a critical fault, the distributed segment BMS will send error messages over CAN to the master BMS, which has a relay that can open the shutdown circuit. In order to ensure that all segments remain in working order, the master BMS will employ a software watchdog timer, which will shut down the car if it fails to receive communication of nominal operation from each segment after a period of time. 
 
-The distributed BMS is connected to the negative terminal of each cell in the segment by a small custom PCB containing a PTC fuse for sense wire protection, which will be riveted to a copper tab that is compressed into the cell terminal by the segment clamping plate (see section \ref{accumulator_cell_configuration}).
+The distributed segment BMS is implemented using the Linear Technology LTC6804-1, which communicates over a daisy-chain-able galvanically-isolated SPI interface called isoSPI. The LTC6804 is capable of measuring the voltages of up to 12 lithium-ion batteries, and is also capable of measuring up to 16 analog inputs with its analog multiplexer. We are using the analog inputs to measure cell temperatures as referenced in section \ref{accumulator_cell_temperature_monitoring}. The LTC6804 datasheet can be found in the appendix under section \ref{appendix_accumulator_temperature}. 
 
-The distributed segment BMS is implemented using the Linear Technology LTC6804-1, which communicates over a daisy-chainable galvanically-isolated SPI interface called isoSPI. The LTC6804 is capable of measuring the voltages of up to 12 lithium-ion batteries, and is also capable of measuring up to 16 analog inputs with its analog multiplexer. We are using the analog inputs to measure cell temperatures as referenced in section \ref{accumulator_cell_temperature_monitoring}. The LTC6804 datasheet can be found in the appendix under section \ref{appendix_accumulator_temperature}. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{BMS_slave_iso}
+    \caption{\hl{Render of the LTC6804-1 based distributed segment BMS.}}
+    \label{fig:BMS_slave_iso}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{BMS_slave_2D}
+    \caption{\hl{Two dimensional view of distributed segment BMS.}}
+    \label{fig:BMS_slave_2D}
+\end{figure}
 
 Communication wiring between the distributed segment BMS boards and the master BMS is achieved in a daisy chain via isoSPI, which terminates on the master BMS with an isoSPI interpreting ICs. The communication wiring will be properly retained to maintain spacing of 30mm from any TS voltage. 
 
@@ -953,7 +953,7 @@ The Accumulator Indicator Light (AIL) will be powered directly by the TS voltage
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.4]{AIL}
+\includegraphics[scale=.2]{AIL}
 \caption{Schematic for the AIL}
 \label{fig:AILcircuit}
 \end{figure}
@@ -1105,7 +1105,33 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 
 \subsubsection{Mechanical Configuration/materials}
 %Describe the concept of the container, show how the cells are mounted, use CAD-Renderings, show data regarding materials used, etc.
-Currently in intensive mechanical design. 
+
+
+\hl{The main structure of the accumulator container is made from .050" 430 stainless steel sheet. The front, left, right, and bottom walls are made from one folded sheet. The rear wall is made from another folded sheet. Inside are six segments of 12 cells. The segments are separated by internal vertical walls. The internal vertical walls are made from 20ga (.0359") 430 stainless steel sheet. The internal vertical walls are attached to the bottom wall with spot welds. The internal vertical walls are attached to the external vertical walls with spot welds. All walls are internally lined with a sheet of garolite to provide insulation.}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{accumulator}
+\caption{\hl{Isometric render of the fully assembled accumulator. }}
+\label{fig:accumulator}
+\end{figure}
+
+\hl{The cells we are using must be compressed on their large face to within the manufacturer recommended range (4-18psi). We are considering two methods of cell compression. In the first, the cells are compressed between  two aluminum face sheets by threaded rods. 4 threaded rods are used to compress each segment. In the second method, the threaded rods are replaced by aluminum end caps that set the distance between the aluminum face sheets. In both methods, cell compression pressure will be set by imposing a strain on the stack. The materials will be characterized and the necessary strain will be applied such that the cells remain in the specified pressure range. Each compressed segment is individually installed into the accumulator, then the rear wall is attached.}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{cell_stack}
+\caption{Configuration of cell modules, with dividing walls.}
+\label{fig:cell_stack}
+\end{figure}
+
+
+\hl{Individual cells are connected by squeezing their tabs together with bolted copper plates. Voltage sensing is done using wires connected to these plates. Each bolted plate assembly is isolated with a 3d-printed cover. This cover protects each terminal from shorts during assembly and maintenance. Each cover is retained with a zip-tie. Thermistors are epoxied to the negative terminal of all cells for temperature monitoring.
+
+The Accumulator Interrupt Relays, Main Pack Fuse, Battery Management System, Service Disconnects, and other related electronics are located in the top section of the accumulator. This section is separated from the lower section by a .050" 430 stainless sheet that is insulated on both sides by 1/32" garolite. The divider is fastened with 18 1/4"-20 grade 5 fasteners. The top section is closed with a lid similar to the divider. It is attached to the side walls with an identical fastener pattern.
+
+All structural fasteners are secured with nylok nuts. The nylok nuts are all located outside the accumulator container. All insulating garolite is epoxied to the surface it insulates.}
+
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.  Ensure that the required mechanical structure to protect the accumulator and other electrical components is clearly identified.
@@ -1113,12 +1139,12 @@ Currently in intensive mechanical design.
 \begin{figure}[H]
 	\centering  % this centers the image
 	
-	\includegraphics[width=0.6\textwidth]{accumulator.png}
+	\includegraphics[width=1\textwidth]{acc_in_frame}
     %\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
 	
-	\caption{The CAD for the accumulator}
+	\caption{\hl{Position of the accumulator in the frame.}}
 	
-	\label{fig:accumulator_cad}
+	\label{fig:acc_in_frame}
 \end{figure}
 
 \subsection{Accumulator pack 2}\label{accumulator_pack_2}
