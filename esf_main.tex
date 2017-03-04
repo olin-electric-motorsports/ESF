@@ -622,7 +622,6 @@ In order to prevent inrush current that could damage the motor controller or AIR
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 The pre-charge circuit will be located within the accumulator. \hlr{The precharge circuitry will be located on the AIR control PCB in the top section of the accumulator, as described in section }\ref{accumulator_mechanical_configuration}.
 
-
 \subsection{Discharge circuitry}\label{discharge_circuitry}
 \subsubsection{Description}
 %Describe your concept of the discharge circuitry.
@@ -1324,7 +1323,14 @@ Originally designed for aviation use, this out-runner motor delivers remarkable 
     \label{motor_motortomcwire}
 \end{table}
 
-Since the motor leads terminate close to the motor with ring terminals close to the motor as seen in figure \ref{motor_pic}, the motor will have a 3D printed enclosure around the leads, with a high power connector found \href{http://www.te.com/usa-en/product-2141230-2.html}{here.}
+Since the motor leads terminate close to the motor with ring terminals close to the motor as seen in figure \ref{motor_pic}, the motor will have a 3D printed enclosure around the leads, with a high power connector found \href{http://www.te.com/usa-en/product-2141230-2.html}{here.} \hlr{A CAD render of the motor lead enclosure can be found in }\fref{fig:motor_enclosure}. \hlr{HV and LV segments are separated by a 3D printed wall with an extension designed to protect the LV rotary encoder wires from the motor from HV connections. HV connections will be shielded and double-insulated, so the plastic serves to keep the wires from interfering, not to provide insulation.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{MotorBoxAssemblyRender2}
+    \caption{\hlr{CAD render of 3D printed motor enclosure. HV and LV segments of the enclosure are separated by a PLA wall.}}
+    \label{fig:motor_enclosure}
+\end{figure}
 
 \begin{figure}[H]
     \centering
