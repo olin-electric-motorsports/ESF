@@ -439,12 +439,12 @@ Interlocks are built in to each HV connector. The connectors are panel-mounted t
 
 \begin{figure}[H]
 \centering
-\includegraphics[width = .75\textwidth]{render_not_available.png}
-\caption{Render of the rear of the vehicle showing location of HV connectors.}
+\includegraphics[width = .75\textwidth]{hvd.png}
+\caption{Render of the rear of the vehicle showing location of HV connectors. \hlr{Connectors are highlighted in orange.} }
 \label{fig:rear_of_car}
 \end{figure}
 
-\subsection{Tractive system active light}\label{tractive_system_active_light}
+\subsection{Tractive system active light}\label{EnergyMeterBackISO}
 \subsubsection{Description/circuitry}
 %Describe the tractive system active light and additional circuitry.
 The TSAL illuminates when the tractive system is active, which is defined as the tractive system voltage being over 60V.
@@ -535,12 +535,12 @@ The TSMPs will be located in the master switch panel enclosure shown in \fref{fi
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=1]{render_not_available.png}
-\caption{CAD rendering of the master switch panel showing TS and GLVS master switches, and TS and GLVS ground measurement points}
+\includegraphics[scale=1]{MSP_Box_Angle}
+\caption{CAD rendering of the master switch panel showing TS and GLVS master switches, and TS and GLVS ground measurement points. This current render has the enclosure protruding from the chassis envelope, but the enclosures team is currently redesigning the face of the master switch panel to be flush with the chassis members.}
 \label{fig:master_switch_panel}
 \end{figure}
 
-
+ 
 \subsection{Pre-Charge circuitry}\label{pre_charge_circuitry}
 \subsubsection{Description}
 %Describe your concept of the pre-charge circuitry.
@@ -605,14 +605,7 @@ In order to prevent inrush current that could damage the motor controller or AIR
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-The pre-charge circuit will be located within the accumulator. 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=1]{render_not_available.png}
-    \caption{CAD rendering of the position of the pre-charge circuit in the accumulator.}
-\end{figure}
-
+The pre-charge circuit will be located within the accumulator. \hlr{The precharge circuitry will be located on the AIR control PCB in the top section of the accumulator, as described in section }\ref{accumulator_mechanical_configuration}.
 
 \subsection{Discharge circuitry}\label{discharge_circuitry}
 \subsubsection{Description}
@@ -698,7 +691,7 @@ The HVD is mounted at the rear of the vehicle, on the rear-facing side of the en
 %TODO add render and positioning info
 \begin{figure}[H]
 \centering
-\includegraphics[width=.75\textwidth]{hvd.png}
+\includegraphics[width=.75\textwidth]{EnergyMeterBackISO}
 \caption{The HVD's location in the car.}
 \label{fig:hvd}
 \end{figure}
@@ -1057,7 +1050,7 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 	
 	
 
-\subsubsection{Mechanical Configuration/materials}
+\subsubsection{Mechanical Configuration/materials}\label{accumulator_mechanical_configuration}
 %Describe the concept of the container, show how the cells are mounted, use CAD-Renderings, show data regarding materials used, etc.
 Currently in intensive mechanical design. 
 
@@ -1140,7 +1133,7 @@ The energy meter housing is mounted to the chassis at the rear of the vehicle, i
 
 \begin{figure}
 \centering
-\includegraphics[width=0.5\textwidth]{render_not_available.png}
+\includegraphics[width=0.5\textwidth]{EnergyMeterBackISO}
 \caption{Render of the rear of the vehicle showing the mounting for the energy meter enclosure at the rear of the vehicle}
 \label{fig:energy_meter_mounting_render}
 \end{figure}
@@ -1194,7 +1187,7 @@ The PM100DX has five high voltage connections (DC+, DC-, Phase A, Phase B, Phase
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=1]{render_not_available.png}
+    \includegraphics[scale=1]{MotorController3-1-17.png}
     \caption{CAD rendering of Motor Controller position}
     \label{mc_cad}
 \end{figure}
