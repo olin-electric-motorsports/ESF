@@ -22,6 +22,8 @@
 \usepackage{epstopdf}
 \usepackage{gensymb}
 \usepackage{listings}
+
+
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{pdfpages}
@@ -34,6 +36,7 @@
 \usepackage{amssymb}
 \usepackage{fancyhdr}
 \usepackage{soul}
+\usepackage{xcolor}
 \usepackage{chngcntr}
 %font
 \usepackage{lmodern}
@@ -43,12 +46,26 @@
 \pagenumbering{roman}
 \pagestyle{fancy}
 \addto\captionsenglish{\renewcommand*\contentsname{Table of Contents}}
-\DeclareRobustCommand{\hlr}[1]{{\sethlcolor{red}\hl{#1}}}
+\DeclareRobustCommand{\hlr}[1]{{\sethlcolor{pink}\hl{#1}}}
+
+\sethlcolor{pink}
+\makeatletter
+ \def\SOUL@hlpreamble{%
+ \setul{}{1ex}%         !!!change this value!!! default is 2.5ex
+ \let\SOUL@stcolor\SOUL@hlcolor
+ \SOUL@stpreamble
+ }
+\makeatother
+
+
+
+
 \graphicspath{{img/}}
 \counterwithin{table}{section} %number tables with section#.table#
 
 
 \counterwithin{table}{section} %number tables with section#.table#
+
 
 
 \begin{document}
@@ -277,19 +294,18 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 %TODO 
 
-The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. It connects to the accumulator interface board, which sends the signal to a through a 28 AWG ribbon cable to the IMD latch using a 6-pin TE Connectivity MICRO MATCH 338068-6 connector.The 28 AWG wire is used because the current draw of the IMD is 150mA, which allows high gauge wire to be used. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105\textdegree C, 300 V, and 1.4 amps. There is a 1 amp fuse protecting the high voltage wiring of the IMD, which is the same as the TSAL fuse in section \ref{tractive_system_active_light}. % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
+The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. \hlr{It connects to the IMD latch using 5-pin Molex LLC 1722861105 connectors. The signal is also sent to the accumulator interface board using the same type of connectors. The 18 AWG wire is more than sufficient for 150mA current draw of the IMD. The 18 AWG ribbon cable has a cross sectional area of .83mm$^2$, and is rated for at least 90\textdegree C, 300 V, and 16 amps.} There is a 1 amp fuse protecting the high voltage wiring of the IMD, which is the same as the TSAL fuse in section \ref{tractive_system_active_light}. % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
 
 
 
-% I am not sure if this is actually how we are doing it, but I am assuming it is correct until I have time to check. I think it might be more convenient to route it through the AIR control board, if possible, as it already needs to connect to the Atmega on that board. 
 
 \begin{figure} [!ht]
 	\centering  % this centers the image
 	
-	\includegraphics[width=0.6\textwidth]{IMD_Latch_Rev2_AltiumSchematic.png}
+	\includegraphics[width=0.6\textwidth]{IMD_Latch_Rev2_AltiumSchematic.PNG}
 	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
 	
-	\caption{The schematic for the IMD Latch.}
+	\caption{\hlr{The schematic for the IMD Latch.}}
 	
 	\label{fig:IMDLatch_Schematic}
 \end{figure}
@@ -303,7 +319,7 @@ The IMD latch shown in \fref{fig:IMDLatch_Schematic} uses the signal from the IM
 %Position in car
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 
-The IMD will be located inside the accumulator, as shown in \fref{fig:accumulator_cad}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
+The IMD will be located inside the accumulator, as shown in \fref{fig:accumulator_hero}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
 
 \subsection{Inertia Switch}\label{inertia_switch}
 \subsubsection{Description (type, operation parameters)}
@@ -330,11 +346,11 @@ The Sensata Resettable crash sensor (6-11g version) will trigger due to an impac
             The Inertia switch will be wired to open the shutdown circuit in the case that there is a crash. The inertia switch is wired in-line with the shutdown circuit to be normally closed. Please see \fref{fig:shutdown_circuit} for the position of the inertia switch relative to the other shutdown system components.
 
 \subsubsection{Position in car}
- The inertia switch will be located on the dashboard, in reach of the driver as to fit EV5.7.4. It is mounted downwards, so it can be triggered and reset while underneath the body panels, as seen in \fref{fig:inertia_switch_mount}.
+\hlr{The inertia switch will be located on the side of the dashboard enclosure. It is mounted upwards, so the top body panel will have to be temporarily removed to reset it,} as seen in \fref{fig:inertia_switch_mount}.
 
   \begin{figure}[H]
   \centering
-  \includegraphics[width = 0.9 \textwidth]{Inertia_Switch_Mount.png}
+  \includegraphics[width = 0.9 \textwidth]{ImpactSensor3-1-17}
   \caption{Positioning of the inertia switch alongside the dashboard enclosure}
   \label{fig:inertia_switch_mount}
   \end{figure}
@@ -396,7 +412,7 @@ The BMS is latched with identical circuitry to the IMD, as shown in \fref{fig:IM
 \subsubsection{Wiring/cables/connectors}
 %TODO
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
-The IMD latch will be connected to the accumulator interface board board via a 4-pin Molex LLC Ultrafit 1722861104 with 20 AWG wire, and the IMD connector using a  6-pin TE Connectivity MICRO MATCH 338068-6 connector with 28 AWG ribbon cable. The 28 AWG ribbon cable has a cross sectional area of .08mm$^2$, and is rated for 105\textdegree C, 300 V, and 1.4 amps. This provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmission. The 18 wire will be rated for at least 90\textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).\\
+The IMD latch will be connected to the accumulator interface board board via a \hlr{5-pin Molex LLC Ultrafit 1722861105 with 18 AWG wire, and the IMD connector using another 5-pin Molex LLC Ultrafit of the same type. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for at least 90\textdegree C, 300 V, and 16 amps.} This provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmission. The 18 wire will be rated for at least 90\textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).\\
 
 Similarly to the IMD latch, the BMS latch will be housed in the accumulator, and thus all of the shutdown circuit connections to and from it will be made with 18AWG wire rated to over 300V and 90\textdegree C in order to handle the maximum of 8A inrush current to the AIRs and maintain compliance with accumulator wiring regulations. PCB traces will also be appropriately sized to handle 8A peak current. 
 % connects to IMD through either accumulator interface or AIR control.
@@ -404,7 +420,7 @@ Similarly to the IMD latch, the BMS latch will be housed in the accumulator, and
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-The IMD, IMD latch, and the BMS are in the accumulator, as shown in \fref{fig:accumulator_cad}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD, which is located in the accumulator for continual monitoring of pack isolation while the accumulator is removed for charging. 
+The IMD, IMD latch, and the BMS are in the accumulator, as shown in \fref{fig:accumulator_hero}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD, which is located in the accumulator for continual monitoring of pack isolation while the accumulator is removed for charging. 
 
 \subsection{Shutdown System Interlocks}\label{shutdown_system_interlocks}
 \subsubsection{Description/circuitry}
@@ -437,8 +453,8 @@ Interlocks are built in to each HV connector. The connectors are panel-mounted t
 
 \begin{figure}[H]
 \centering
-\includegraphics[width = .75\textwidth]{render_not_available.png}
-\caption{Render of the rear of the vehicle showing location of HV connectors.}
+\includegraphics[width = .75\textwidth]{EnergyMeterBackISO}
+\caption{Render of the rear of the vehicle showing location of HV connectors. \hlr{Connectors are highlighted in orange.} }
 \label{fig:rear_of_car}
 \end{figure}
 
@@ -452,9 +468,9 @@ The TSAL illuminates when the tractive system is active, which is defined as the
 	    \begin{tabular}{|l|l|}
 	    \hline
 	    Supply voltage: & 12V \\ \hline
-	    Max. operational current: &  2A\\ \hline
+	    Max. operational current: &  \hl{1.2A}\\ \hline
 	    Lamp type: & LEDs \\ \hline
-	    Power consumption: & 24W (max)\\ \hline
+	    Power consumption: & \hl{14.4W (max)}\\ \hline
 	    Brightness: & Unknown\\ \hline
 	    Frequency: & 2 Hz \\ \hline
 	    Size (length x height x width): & 41x41x32 mm \\ \hline
@@ -467,25 +483,22 @@ See the appendix \hyperlink{TSALdatasheet}{here} for a link to the TSAL Datashee
 
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  Include gauge, voltage and temperature rating of wiring used and any fuses or other overcurrent protection used.
-The circuitry designed has a TS-controlled optocoupler. When the TS is over 60V, Zener diodes with a breakdown voltage of 58V and 3.6V respectively power the photodiode side which switches the MOSFET side allowing current to flow from the GLV to power the TSAL. The frequency of the TSAL will be controlled by built in settings to flash at 2Hz. See \fref{fig:TSALcircuit} for a schematic diagram of the TSAL circuit.
+\hl{The circuitry designed has a TS-controlled digital isolator whose power is supplied by the TS through two linear voltage regulators. When the TS is over 60V, a voltage divider with resistors of 30.1K and 1.91K causes the digital isolator to go logic high which allows the down regulated GLV to switch on the MOSFET allowing current to flow through the TSAL low side drive.} The frequency of the TSAL will be controlled by built in settings to flash at 2Hz. See \fref{fig:TSALcircuit} for a schematic diagram of the TSAL circuit.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[scale=.7]{TSAL}
-    \caption{Schematic for the TSAL}
-    \label{fig:TSALcircuit}
+\centering
+\includegraphics[scale=.7]{TSAL.png}
+\caption{Schematic for the TSAL}
+\label{fig:TSALcircuit}
 \end{figure}
 
-All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A, while all PCB traces will be a minimum of 12 mil, but nominally 20 mil in width. The TS voltage will be fused to 1A on the power line. The GLV voltage will be fused to 2A and its traces will be 50 mil in width and 2 oz per square foot in thickness, able to handle 2.3A of current due to the 2A max current draw of the TSAL.
+All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A, while all PCB traces will be a minimum of 12 mil, but nominally 20 mil in width. The TS voltage will be fused to \hl{50mA}. The GLV voltage will be fused to \hl{.25A on the supply line for the digital isolator and 1.25A on the power line for the TSAL with traces of at least 60 mil}, able to handle \hl{1.5A} of current due to the \hl{1.2A} max current draw of the TSAL.
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 The TSAL will be mounted to the underside of the highest point of the main roll hoop, per EV 4.12.3 and 4.12.4 using a robust 3D printed (Kevlar reinforced Nylon) bracket integrating the light and necessary wiring. This enclosure has not been designed yet. The PCB will be located in the master switch panel enclosure.
 
-%Need to add rendering here
-
 \begin{figure}[H]
-
 \centering
 \includegraphics[scale=1]{TSAL_mounting.png}
 \caption{CAD rendering of TSAL position under apex of main roll hoop}
@@ -507,21 +520,21 @@ The TSMPs and GLVS ground measurement points are located on the master switch pa
 \label{fig:TSMP_schematic}
 \end{figure}
 
-There are three measurement points: TS+, TS-, and GLVS chassis ground. The TSMP connections will protected with 50k$\Omega$ current-limiting resistors. These resistors limit the maximum fault current (a short circuit between the measurement points) to below 0.01A, which is below the level that is harmful to a human.
+There are \hl{four} measurement points: HV+, HV-, \hl{GLVS+}, and GLVS chassis ground. The HV TSMP connections will protected with \hl{10k$\Omega$} current-limiting resistors. These resistors limit the maximum fault current (a short circuit between the measurement points) in accordance with EV4.4.6. 
 
 \begin{align*}
 V = I * R \\
-300V = I * 100,000 \Omega \\
-I = 0.003A
+300V = I * 20,000\Omega \\
+I = 0.015A
 \end{align*}
 
 \begin{align*}
 P = I * V \\
-P = 0.003A * 300V \\
-P = 0.9W
+P = 0.015A * 300V \\
+P = 4.5W
 \end{align*}
 
-According to the above calculations, the resistors will have to be rated to at least 1W and 300V. We will be using Panasonic ERG-1SJ513 51k 1W resistors. The datasheets for the resistors, the connectors, and an example multimeter can be found in \fref{sec:appendix_TSMP}.
+According to the above calculations, the resistors will have to be rated to at least \hl{5W} and 300V. We will be using \hl{Vishay PAC500001002FAC000 10k 5W} resistors. The datasheets for the resistors, the connectors, and an example multimeter can be found in \fref{sec:appendix_TSMP}.
 
 The TSMPs are protected with current-limiting resistors because protecting the wires with fuses introduces the failure mode in which one of the fuses has blown, and a measurement across the TSMPs shows an open circuit even though the tractive system is still energized. 
 
@@ -533,12 +546,12 @@ The TSMPs will be located in the master switch panel enclosure shown in \fref{fi
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=1]{render_not_available.png}
-\caption{CAD rendering of the master switch panel showing TS and GLVS master switches, and TS and GLVS ground measurement points}
+\includegraphics[scale=1]{MSP_Box_Angle}
+\caption{CAD rendering of the master switch panel showing TS and GLVS master switches, and TS and GLVS ground measurement points. \hl{This current render has the enclosure protruding from the chassis envelope, but the enclosures team is currently redesigning the face of the master switch panel to be flush with the chassis members.}}
 \label{fig:master_switch_panel}
 \end{figure}
 
-
+ 
 \subsection{Pre-Charge circuitry}\label{pre_charge_circuitry}
 \subsubsection{Description}
 %Describe your concept of the pre-charge circuitry.
@@ -603,14 +616,7 @@ In order to prevent inrush current that could damage the motor controller or AIR
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
-The pre-charge circuit will be located within the accumulator. 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=1]{render_not_available.png}
-    \caption{CAD rendering of the position of the pre-charge circuit in the accumulator.}
-\end{figure}
-
+The pre-charge circuit will be located within the accumulator. \hlr{The precharge circuitry will be located on the AIR control PCB in the top section of the accumulator, as described in section }\ref{accumulator_mechanical_configuration}.
 
 \subsection{Discharge circuitry}\label{discharge_circuitry}
 \subsubsection{Description}
@@ -629,7 +635,7 @@ Since the power resistor limits the current on the discharge circuit, a fuse is 
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.7 \textwidth]{Discharge.png}
-    \caption{Schematic of the discharge system}
+    \caption{Schematic of the discharge system\hlr{. The wiring for the TSMPs, TSAL power, and E-meter connections are also visible.}}
     \label{discharge_schem}
 \end{figure}
 
@@ -663,6 +669,37 @@ Since the power resistor limits the current on the discharge circuit, a fuse is 
 		\label{dctable}
 	\end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.7 \textwidth]{discharge_pcb}
+    \caption{\hlr{Render of the discharge circuit PCB. The discharge resistor is a TO-247 package mounted to a heatsink. }}
+    \label{discharge_pcb}
+\end{figure}
+
+\hl{As shown in figure {\ref{discharge_pcb}} the discharge resistor is mounted to an Ohmite RA-T2X-25E heatsink. Figure {\ref{discharge_heat}} shows the modeled temperature of the discharge resistor under the maximum continuous discharge current for 15 seconds. This temperature curve was computed using the equation,}
+
+\begin{equation}
+    \Delta T = \frac{(P_{in} - P_{out}) \Delta t}{m*C_p}
+\end{equation}
+
+\hl{Where $P_{out}$ is the power dissapation of the heatsink given by, }
+
+\begin{equation}
+    P_{out} = \frac{1}{R_{therm}}(T-T_{amb}),
+\end{equation}
+
+\hl{$P_{in}$ is the power generated by the resistor, $\Delta t$ is the time step of the simulation, $m$ is the mass of the heatsink in kg, $C_p$ is the specific heat of aluminum, $R_{therm}$ is the thermal resistance of the heatsink under natural convection in $\frac{\degree C}{W}$, $T$ is the temperature of the heatsink, and $T_{amb}$ is the temperature of the ambient air. }
+
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.7 \textwidth]{discharge_heat}
+    \caption{\hlr{Model of discharge resistor temperature under maximum continuous discharge current for 15 seconds.}}
+    \label{discharge_heat}
+\end{figure}
+
 
 
 \subsubsection{Position in car}
@@ -693,12 +730,20 @@ The HVD is in series with the negative pole of the tractive system, on the vehic
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 The HVD is mounted at the rear of the vehicle, on the rear-facing side of the energy meter enclosure, however this enclosure is yet to be designed. It is bright orange, and will be clearly marked and easily accessible from the rear of the vehicle. In accordance with EV 4.7.1, the HVD will be mounted more than 350mm from the ground.  
 
-%TODO add render and positioning info
 \begin{figure}[H]
 \centering
-\includegraphics[width=.75\textwidth]{hvd.png}
+\includegraphics[width=.75\textwidth]{EnergyMeterBackISO}
 \caption{The HVD's location in the car.}
 \label{fig:hvd}
+\end{figure}
+
+\hlr{As seen in} \fref{fig:hvd_side}\hl{, the HVD mounting on the energy meter enclosure is currently in violation of EV4.2.1. This is not a final configuration, and the enclosures team is currently redesigning this enclosure and its mounting to move the HVD entirely within the chassis envelope.}
+
+ \begin{figure}[H]
+\centering
+\includegraphics[width=.75\textwidth]{EnergyMeterBackOfCar}
+\caption{\hlr{a side view of the HVD mounting, showing protrusion from the chassis envelope. This is a temporary state, and will not be reflected in final design}}
+\label{fig:hvd_side}
 \end{figure}
 
 
@@ -768,8 +813,8 @@ Since we are using proprietary cells, we are not allowed to publish the complete
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{accumulator_hero.png}
-\caption{Render of the accumulator with one panel removed to show cell arrangement.}
+\includegraphics[width=1\textwidth]{accumulator_front}
+\caption{\hl{Render of the accumulator with one panel removed to show cell arrangement.}}
 \label{fig:accumulator_hero}
 \end{figure}
 
@@ -813,26 +858,18 @@ The P2.7 pouch cells are connected in six segments of 12 cells in series, for a 
 \label{fig:cell_configuration_schematic}
 \end{figure}
 
-To connect the cells into segments, they are stacked on one another with 1mm 6061 aluminum heat sinks and neoprene compression foam to distribute load, as shown in \fref{fig:cell_stack}. The cells are alternated in polarity for easy tab connection. Data on the foam can be found in the appendix, in section \ref{appendix_accumulator_cell_configuration}.
+To connect the cells into segments, they are stacked on one another with 1mm 6061 aluminum heat sinks and neoprene compression foam to distribute load. The cells are alternated in polarity for easy tab connection. Data on the foam can be found in the appendix, in section \ref{appendix_accumulator_cell_configuration}.
+
+\hl{Individual cells are connected by squeezing their tabs together with bolted copper plates. Voltage sensing is done using wires connected to these plates. Each bolted plate assembly is isolated with a 3d-printed cover. This cover protects each terminal from shorts during assembly and maintenance. Each cover is retained with a zip-tie. This is a safer assembly technique than welding the cell tabs together, and allows for replacement of damaged cells if necessary.} 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{accumulator_cross_section}
-\caption{Cross section of the segment cell stacks showing the layers of foam and aluminum heat sink between the cells for heat dissipation}
-\label{fig:cell_stack}
-\end{figure}
-
-To connect the cell tabs, a mounting plate is placed over the alternating cells, as seen in \fref{fig:cell_tabs}, and a clamping plate with wedge-shaped protrusions aligned with the tabs is fastened over the top of the mounting plate, pressing the tabs together to form an electrical connection. This is a safer assembly technique than welding the cell tabs together, and allows for replacement of damaged cells if necessary. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.6\textwidth]{accumulator_tabs.png}
-\caption{Render of the cell mounting plate showing cell tabs protruding through clamping holes.}
+\includegraphics[width=1\textwidth]{module_iso_method_2}
+\caption{\hl{Single segment of 12 cells with 3d-printed covers over clamped cell tabs.}}
 \label{fig:cell_tabs}
 \end{figure}
 
 In between the segments, there will be a 4AWG jumper made of the vehicle's HV cable, with a 1-position connector on each end. These will be on the tops of the cell segments, and will be easily removable, so as to act as the manual service disconnects between segments. We are currently in communication with sales representatives from Amphenol about an appropriate connector for our application, and we are considering the Radlok connector system, seen in \fref{fig:radlok}.
-
 
 \begin{figure}[H]
 \centering
@@ -845,12 +882,12 @@ In between the segments, there will be a 4AWG jumper made of the vehicle's HV ca
 \subsubsection{Cell temperature monitoring}\label{accumulator_cell_temperature_monitoring}
 %Describe how the temperature of the cells is monitored, where the temperature sensors are placed, how many cells are monitored, etc. Show schematics, cover additional parts, etc.
 
-In compliance with EV3.6.3 and EV3.6.6 the temperature of every cell will be measured within 10cm of the negative terminal. We will achieve this by gluing an NTC thermistor to the insulated section of the negative terminal of each cell, as close as possible to the body of the cell. The thermistors will be electrically isolated from the terminal by the insulating foil of the cell, and the temperature measurement will most closely approximate the internal temperature of the electrode by being close to the body of the cell. 
+In compliance with EV3.6.3 and EV3.6.6 the temperature of every cell will be measured within \hlr{10mm} of the negative terminal. We will achieve this by \hl{epoxying} an NTC thermistor to the insulated section of the negative terminal of each cell, as close as possible to the body of the cell. The thermistors will be electrically isolated from the terminal by the insulating foil of the cell, and the temperature measurement will most closely approximate the internal temperature of the electrode by being close to the body of the cell. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{accumulator_temp_sense}
-    \caption{Approximate positioning of the thermistors (seen here with red and black leads) relative to the cells}
+    \includegraphics[width=1\textwidth]{thermistor}
+    \caption{\hl{Approximate positioning of the thermistors (seen here with red and black leads) relative to the cells}}
     \label{fig:cell_temp_monitor}
 \end{figure}
 
@@ -883,11 +920,23 @@ The maximum cell operating temperature is 45 \textdegree C. Our thermistors are 
 %-	Describe how the BMS is able to open the AIRs if any error is detected
 %-	Describe where galvanic isolation occurs between TS and GLV system connections.
 
-Each segment of the accumulator will be montitored and controlled for faults by its own distributed battery management system, which in turn communicates with a central master BMS that calculates state of charge, state of health, and monitors power consumption. In the case of a critical fault, the distributed segment BMS will send error messages over CAN to the master BMS, which has a relay that can open the shutdown circuit. In order to ensure that all segments remain in working order, the master BMS will employ a software watchdog timer, which will shut down the car if it fails to receive communication of nominal operation from each segment after a period of time. 
+Each segment of the accumulator will be monitored and controlled for faults by its own distributed battery management system, which in turn communicates with a central master BMS that calculates state of charge, state of health, and monitors power consumption. In the case of a critical fault, the distributed segment BMS will send error messages over CAN to the master BMS, which has a relay that can open the shutdown circuit. In order to ensure that all segments remain in working order, the master BMS will employ a software watchdog timer, which will shut down the car if it fails to receive communication of nominal operation from each segment after a period of time. 
 
-The distributed BMS is connected to the negative terminal of each cell in the segment by a small custom PCB containing a PTC fuse for sense wire protection, which will be riveted to a copper tab that is compressed into the cell terminal by the segment clamping plate (see section \ref{accumulator_cell_configuration}).
+The distributed segment BMS is implemented using the Linear Technology LTC6804-1, which communicates over a daisy-chain-able galvanically-isolated SPI interface called isoSPI. The LTC6804 is capable of measuring the voltages of up to 12 lithium-ion batteries, and is also capable of measuring up to 16 analog inputs with its analog multiplexer. We are using the analog inputs to measure cell temperatures as referenced in section \ref{accumulator_cell_temperature_monitoring}. The LTC6804 datasheet can be found in the appendix under section \ref{appendix_accumulator_temperature}. 
 
-The distributed segment BMS is implemented using the Linear Technology LTC6804-1, which communicates over a daisy-chainable galvanically-isolated SPI interface called isoSPI. The LTC6804 is capable of measuring the voltages of up to 12 lithium-ion batteries, and is also capable of measuring up to 16 analog inputs with its analog multiplexer. We are using the analog inputs to measure cell temperatures as referenced in section \ref{accumulator_cell_temperature_monitoring}. The LTC6804 datasheet can be found in the appendix under section \ref{appendix_accumulator_temperature}. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{BMS_slave_iso}
+    \caption{\hl{Render of the LTC6804-1 based distributed segment BMS.}}
+    \label{fig:BMS_slave_iso}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{BMS_slave_2D}
+    \caption{\hl{Two dimensional view of distributed segment BMS.}}
+    \label{fig:BMS_slave_2D}
+\end{figure}
 
 Communication wiring between the distributed segment BMS boards and the master BMS is achieved in a daisy chain via isoSPI, which terminates on the master BMS with an isoSPI interpreting ICs. The communication wiring will be properly retained to maintain spacing of 30mm from any TS voltage. 
 
@@ -905,7 +954,7 @@ The Accumulator Indicator Light (AIL) will be powered directly by the TS voltage
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.4]{AIL}
+\includegraphics[scale=.3]{AIL.png}
 \caption{Schematic for the AIL}
 \label{fig:AILcircuit}
 \end{figure}
@@ -1055,9 +1104,35 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 	
 	
 
-\subsubsection{Mechanical Configuration/materials}
+\subsubsection{Mechanical Configuration/materials}\label{accumulator_mechanical_configuration}
 %Describe the concept of the container, show how the cells are mounted, use CAD-Renderings, show data regarding materials used, etc.
-Currently in intensive mechanical design. 
+
+
+\hl{The main structure of the accumulator container is made from .050" 430 stainless steel sheet. The front, left, right, and bottom walls are made from one folded sheet. The rear wall is made from another folded sheet. Inside are six segments of 12 cells. The segments are separated by internal vertical walls. The internal vertical walls are made from 20ga (.0359") 430 stainless steel sheet. The internal vertical walls are attached to the bottom wall with spot welds. The internal vertical walls are attached to the external vertical walls with spot welds. All walls are internally lined with a sheet of garolite to provide insulation.}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{accumulator}
+\caption{\hl{Isometric render of the fully assembled accumulator. }}
+\label{fig:accumulator}
+\end{figure}
+
+\hl{The cells we are using must be compressed on their large face to within the manufacturer recommended range (4-18psi). We are considering two methods of cell compression. In the first, the cells are compressed between  two aluminum face sheets by threaded rods. 4 threaded rods are used to compress each segment. In the second method, the threaded rods are replaced by aluminum end caps that set the distance between the aluminum face sheets. In both methods, cell compression pressure will be set by imposing a strain on the stack. The materials will be characterized and the necessary strain will be applied such that the cells remain in the specified pressure range. Each compressed segment is individually installed into the accumulator, then the rear wall is attached.}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{cell_stack}
+\caption{Configuration of cell modules, with dividing walls.}
+\label{fig:cell_stack}
+\end{figure}
+
+
+\hl{Individual cells are connected by squeezing their tabs together with bolted copper plates. Voltage sensing is done using wires connected to these plates. Each bolted plate assembly is isolated with a 3d-printed cover. This cover protects each terminal from shorts during assembly and maintenance. Each cover is retained with a zip-tie. Thermistors are epoxied to the negative terminal of all cells for temperature monitoring.
+
+The Accumulator Interrupt Relays, Main Pack Fuse, Battery Management System, Service Disconnects, and other related electronics are located in the top section of the accumulator. This section is separated from the lower section by a .050" 430 stainless sheet that is insulated on both sides by 1/32" garolite. The divider is fastened with 18 1/4"-20 grade 5 fasteners. The top section is closed with a lid similar to the divider. It is attached to the side walls with an identical fastener pattern.
+
+All structural fasteners are secured with nylok nuts. The nylok nuts are all located outside the accumulator container. All insulating garolite is epoxied to the surface it insulates.}
+
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.  Ensure that the required mechanical structure to protect the accumulator and other electrical components is clearly identified.
@@ -1065,12 +1140,12 @@ Currently in intensive mechanical design.
 \begin{figure}[H]
 	\centering  % this centers the image
 	
-	\includegraphics[width=0.6\textwidth]{accumulator.png}
+	\includegraphics[width=1\textwidth]{acc_in_frame}
     %\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
 	
-	\caption{The CAD for the accumulator}
+	\caption{\hl{Position of the accumulator in the frame.}}
 	
-	\label{fig:accumulator_cad}
+	\label{fig:acc_in_frame}
 \end{figure}
 
 \subsection{Accumulator pack 2}\label{accumulator_pack_2}
@@ -1084,7 +1159,27 @@ The vehicle's energy meter is mounted in a dedicated tractive system enclosure a
 \subsection{Wiring, cables, current calculations, connectors}
 %Describe the wiring, show schematics, provide calculations for currents and voltages, and show data regarding the cables and connectors used.
 
-The energy meter current calculations require it to be connected in series with the low pole of the tractive system. It is bolted onto custom-made copper bus bars with serrated fasteners to ensure electrical connection. Voltage measurement connections to TS+ for the energy meter, and connections for the TSAL fuses and TSMP current-limiting resistors are made via ring terminals to the corresponding bus bars. The wires for the TSMPs, the TSAL, and the energy meter will all be 20AWG rated to 300V and 90\textdegree C. The energy meter itself also requires GLVS power, which means that proper HV wire spacing of 30mm will be upheld. 
+The energy meter current calculations require it to be connected in series with the low pole of the tractive system. It is bolted onto custom-made copper bus bars with \hlr{serrated, distorted-thread locking }fasteners to ensure electrical connection, \hlr{which can be seen in }\fref{fig:energy_meter_internals}. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{EnergyMeterExposedInternalsCovered}
+\caption{\hlr{Rendering of the internal geometry of the energy meter enclosure. The energy meter itself is visible in red. The blue solids are insulating covers to separate the individual HV bus bars from one another and to protect the LV energy meter circuitry at the base of the enclosure. See }\fref{fig:energy_meter_mounting_render}\hlr{ for a render of the enclosure in the vehicle}}
+\label{fig:energy_meter_internals}
+\end{figure}
+
+\Fref{fig:energy_meter_internals_enclosure} \hlr{shows the internals of the energy meter enclosure from another angle, also including the housing. Internal covers are removed to show bus bar geometry. Bus bars will be wrapped in Kapton polyimide tape with a protective heat-shrink sleeve.}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{EnergyMeterInternalsNoCovers}
+\caption{\hlr{Rendering of the energy meter enclosure showing the housing. Internal bus bar covers have been hidden to show bus bar structure.}}
+\label{fig:energy_meter_internals_enclosure}
+\end{figure}
+
+Voltage measurement connections to TS+ for the energy meter, and connections for the TSAL fuses and TSMP current-limiting resistors are made via ring terminals to the corresponding bus bars. The wires for the TSMPs, the TSAL, and the energy meter will all be 20AWG rated to 300V and 90\textdegree C. The energy meter itself also requires GLVS power, which means that proper HV wire spacing of 30mm will be upheld. 
+
+
 
 \begin{figure}[H]
 \centering
@@ -1093,7 +1188,7 @@ The energy meter current calculations require it to be connected in series with 
 \label{fig:energy_meter_schematic}
 \end{figure}
 
-\Fref{fig:energy_meter_schematic} shows the internals of the energy meter box. The GLVS connector contains the shutdown circuit power for the discharge circuit, the interlock from the HVD, and GLVS power for the energy meter. The high voltage low power connector contains TSMP and TSAL high voltage connections to the master switch panel. High power connections are shown in orange.
+\Fref{fig:energy_meter_schematic} shows the internals of the energy meter box \hlr{in electrical schematic form}. The GLVS connector contains the shutdown circuit power for the discharge circuit, the interlock from the HVD, and GLVS power for the energy meter. The high voltage low power connector contains TSMP and TSAL high voltage connections to the master switch panel. High power connections are shown in orange.
 
 The energy meter TS+ connection and the TSAL TS+ measurement wire share the same fused connection, and the TSAL TS- measurement wire has its own fuse. The fuse specifications can be found in \fref{tab:TSAL_and_EM_fuse}. The datasheet for the fuse can be found in \fref{tab:TSAL_and_EM_fuse}.
 
@@ -1118,7 +1213,7 @@ The energy meter housing is mounted to the chassis at the rear of the vehicle, i
 
 \begin{figure}
 \centering
-\includegraphics[width=0.5\textwidth]{render_not_available.png}
+\includegraphics[width=0.5\textwidth]{EnergyMeterBackISO}
 \caption{Render of the rear of the vehicle showing the mounting for the energy meter enclosure at the rear of the vehicle}
 \label{fig:energy_meter_mounting_render}
 \end{figure}
@@ -1172,7 +1267,7 @@ The PM100DX has five high voltage connections (DC+, DC-, Phase A, Phase B, Phase
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=1]{render_not_available.png}
+    \includegraphics[scale=1]{MotorController3-1-17.png}
     \caption{CAD rendering of Motor Controller position}
     \label{mc_cad}
 \end{figure}
@@ -1232,7 +1327,14 @@ Originally designed for aviation use, this out-runner motor delivers remarkable 
     \label{motor_motortomcwire}
 \end{table}
 
-Since the motor leads terminate close to the motor with ring terminals close to the motor as seen in figure \ref{motor_pic}, the motor will have a 3D printed enclosure around the leads, with a high power connector found \href{http://www.te.com/usa-en/product-2141230-2.html}{here.}
+Since the motor leads terminate close to the motor with ring terminals close to the motor as seen in figure \ref{motor_pic}, the motor will have a 3D printed enclosure around the leads, with a high power connector found \href{http://www.te.com/usa-en/product-2141230-2.html}{here.} \hlr{A CAD render of the motor lead enclosure can be found in }\fref{fig:motor_enclosure}. \hlr{HV and LV segments are separated by a 3D printed wall with an extension designed to protect the LV rotary encoder wires from the motor from HV connections. HV connections will be shielded and double-insulated, so the plastic serves to keep the wires from interfering, not to provide insulation.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{MotorBoxAssemblyRender2}
+    \caption{\hlr{CAD render of 3D printed motor enclosure. HV and LV segments of the enclosure are separated by a PLA wall.}}
+    \label{fig:motor_enclosure}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -1299,7 +1401,7 @@ Two rotary potentiometers are mechanically housed in one unit from Active Sensor
 \subsection{Torque Encoder Plausibility Check}\label{torque_encoder_plausibility_check}
 %Describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how failures (e.g. Implausibility, short circuit or open circuit or equivalent) are detected and how the system reacts if an implausibility or errors is detected.
 
-Two potentiometers are mounted on the torque pedal. A CAN node probes the voltage dividers which are amplified in different transfer functions using a Texas Instruments Operational Amplifier, part number LMV341QDCKRQ1. One transfer function amplifies the voltage of one potentiometer by a factor of two and the other amplifies the voltage from the potentiometer by a factor of one half. The ATmega will compare the two independent voltages and if an implausibility occurs, a difference in voltage from the Torque Encoder besides what is expected from the transfer function, and persists for more than 100msecc, the power to the motor(s) must be immediately shut down completely. If a short circuit or wiring failure with either potentiometer occurs, the input will be outside the normal operating range, and the power to the motor controllers will be shut down. The node will log the error in the CAN bus. There will also be a Pegasus Brake light pressure switch (part number 3601, recommended by Formula Hybrid) on the brakes, wired to a CAN node with 22 gauge wire. If the pressure switch indicates actuation of the brake and the potentiometers measure more than 25 percent pedal travel, the power to the motors will be completely stopped until the accelerator pedal indicates less than 5 percent pedal travel. 
+Two potentiometers are mounted on the torque pedal. A CAN node probes the voltage dividers which are amplified in different transfer functions using a Texas Instruments Operational Amplifier, part number LMV341QDCKRQ1. One transfer function amplifies the voltage of one potentiometer by a factor of two and the other amplifies the voltage from the potentiometer by a factor of one half. The ATmega will compare the two independent voltages and if an implausibility occurs, a difference in voltage from the Torque Encoder besides what is expected from the transfer function, and persists for more than 100msec, the power to the motor(s) must be immediately shut down completely. If a short circuit or wiring failure with either potentiometer occurs, the input will be outside the normal operating range, and the power to the motor controllers will be shut down. \hlr{The normal operating range for the throttle inputs will be from 0.5V to 4.5V on the analog line with a gain of 2, and from 2 to 3 volts on the analog line with a gain of 1/2. Upon detecting an implausibility, the ATmega16m1 ADC will trigger an interrupt that the input voltage is outside the defined range, and a software timer will begin. If the software timer reaches 100 msec before the input voltage triggers a "return to normal range" interrupt, then the APPS will trigger a motor shutdown over CAN.} The node will log the error in the CAN bus. There will also be a Pegasus Brake light pressure switch (part number 3601, recommended by Formula Hybrid) on the brakes, wired to a CAN node with 22 gauge wire. If the pressure switch indicates actuation of the brake and the \hlr{accelerator pedal position sensor} measures more than 25 percent pedal travel, the power to the motors will be completely stopped until the accelerator pedal indicates less than 5 percent pedal travel. 
 
 \subsection{Wiring}
 %Describe the wiring, show schematics, show data regarding the cables and connectors used.
@@ -1362,7 +1464,7 @@ The vehicle's steel chassis is uses as GLVS ground. This ground will be establis
 %Describe which measurements you will take to ensure that EV4.3 is achieved
 All conductive components within 100 mm of any Tractive System or GLVS component will be measured by Kelvin ohmmeter to have a resistance of less them 300 m$\omega$ to chassis ground, measured at the chassis ground measurement point on the master switch panel. All fastened mechanical components and enclosures will be individually measured to ensure proper ground connection. Chassis ground continuity will be tested during and after assembly to ensure complete coverage. Any carbon fiber components will be exhaustively measured to ensure resistance compliance.
 
-\section{Firewall(s)}\label{firewalls}c
+\section{Firewall(s)}\label{firewalls}
 \subsection{Firewall 1}\label{firewall_1}
 \subsubsection{Description/materials}
 %Describe the concept, layer structure and the materials used for the firewall. Show how the low resistance Control System ground connection is achieved.
@@ -1413,6 +1515,7 @@ We only have one firewall, described in \ref{firewall_1}.
 
 \href{http://www.bender-us.com/documents/IR155-10_datasheet_NAE1012821.pdf}{Full IMD datasheet here.}
 
+
 \setcounter{subsubsection}{5}
 \subsubsection{Shutdown System Interlocks}\label{sec:appendix_interlocks}
 \hlr{Referred from section} \ref{shutdown_system_interlocks}.
@@ -1436,13 +1539,31 @@ We only have one firewall, described in \ref{firewall_1}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{TSMP_resistor_ratings}
-	\caption{Ratings for Panasonic ERG series resistors. The TSMP resistors are ERG-1SJ513, shown in the second row}
+	\caption{Ratings for Vishay PAC series resistors. The TSMP resistors are PAC05 (PAC500001002FAC000), shown in the fifth row}
 \end{figure}
 \href{https://www.gossenmetrawatt.com/resources/tt/hit27/db_gb.pdf}{Example multimeter for TS measurement. Link to datasheet.}
-\href{http://media.digikey.com/pdf/Data%20Sheets/Panasonic%20Resistors%20Thermistors%20PDFs/ERX_GxS_F_Series.pdf}{Complete datasheet for TSMP current limiting resistors.}
+\href{http://www.vishay.com/docs/28731/pacserie.pdf}{Complete datasheet for TSMP current limiting resistors.}
 \href{http://www.mouser.com/ds/2/159/D72930_02_10_06-21562.pdf}{Datasheet for TSMP banana jack connectors here.}
 
-\setcounter{subsubsection}{10}
+\setcounter{subsubsection}{9}
+\subsubsection{Discharge circuitry}\label{appendix_discharge}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{discharge_res_table}
+    \caption{\hlr{Ratings for Ohmite AP101 series resistors. The discharge resistor is AP101 3K J}}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{discharge_heatsink_table}
+    \caption{\hlr{Ratings for Ohmite F and R series heatsinks. The discharge resistor heatsink is RA-T2X-25E, shown in the first row.}}
+\end{figure}
+
+\href{http://www.ohmite.com/cat/acl_ap101.pdf}{\hlr{Complete datasheet for discharge resistor.}}
+\href{http://www.ohmite.com/cat/sink_f_r.pdf}{\hlr{Complete datasheet for discharge resistor heatsink.}}
+
+
+
 \subsubsection{HV Disconnect (HVD)}\label{appendix_hvd}
 \hlr{Referred from section} \ref{hv_disconnect}.
 
