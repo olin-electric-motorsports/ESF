@@ -320,7 +320,7 @@ The IMD latch shown in \fref{fig:IMDLatch_Schematic} uses the signal from the IM
 %Position in car
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 
-The IMD will be located inside the accumulator, as shown in \fref{fig:accumulator_cad}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
+The IMD will be located inside the accumulator, as shown in \fref{fig:accumulator_hero}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
 
 \subsection{Inertia Switch}\label{inertia_switch}
 \subsubsection{Description (type, operation parameters)}
@@ -421,7 +421,7 @@ Similarly to the IMD latch, the BMS latch will be housed in the accumulator, and
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-The IMD, IMD latch, and the BMS are in the accumulator, as shown in \fref{fig:accumulator_cad}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD, which is located in the accumulator for continual monitoring of pack isolation while the accumulator is removed for charging. 
+The IMD, IMD latch, and the BMS are in the accumulator, as shown in \fref{fig:accumulator_hero}. BMS is positioned there for ease of access to the battery, and the IMD latch is positioned there in order to be close to the IMD, which is located in the accumulator for continual monitoring of pack isolation while the accumulator is removed for charging. 
 
 \subsection{Shutdown System Interlocks}\label{shutdown_system_interlocks}
 \subsubsection{Description/circuitry}
@@ -454,12 +454,12 @@ Interlocks are built in to each HV connector. The connectors are panel-mounted t
 
 \begin{figure}[H]
 \centering
-\includegraphics[width = .75\textwidth]{hvd.png}
+\includegraphics[width = .75\textwidth]{EnergyMeterBackISO}
 \caption{Render of the rear of the vehicle showing location of HV connectors. \hlr{Connectors are highlighted in orange.} }
 \label{fig:rear_of_car}
 \end{figure}
 
-\subsection{Tractive system active light}\label{EnergyMeterBackISO}
+\subsection{Tractive system active light}\label{tractive_system_active_light}
 \subsubsection{Description/circuitry}
 %Describe the tractive system active light and additional circuitry.
 The TSAL illuminates when the tractive system is active, which is defined as the tractive system voltage being over 60V.
@@ -524,11 +524,11 @@ The TSMPs and GLVS ground measurement points are located on the master switch pa
 \label{fig:TSMP_schematic}
 \end{figure}
 
-There are four measurement points: HV+, HV-, GLVS+, and GLVS chassis ground. The HV TSMP connections will protected with 10k$\Omega$ current-limiting resistors. These resistors limit the maximum fault current (a short circuit between the measurement points) in accordance with EV4.4.6. 
+There are \hl{four} measurement points: HV+, HV-, \hl{GLVS+}, and GLVS chassis ground. The HV TSMP connections will protected with \hl{10k$\Omega$} current-limiting resistors. These resistors limit the maximum fault current (a short circuit between the measurement points) in accordance with EV4.4.6. 
 
 \begin{align*}
 V = I * R \\
-300V = I * 20,000 \Omega \\
+300V = I * 20,000\Omega \\
 I = 0.015A
 \end{align*}
 
@@ -538,7 +538,7 @@ P = 0.015A * 300V \\
 P = 4.5W
 \end{align*}
 
-According to the above calculations, the resistors will have to be rated to at least 5W and 300V. We will be using Vishay PAC500001002FAC000 10k 5W resistors. The datasheets for the resistors, the connectors, and an example multimeter can be found in \fref{sec:appendix_TSMP}.
+According to the above calculations, the resistors will have to be rated to at least \hl{5W} and 300V. We will be using \hl{Vishay PAC500001002FAC000 10k 5W} resistors. The datasheets for the resistors, the connectors, and an example multimeter can be found in \fref{sec:appendix_TSMP}.
 
 The TSMPs are protected with current-limiting resistors because protecting the wires with fuses introduces the failure mode in which one of the fuses has blown, and a measurement across the TSMPs shows an open circuit even though the tractive system is still energized. 
 
@@ -741,7 +741,7 @@ The HVD is mounted at the rear of the vehicle, on the rear-facing side of the en
 \label{fig:hvd}
 \end{figure}
 
-\hlr{As seen in }\fref{fig:hvd_side}\hlr{, the HVD mounting on the energy meter enclosure is currently in violation of EV4.2.1. This is not a final configuration, and the enclosures team is currently redesigning this enclosure and its mounting to move the HVD entirely within the chassis envelope.}
+\hlr{As seen in} \fref{fig:hvd_side}\hl{, the HVD mounting on the energy meter enclosure is currently in violation of EV4.2.1. This is not a final configuration, and the enclosures team is currently redesigning this enclosure and its mounting to move the HVD entirely within the chassis envelope.}
 
  \begin{figure}[H]
 \centering
