@@ -469,9 +469,9 @@ The TSAL illuminates when the tractive system is active, which is defined as the
 	    \begin{tabular}{|l|l|}
 	    \hline
 	    Supply voltage: & 12V \\ \hline
-	    Max. operational current: &  1.2A\\ \hline
+	    Max. operational current: &  \hl{1.2A}\\ \hline
 	    Lamp type: & LEDs \\ \hline
-	    Power consumption: & 14.4W (max)\\ \hline
+	    Power consumption: & \hl{14.4W (max)}\\ \hline
 	    Brightness: & Unknown\\ \hline
 	    Frequency: & 2 Hz \\ \hline
 	    Size (length x height x width): & 41x41x32 mm \\ \hline
@@ -484,7 +484,7 @@ See the appendix \hyperlink{TSALdatasheet}{here} for a link to the TSAL Datashee
 
 \subsubsection{Wiring/cables/connectors}
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  Include gauge, voltage and temperature rating of wiring used and any fuses or other overcurrent protection used.
-The circuitry designed has a TS-controlled digital isolator whose power is supplied by the TS through two linear voltage regulators. When the TS is over 60V, a voltage divider with resistors of 30.1K and 1.91K causes the digital isolator to go logic high which allows the down regulated GLV to switch on the MOSFET allowing current to flow through the TSAL low side drive. The frequency of the TSAL will be controlled by built in settings to flash at 2Hz. See \fref{fig:TSALcircuit} for a schematic diagram of the TSAL circuit.
+\hl{The circuitry designed has a TS-controlled digital isolator whose power is supplied by the TS through two linear voltage regulators. When the TS is over 60V, a voltage divider with resistors of 30.1K and 1.91K causes the digital isolator to go logic high which allows the down regulated GLV to switch on the MOSFET allowing current to flow through the TSAL low side drive.} The frequency of the TSAL will be controlled by built in settings to flash at 2Hz. See \fref{fig:TSALcircuit} for a schematic diagram of the TSAL circuit.
 
 \begin{figure}[H]
 \centering
@@ -493,7 +493,7 @@ The circuitry designed has a TS-controlled digital isolator whose power is suppl
 \label{fig:TSALcircuit}
 \end{figure}
 
-All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A, while all PCB traces will be a minimum of 12 mil, but nominally 20 mil in width. The TS voltage will be fused to 50mA. The GLV voltage will be fused to .25A on the supply line for the digital isolator and 1.25A on the power line for the TSAL with traces of at least 60 mil, able to handle 1.5A of current due to the 1.2A max current draw of the TSAL.
+All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A, while all PCB traces will be a minimum of 12 mil, but nominally 20 mil in width. The TS voltage will be fused to \hl{50mA}. The GLV voltage will be fused to \hl{.25A on the supply line for the digital isolator and 1.25A on the power line for the TSAL with traces of at least 60 mil}, able to handle \hl{1.5A} of current due to the \hl{1.2A} max current draw of the TSAL.
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
