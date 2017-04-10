@@ -492,6 +492,15 @@ See the appendix \hyperlink{TSALdatasheet}{here} for a link to the TSAL Datashee
 \label{fig:TSALcircuit}
 \end{figure}
 
+\hl{Per EV4.1.7, the HV and LV sides of the TSAL board are separated by at least 12.7 mm (1/2 in). See} \fref{fig:TSALspacing} \hl{for an image of the PCB layout.}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.7]{TSALspacing.png}
+\caption{\hl{Spacing for the TSAL}}
+\label{fig:TSALspacing}
+\end{figure}
+
 All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A, while all PCB traces will be a minimum of 12 mil, but nominally 20 mil in width. The TS voltage will be fused to \hl{50mA}. The GLV voltage will be fused to \hl{.25A on the supply line for the digital isolator and 1.25A on the power line for the TSAL with traces of at least 60 mil}, able to handle \hl{1.5A} of current due to the \hl{1.2A} max current draw of the TSAL.
 
 \subsubsection{Position in car}
