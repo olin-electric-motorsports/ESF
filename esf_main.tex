@@ -439,7 +439,7 @@ The IMD, IMD latch, and the BMS are in the accumulator, as shown in \fref{fig:ac
 \subsubsection{Description/circuitry}
 %Describe the concept and circuitry of the Shutdown System Interlocks.
 %Note: Interlocks are circuits used to open the shutdown circuit if a connector is disconnected or enclosure is opened.  This is not the entire shutdown circuit.
-The vehicle's tractive system connectors are all lever action locking connectors from the TE Connectivity HVP 800 series. Their arrangement in the tractive system can be seen in \fref{fig:HV_connector_diagram}. These connectors can be removed without tools. In compliance with EV 3.3.6, these connectors all contain an interlock that opens the shutdown circuit when they are not installed. 
+The vehicle's tractive system connectors are all lever action locking connectors from the TE Connectivity HVP 800 series. Their arrangement in the tractive system can be seen in \fref{fig:HV_connector_diagram}. These connectors can be removed without tools. In compliance with EV 3.3.6, \hl{the accumulator connector and HVD contain an interlock that opens the shutdown circuit when they are not installed.} 
 
   \begin{figure}[H]
         \centering
@@ -448,7 +448,7 @@ The vehicle's tractive system connectors are all lever action locking connectors
         \label{fig:HV_connector_diagram}
   \end{figure}
 
-In order to close the shutdown circuit during charging when the accumulator is removed from the vehicle, a connection must be made that overrides the interlocks in the HV connectors that remain with the vehicle. Our solution is a shunt in the LV charging connector that bypasses the circuit that normally connects to the energy meter, HVD, and motor connector interlocks. The main accumulator connector interlock is still required to close the shutdown circuit, so EV 3.3.6 compliance is maintained. A schematic of this interlock circuitry can be seen in \fref{fig:HV_connector_schematic}.
+In order to close the shutdown circuit during charging when the accumulator is removed from the vehicle, a connection must be made that overrides the interlocks in the HV connectors that remain with the vehicle. Our solution is a shunt in the LV charging connector that bypasses the circuit that normally connects \hl{HVD interlock}. The main accumulator connector interlock is still required to close the shutdown circuit, so EV 3.3.6 compliance is maintained. A schematic of this interlock circuitry can be seen in \fref{fig:HV_connector_schematic}.
 
 \begin{figure}[H]
 \centering
@@ -462,7 +462,7 @@ In order to close the shutdown circuit during charging when the accumulator is r
 The shutdown circuit interlock wires will be 20 or 22 AWG and rated to over 300V and 90\textdegree C and are protected by the main shutdown circuit breaker as in \fref{sec:shutdown_wiring}. 
 
 \subsubsection{Position in car}
-Interlocks are built in to each HV connector. The connectors are panel-mounted to the accumulator housing, the energy meter housing, and the motor housing. See the render of the rear of the car in \fref{fig:rear_of_car}.
+\hl{The accumulator connector is panel-mounted to the accumulator housing. The HVD is mounted on the energy meter enclosure, and is clearly visible from the rear of the vehicle.} See the render of the rear of the car in \fref{fig:rear_of_car}.
 
 \begin{figure}[H]
 \centering
@@ -507,9 +507,11 @@ See the appendix \hyperlink{TSALdatasheet}{here} for a link to the TSAL Datashee
 
 All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A, while all PCB traces will be a minimum of 12 mil, but nominally 20 mil in width. The TS voltage will be fused to \hl{50mA}. The GLV voltage will be fused to \hl{.25A on the supply line for the digital isolator and 1.25A on the power line for the TSAL with traces of at least 60 mil}, able to handle \hl{1.5A} of current due to the \hl{1.2A} max current draw of the TSAL.
 
+\hl{As seen in figure {\ref{fig:TS_block_diagram}}, the HV fuses for the TSAL are located in the energy meter enclosure, datasheet located in section {\ref{appendix_energy_meter_mounting}}. The HV wires from the energy meter enclosure to the master switch panel enclosure are shielded and covered in orange cable wrap, datasheet located in section {\ref{sec:appendix_TSAL}}}. 
+
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
-The TSAL will be mounted to the underside of the highest point of the main roll hoop, per EV 4.12.3 and 4.12.4 using a robust 3D printed (Kevlar reinforced Nylon) bracket integrating the light and necessary wiring. This enclosure has not been designed yet. The PCB will be located in the master switch panel enclosure.
+The TSAL will be mounted to the underside of the highest point of the main roll hoop, per EV 4.12.3 and 4.12.4 using a \hl{welded mount}. The PCB will be located in the master switch panel enclosure.
 
 \begin{figure}[H]
 \centering
@@ -552,6 +554,8 @@ According to the above calculations, the resistors will have to be rated to at l
 The TSMPs are protected with current-limiting resistors because protecting the wires with fuses introduces the failure mode in which one of the fuses has blown, and a measurement across the TSMPs shows an open circuit even though the tractive system is still energized. 
 
 In case of gross operator error that results in connecting a multimeter from a TS measurement point to the GLVS ground measurement point, the IMD will detect a loss of isolation and open the shutdown circuit. 
+
+\hl{As seen in figure {\ref{fig:TS_block_diagram}}, the current limiting resistors are located in the energy meter enclosure. The HV wires from the energy meter enclosure to the master switch panel enclosure are shielded and covered in orange cable wrap, datasheet located in section {\ref{sec:appendix_TSAL}}}.
 
 \subsubsection{Position in car}
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
@@ -1557,11 +1561,20 @@ We only have one firewall, described in \ref{firewall_1}.
 \end{figure}
 \href{http://www.te.com/content/dam/te-com/documents/hybrid-and-electric-mobility-solutions/global/8-1773462-1-hvp-800.pdf}{TE HVP 800 complete Datasheet}
 
-\hypertarget{TSALdatasheet}{}
+\hypertarget{TSALdatasheet}{}\label{sec:appendix_TSAL}
 \subsubsection{Tractive System Active Light}
 \hlr{Referred from section }\ref{tractive_system_active_light}.
 
 \href{https://d114hh0cykhyb0.cloudfront.net/pdfs/MSTRB-X-X+Mini+Strobe+LED.pdf}{TSAL Datasheet here.}
+
+\begin{figure}[H]
+    \includegraphics[width=0.7\textwidth]{44A1121_wire_datasheet.png}
+    \caption{\hl{Ratings for wire used for TS connections to TSAL circuitry, TE part number 44A1121-20-0/9-9-US.}}
+    \label{fig:HV_low_current_wire_ratings}
+\end{figure}
+\href{http://www.mouser.com/ds/2/418/NG_CD_44A112X_G1-689824.pdf}{\hl{TE 44A1121-20-0/9-9-US Shielded Multi-Conductor Wire complete Datasheet}}
+
+\hl{This wire is also referenced in the TSMP section {\ref{measurement_points}}. }
 
 \subsubsection{Measurement points (TSMPs)}\label{sec:appendix_TSMP}
 \hlr{Referred from section }\ref{measurement_points}.
@@ -1680,7 +1693,7 @@ Charger Information Page
 \href{http://pdf1.alldatasheet.com/datasheet-pdf/view/826351/OMRON/G9EJ-1-E.html}{Omron G9EJ-1-E Relay Datasheet}
 
 \subsection{Energy Meter Mounting}\label{appendix_energy_meter_mounting}
-\hlr{Referred from sections {\ref{imd}} and {\ref{energy_meter_mounting}}.}
+\hlr{Referred from sections {\ref{imd}}, {\ref{tractive_system_active_light}}, and {\ref{energy_meter_mounting}}.}
 
 \begin{figure} [H]
 	\centering  % this centers the image	
