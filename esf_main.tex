@@ -613,7 +613,7 @@ In order to prevent inrush current that could damage the motor controller or AIR
 	    Voltage rating & 700 V \\ \hline
 	    Cross-sectional area of wire used & 0.83mm$^2$ (18 AWG)\\ \hline
 	    \end{tabular}
-	    \caption{General data of pre-charge resistor}
+	    \caption{General data of pre-charge resistor. \hl{See the datasheet in appendix section }\ref{appendix_precharge}.}
 	    \label{prechargeresistor}
 	\end{table}
 
@@ -627,7 +627,7 @@ In order to prevent inrush current that could damage the motor controller or AIR
 	    Voltage rating & 300VDC \\ \hline
 	    Cross-sectional area of wire used & 0.83mm$^2$ (18 AWG) \\ \hline
 	    \end{tabular}
-	    \caption{General data of the pre-charge relay}
+	    \caption{General data of the pre-charge relay \hl{See the datasheet in appendix section }\ref{appendix_precharge}.}
 	    \label{PCrelay}
 	\end{table}
 
@@ -701,7 +701,7 @@ Since the power resistor limits the current on the discharge circuit, a fuse is 
     \label{discharge_pcb}
 \end{figure}
 
-\hl{As shown in figure {\ref{discharge_pcb}} the discharge resistor is mounted to an Ohmite RA-T2X-25E heatsink. Figure {\ref{discharge_heat}} shows the modeled temperature of the discharge resistor under the maximum continuous discharge current for 15 seconds. This temperature curve was computed using the equation,}
+\hl{As shown in figure {\ref{discharge_pcb}} the discharge resistor is mounted to an Ohmite RA-T2X-51E heatsink. Figure {\ref{discharge_heat}} shows the modeled temperature of the discharge resistor under the maximum continuous discharge current for 15 seconds. This temperature curve was computed using the equation,}
 
 \begin{equation}
     \Delta T = \frac{(P_{in} - P_{out}) \Delta t}{m*C_p}
@@ -764,7 +764,7 @@ The HVD is mounted at the rear of the vehicle, on the rear-facing side of the en
 
 \hlr{As seen in} \fref{fig:hvd_side}\hl{, the HVD mounting on the energy meter enclosure is currently in violation of EV4.2.1. This is not a final configuration, and the enclosures team is currently redesigning this enclosure and its mounting to move the HVD entirely within the chassis envelope.}
 
- \begin{figure}[H]
+\begin{figure}[H]
 \centering
 \includegraphics[width=.75\textwidth]{EnergyMeterBackOfCar}
 \caption{\hlr{a side view of the HVD mounting, showing protrusion from the chassis envelope. This is a temporary state, and will not be reflected in final design}}
@@ -1595,8 +1595,28 @@ We only have one firewall, described in \ref{firewall_1}.
 \href{http://www.vishay.com/docs/28731/pacserie.pdf}{Complete datasheet for TSMP current limiting resistors.}
 \href{http://www.mouser.com/ds/2/159/D72930_02_10_06-21562.pdf}{Datasheet for TSMP banana jack connectors here.}
 
-\setcounter{subsubsection}{9}
+\setcounter{subsubsection}{8}
+\subsubsection{Precharge circuitry}\label{appendix_precharge}
+\hl{Referred from section }\ref{pre_charge_circuitry}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{PF2470_datasheet.png}
+    \caption{\hlr{Ratings for Riedon PF2470 series power resistors}}
+\end{figure}
+\href{http://riedon.com/media/pdf/PF2470.pdf}{\hl{PF2470 datasheet here.}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{G2RL_datasheet.png}
+    \caption{\hlr{Ratings for Omron G2RL series}}
+\end{figure}
+\href{http://www.mouser.com/ds/2/307/en-g2rl-472571.pdf}{\hl{Omron G2RL Relay complete datasheet}}
+
+\hl{See {\ref{appendix_discharge}} for Ohmite F and R series heatsinks. The precharge heat sink is a RA-T2X-25E, shown in the first row. }
+
 \subsubsection{Discharge circuitry}\label{appendix_discharge}
+\hl{Referred from section }\ref{discharge_circuitry}
 
 \begin{figure}[H]
     \centering
@@ -1606,7 +1626,7 @@ We only have one firewall, described in \ref{firewall_1}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{discharge_heatsink_table}
-    \caption{\hlr{Ratings for Ohmite F and R series heatsinks. The discharge resistor heatsink is RA-T2X-25E, shown in the first row.}}
+    \caption{\hl{Ratings for Ohmite F and R series heatsinks. The discharge resistor heatsink is RA-T2X-51E, shown in the third row.}}
 \end{figure}
 
 \href{http://www.ohmite.com/cat/acl_ap101.pdf}{\hlr{Complete datasheet for discharge resistor.}}
