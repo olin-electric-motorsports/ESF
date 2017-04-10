@@ -950,16 +950,17 @@ The BMS reacts to critical low voltage of 2.8012V by shutting down the vehicle. 
 
 \subsubsection{Accumulator indicator}\label{accumulator_indicator}
 %Describe the indicator, show wiring, provide tables with operation, PCB design, etc.
-The Accumulator Indicator Light (AIL) will be powered directly by the TS voltage using two Zener diodes which will allow enough current to flow through the AIL to turn it on when the supply exceeds 60V. This PCB has not been designed yet but the general schematic can be seen below in \fref{fig:AILcircuit}. \\
+The Accumulator Indicator Light (AIL) will be powered directly by the TS voltage using \hl{a linear voltage regulator, a Zener diode and a voltage divider to switch the AIL low-side drive MOSFET. When the TS voltage reaches 60V the Zener diode will allow current to flow through the voltage divider triggering the gate of the MOSFET. The AIL has been specified to only need 2mA because the maximum output current of the linear regulator is 10mA. See} \fref{fig:AILcircuit} \hl{for a schematic diagram of the TSAL circuit.}
+\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.3]{AIL.png}
+\includegraphics[scale=.8]{AIL.png}
 \caption{Schematic for the AIL}
 \label{fig:AILcircuit}
 \end{figure}
 
-The AIL will be located on the AIR control board PCB, fused to 1A, and have traces of 20 mil, which are rated for 1.4A. All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A.
+The AIL will be located on the \hl{pre-charge} PCB, fused to \hl{3.15A}, and have traces of \hl{25} mil. All connections made by wires will be 20 AWG rated for 600V, 125°C and 7A.
 
 
 \subsubsection{Wiring, cables, current calculations, connectors}\label{accumulator_wiring}
