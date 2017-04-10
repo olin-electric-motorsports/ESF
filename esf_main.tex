@@ -694,6 +694,8 @@ Since the power resistor limits the current on the discharge circuit, a fuse is 
 		\label{dctable}
 	\end{table}
 
+\hl{The discharge relay is identical to the relay used for pre-charge and detailed in table {\ref{PCrelay}}. Note, as this is a SPDT relay, we can configure it to be normally open for pre-charge, and normally closed for discharge.}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.7 \textwidth]{discharge_pcb}
@@ -707,7 +709,7 @@ Since the power resistor limits the current on the discharge circuit, a fuse is 
     \Delta T = \frac{(P_{in} - P_{out}) \Delta t}{m*C_p}
 \end{equation}
 
-\hl{Where $P_{out}$ is the power dissapation of the heatsink given by, }
+\hl{Where $P_{out}$ is the power dissipation of the heatsink given by, }
 
 \begin{equation}
     P_{out} = \frac{1}{R_{therm}}(T-T_{amb}),
