@@ -373,7 +373,7 @@ The schematic can be seen in \fref{fig:bspd_schematic}. \\
 	    \begin{tabular}{|l|l|}
 	    \hline
 	    Brake sensor used: & Pegasus Brake Light switch, part 3601 \\ \hline
-	    Torque encoder used: &  Active Sensors MHR5621\\ \hline
+	    Torque encoder used: &  \hl{Magni-Tec} MHR5621\\ \hline
 	    Supply voltages: & 5V \\ \hline
 	    Maximum supply currents: & 15 mA\\ \hline
 	    Operating temperature: & -55 to 150\degree C \\ \hline
@@ -1381,14 +1381,14 @@ We only have one motor, described in \ref{motor_1}.
 \subsection{Description/additional circuitry}
 %Describe the type of the torque encoder(s) used, provide tables with main operation parameters, and describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how the system reacts if an implausibility or error (e.g. short circuit or open circuit or equivalent) is detected.
 
-Two rotary potentiometers are mechanically housed in one unit from Active Sensors (P/N MHR5621) and mounted to the rotating shaft of the throttle pedal assembly. The use of a single housing eliminates concerns regarding mechanical backlash and misalignment. Each output from the potentiometers will go to a CAN connected ATmega16M1, which will compare the two outputs and send a message via CAN bus to the motor controllers with the requested torque.
+Two \hl{hall-effect-based rotary encoders} are mechanically housed in one unit, \hl{the Magni-Tec MHR5261, which is} mounted to the rotating shaft of the throttle pedal assembly. The use of a single housing eliminates concerns regarding mechanical backlash and misalignment. \hl{See section {\ref{appendix_torque_encoder}} for datasheet.} Each output from \hl{the encoders} will \hl{be measured by a} CAN-connected ATmega16M1, which will compare the two outputs and send a message via CAN bus to the motor controllers with the requested torque.
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|l|}
 	\hline
-	Torque encoder manufacturer and type: & MHR5621 from Active Sensors \\ \hline
-	Torque encoder principle & Potentiometer \\ \hline
+	Torque encoder manufacturer and type: & \hl{Magni-Tec MHR5621} \\ \hline
+	Torque encoder principle & \hl{Hall-effect-based voltage source} \\ \hline
 	Supply voltage & 5V \\ \hline
 	Maximum supply current & 15 mA \\ \hline
 	Operating temperature & -55 to 150\degree C \\ \hline
@@ -1401,7 +1401,9 @@ Two rotary potentiometers are mechanically housed in one unit from Active Sensor
 \subsection{Torque Encoder Plausibility Check}\label{torque_encoder_plausibility_check}
 %Describe additional circuitry used to check or manipulate the signal going to the motor controller. Describe how failures (e.g. Implausibility, short circuit or open circuit or equivalent) are detected and how the system reacts if an implausibility or errors is detected.
 
-Two potentiometers are mounted on the torque pedal. A CAN node probes the voltage dividers which are amplified in different transfer functions using a Texas Instruments Operational Amplifier, part number LMV341QDCKRQ1. One transfer function amplifies the voltage of one potentiometer by a factor of two and the other amplifies the voltage from the potentiometer by a factor of one half. The ATmega will compare the two independent voltages and if an implausibility occurs, a difference in voltage from the Torque Encoder besides what is expected from the transfer function, and persists for more than 100msec, the power to the motor(s) must be immediately shut down completely. If a short circuit or wiring failure with either potentiometer occurs, the input will be outside the normal operating range, and the power to the motor controllers will be shut down. \hlr{The normal operating range for the throttle inputs will be from 0.5V to 4.5V on the analog line with a gain of 2, and from 2 to 3 volts on the analog line with a gain of 1/2. Upon detecting an implausibility, the ATmega16m1 ADC will trigger an interrupt that the input voltage is outside the defined range, and a software timer will begin. If the software timer reaches 100 msec before the input voltage triggers a "return to normal range" interrupt, then the APPS will trigger a motor shutdown over CAN.} The node will log the error in the CAN bus. There will also be a Pegasus Brake light pressure switch (part number 3601, recommended by Formula Hybrid) on the brakes, wired to a CAN node with 22 gauge wire. If the pressure switch indicates actuation of the brake and the \hlr{accelerator pedal position sensor} measures more than 25 percent pedal travel, the power to the motors will be completely stopped until the accelerator pedal indicates less than 5 percent pedal travel. 
+Two \hl{rotary encoders} are mounted on the torque pedal. A CAN node probes the voltage dividers which are amplified in different transfer functions using a Texas Instruments Operational Amplifier, part number LMV341QDCKRQ1. One \hl{op-amp} amplifies the voltage of one \hl{encoder} by a factor of two and the other amplifies the voltage from the \hl{other encoder} by a factor of one half. The ATmega will compare the two independent voltages and if an implausibility occurs, a difference in voltage from the Torque Encoder besides what is expected from the transfer function, and persists for more than 100msec, the power to the motor(s) must be immediately shut down completely. If a short circuit or wiring failure with either potentiometer occurs, the input will be outside the normal operating range, and the power to the motor controllers will be shut down. \hlr{The normal operating range for the throttle inputs will be from 0.5V to 4.5V on the analog line with a gain of 2, and from 2 to 3 volts on the analog line with a gain of 1/2. Upon detecting an implausibility, the ATmega16m1 ADC will trigger an interrupt that the input voltage is outside the defined range, and a software timer will begin. If the software timer reaches 100 msec before the input voltage triggers a "return to normal range" interrupt, then the APPS will trigger a motor shutdown over CAN.} The node will log the error in the CAN bus. There will also be a Pegasus Brake light pressure switch (part number 3601, recommended by Formula Hybrid) on the brakes, wired to a CAN node with 22 gauge wire. If the pressure switch indicates actuation of the brake and the \hlr{accelerator pedal position sensor} measures more than 25 percent pedal travel, the power to the motors will be completely stopped until the accelerator pedal indicates less than 5 percent pedal travel. 
+
+\hl{In addition to the torque encoder plausibility check in the ATmega software, we also implement a CAN message timeout in the motor controller for stale throttle signals. If the motor does not receive a CAN message from the throttle CAN node for 300 ms (a parameter in the motor controller configuration) it will stop power to the motors. See appendix section {\ref{appendix_torque_encoder}} for PM100DX motor controller datasheet excerpt.} 
 
 \subsection{Wiring}
 %Describe the wiring, show schematics, show data regarding the cables and connectors used.
@@ -1640,6 +1642,27 @@ Charger Information Page
 
 \href{http://www.littelfuse.com/~/media/c635bf51279f4ef6bedee5deb356e102.ashx}{Littelfuse 808 Series datasheet.}
 
+\setcounter{subsection}{6}
+\subsection{Torque Encoder}\label{appendix_torque_encoder}
+\hl{Referred from section }\ref{torque_encoder}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{MHR5600_electrical_specifications.png}
+    \caption{\hl{Electrical specifications for Magni-Tec MHR5600-series rotary encoders}}
+    \label{fig:mhr5600_series}
+\end{figure}
+
+\href{http://www.magni-tec.com/datasheet/WS-MHR5600.pdf}{\hl{Magni-Tec MHR5600 Series datasheet.}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{RMS_CAN_timeout.png}
+    \caption{\hl{CAN Timeout parameter for RMS PM100DX motor controller}}
+    \label{fig:RMS_CAN_timeout}
+\end{figure}
+
+\href{https://app.box.com/s/4fb49r9p6lzfz4uwcb5izkxpcwh768vc}{\hl{Rinehart Motion Systems CAN protocol datasheet.}}
 
 \end{document}
 
