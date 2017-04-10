@@ -254,7 +254,7 @@ The shutdown circuit is wired between enclosures through waterproof TE Ampseal a
 \subsection{IMD}\label{imd}
 \subsubsection{Description (type, operation parameters)}%TODO
 
-The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it detects an isolation fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an Atmega on the AIR control board. The status of the shutdown circuit is monitored by the MSP board. If the MSP board detects the relay is  open it activates the IMD light. The IMD has a start up time of $\leq$ 2s. Further information on the IMD can be found in the appendix, section \ref{IMD_datasheet}.
+The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high and only low if it detects an isolation fault. The output is then sent to the IMD latch board, where it is powers a SPST-NO relay which closes a switch in the shutdown circuit. The output of the IMD is also monitored directly by an ATmega on the AIR control board. \hl{The status of the IMD is also monitored by the BMS master, which sends messages to the dashboard over CAN to toggle the IMD light.} The IMD has a start up time of $\leq$ 2s. Further information on the IMD can be found in the appendix, section \ref{IMD_datasheet}.
 
 
 
@@ -294,19 +294,14 @@ The IMD used will be a Bender A-ISOMETER IR155-3204. The output is normally high
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring including wire gauge/temp/voltage rating and fuses protecting the wiring.
 %TODO 
 
-The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. \hlr{It connects to the IMD latch using 5-pin Molex LLC 1722861105 connectors. The signal is also sent to the accumulator interface board using the same type of connectors. The 18 AWG wire is more than sufficient for 150mA current draw of the IMD. The 18 AWG ribbon cable has a cross sectional area of .83mm$^2$, and is rated for at least 90\textdegree C, 300 V, and 16 amps.} There is a 1 amp fuse protecting the high voltage wiring of the IMD, which is the same as the TSAL fuse in section \ref{tractive_system_active_light}. % I don't know the details of the fuse, but it is mentioned in both last year's ESF and in the ESF writing guide. It is visible in some of the plans for the electrical system. I need to know where I can find the details. Last year it was a 1 amp fuse, but it might be different this year. I am writing 1 amp for now, but it needs to be confirmed.
-
-
+The  IMD uses the TYCO-MICRO MATE-N-LOK 1 x 2-1445088-8 connector and it's mate. \hlr{It connects to the IMD latch using 5-pin Molex LLC 1722861105 connectors. The signal is also sent to the BMS Master. The 18 AWG wire is more than sufficient for 150mA current draw of the IMD. The 18 AWG wire has a cross sectional area of 0.83mm$^2$, and is rated for at least 90\textdegree C, 300 V, and 16 amps. The HV wires to the IMD are protected by 3.15A fuses located on the pre-charge board. These fuses are identical to the fuses used to protect the TSAL, located in the energy meter enclosure documented in section {\ref{energy_meter_mounting}}. The datasheet can be found in section {\ref{appendix_energy_meter_mounting}}. The pre-charge board, seen to the left of the IMD in figure {\ref{fig:accumulator_top_view}}, is connected to TS+ and TS- (on the car side of the AIRs), as well as BAT+. It passes fused TS+ and TS- to the IMD. } 
 
 
 \begin{figure} [!ht]
-	\centering  % this centers the image
-	
-	\includegraphics[width=0.6\textwidth]{IMD_Latch_Rev2_AltiumSchematic.PNG}
+	\centering 
+	\includegraphics[width=1\textwidth]{IMD_Latch_Rev2_AltiumSchematic.PNG}
 	\captionsetup{margin={0.3\textwidth,0.3\textwidth}}
-	
 	\caption{\hlr{The schematic for the IMD Latch.}}
-	
 	\label{fig:IMDLatch_Schematic}
 \end{figure}
 
@@ -315,11 +310,19 @@ The IMD latch shown in \fref{fig:IMDLatch_Schematic} uses the signal from the IM
 
 
 \subsubsection*{2.2.3 Position in car}
-%TODO
 %Position in car
 %Provide CAD-renderings showing the relevant parts. Mark the parts in the rendering, if necessary.
 
-The IMD will be located inside the accumulator, as shown in \fref{fig:accumulator_hero}. This is a convenient location for the IMD as high voltage sensing lines must already be present here for the TSMP’s.
+The IMD will be located inside the accumulator, as shown in \fref{fig:accumulator_top_view}. \hl{It is located in the accumulator for continual monitoring of pack isolation while the accumulator is removed for charging.}
+
+\begin{figure}[H]
+    \centering 
+    \includegraphics[width=1\textwidth]{Accum_top_view.jpg}
+    \captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+    \caption{\hlr{View of the top of the accumulator}}
+    \label{fig:accumulator_top_view}
+\end{figure}
+
 
 \subsection{Inertia Switch}\label{inertia_switch}
 \subsubsection{Description (type, operation parameters)}
@@ -362,9 +365,11 @@ The Sensata Resettable crash sensor (6-11g version) will trigger due to an impac
 
 The Brake System Plausibility Device (BSPD) is a custom circuit designed to open a relay in the shutdown circuit if the brakes are being pressed while there is positive-current being delivered to the motors for more than 0.5 seconds. The custom circuit takes in two digital signals, the brake signal and a boolean yes/no whether or not positive-current is being delivered to the motor. The positive-current will be sensed with our BMS using a hall-effect current sensor and a comparator which will output high when positive-current is being delivered to the motors. \\
 
+\hl{The BMS uses a LEM HO 50-S hall effect current sensor. With our nominal pack voltage of 237.6V, it switches at 21A or 5kW to comply with EV5.6. As can be seen in the datasheet, which can be found in section {\ref{appendix_bspd}}, the sensor has a sensitivity of 16 mV/A. Figure {\ref{fig:bms_current_sense_schematic}} shows the circuit on the BMS, which amplifies the signal relative to the hall effect reference voltage with a gain of 2. Therefore, the threshold for 5kW of output power is at 672mV. This signal is compared to a voltage divider of a 100k resistor and a 14.3k resistor. With our VCC at 5V, this voltage divider outputs a value of 626mV, which sets the comparator to trigger high at a comfortable margin below the 5kW threshold.}\\
+
 There are two main sections to the circuit: the timing section and the latching section. The timing section consists of a 555-timer in monostable mode which is configured to be powered from the output of an AND-gate which takes in both the brake signal and the positive-current signal. This 555-timer will output a high pulse if the AND gate outputs a high voltage for more than 0.5 seconds. \\
 
-The latching section of the circuit is a simple SR-latch, which will hold the relay open when tripped by the timing section. It will remain in this state until a reset signal is given, which will be from an ATmega. This reset signal will only be done when the GLV system is first powered on, thus making it non-driver resettable. \\
+The latching section of the circuit is a simple SR-latch, which will hold the relay open when tripped by the timing section. \hl{The relay is held open until power is reset. Shortly after the circuit is powered, the 1G123 monostable multivibrator outputs a 1ms long pulse to set the latch, and close the shutdown circuit.} \\
 
 The schematic can be seen in \fref{fig:bspd_schematic}. \\
 
@@ -391,9 +396,16 @@ The output of the BSPD circuit will low-side drive a relay in series with the sh
 
   \begin{figure}[H]
         \centering
-        \includegraphics[width= .6\textheight]{bspd_schematic.png}
-        \caption{Schematic for BSPD circuit}
+        \includegraphics[width=\textwidth]{bspd_schematic_rev2.png}
+        \caption{\hl{Schematic for BSPD circuit}}
         \label{fig:bspd_schematic}
+  \end{figure}
+
+  \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{BMS_current_sense_schematic.png}
+        \caption{\hl{Schematic for BMS current sensing circuit}}
+        \label{fig:bms_current_sense_schematic}
   \end{figure}
 
 \subsubsection{Position in car/mechanical fastening/mechanical connection}
@@ -407,14 +419,15 @@ This board is located in the bulkhead enclosure at the front of the car.
 
 Resetting the IMD latch, which is shown in \fref{fig:IMDLatch_Schematic} , requires restarting the GLV system. Restarting the GLV system will cause the IMD latch to send a pulse. If the output of the IMD is high because there is no ground fault, the pulse from the GLV activation will close the secondary relay, which allows the signal from the IMD to close the shutdown circuit.\\
 
-The BMS is latched with identical circuitry to the IMD, as shown in \fref{fig:IMDLatch_Schematic}, and is also reset by a GLVS power cycle. The BMS latch circuitry, however, will be on the master BMS PCB in the accumulator, and will control a separate on-board relay to open the shutdown circuit. In the case that the BMS detects a fault in cell temperature or voltage that requires a vehicle shutdown, the ATmega16m1 on the board will pull the BMS latch output pin low, latching the BMS latch circuit into a low state and opening the shutdown circuit. The master BMS will also serve as a CAN network monitor, and if another node in the vehicle detects a fault condition that requires vehicle shutdown that is not rules-required to be analog circuity, that node will send a shutdown message to the master BMS that will open the shutdown circuit. 
+\hl{The BMS master controls a normally open relay on the shutdown circuit. In the case that the BMS detects a fault in cell temperature or voltage that requires a vehicle shutdown, the ATmega16m1 on the board opens the relay, and does not close the relay until it power cycled. Essentially, the BMS master is programmed to close its relay only once per power cycle. The master BMS will also serve as a CAN network monitor, and if another node in the vehicle detects a fault condition that requires vehicle shutdown that is not rules-required to be analog circuity, that node will send a shutdown message to the master BMS that will open the shutdown circuit. }
 
 \subsubsection{Wiring/cables/connectors}
 %TODO
 %Describe wiring, show schematics, describe connectors and cables used and show useful data regarding the wiring.  If not detailed in section 2.1, be sure to show how the device opens the shutdown circuit.
 The IMD latch will be connected to the accumulator interface board board via a \hlr{5-pin Molex LLC Ultrafit 1722861105 with 18 AWG wire, and the IMD connector using another 5-pin Molex LLC Ultrafit of the same type. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for at least 90\textdegree C, 300 V, and 16 amps.} This provides a considerable safety margin. The ribbon cable carries signals from the IMD. 18 AWG wire is used for the shutdown circuit and to supply power and ground to the IMD latch. The 18 AWG wire has a cross sectional area of .83mm$^2$, and is rated for 16 amps for chassis wiring and 2.3 amps for power transmission. The 18 wire will be rated for at least 90\textdegree C and 300~V, as required by the rules for wiring in the accumulator (see EV3.3.8 and EV4.5.4).\\
 
-Similarly to the IMD latch, the BMS latch will be housed in the accumulator, and thus all of the shutdown circuit connections to and from it will be made with 18AWG wire rated to over 300V and 90\textdegree C in order to handle the maximum of 8A inrush current to the AIRs and maintain compliance with accumulator wiring regulations. PCB traces will also be appropriately sized to handle 8A peak current. 
+
+Similarly to the IMD latch, the BMS will be housed in the accumulator, and thus all of the shutdown circuit connections to and from it will be made with 18AWG wire rated to over 300V and 90\textdegree C in order to handle the maximum of \hl{5A} inrush current to the AIRs and maintain compliance with accumulator wiring regulations. PCB traces will also be appropriately sized to handle \hl{5A} peak current. 
 % connects to IMD through either accumulator interface or AIR control.
 
 
@@ -1515,6 +1528,20 @@ We only have one firewall, described in \ref{firewall_1}.
 
 \href{http://www.bender-us.com/documents/IR155-10_datasheet_NAE1012821.pdf}{Full IMD datasheet here.}
 
+\setcounter{subsubsection}{3}
+\subsubsection{BSPD}\label{appendix_bspd}
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=\textwidth]{current_sensor_datasheet.png}
+    \captionsetup{margin={0.3\textwidth,0.3\textwidth}}
+    \caption{\hl{Current sensor sensitivity from datasheet}}
+    \label{fig:current_sensor_datasheet}
+\end{figure}
+
+\href{http://www.lem.com/docs/products/ho_50_250-s-0100_series.pdf}{\hl{LEM HO-S series datasheet.}}
+
+\hl{Referred from Section} \ref{brake_plausibility_device}.
 
 \setcounter{subsubsection}{5}
 \subsubsection{Shutdown System Interlocks}\label{sec:appendix_interlocks}
@@ -1629,7 +1656,7 @@ Charger Information Page
 \end{figure}
 
 \subsection{Energy Meter Mounting}\label{appendix_energy_meter_mounting}
-\hlr{Referred from section }\ref{energy_meter_mounting}.
+\hlr{Referred from sections {\ref{imd}} and {\ref{energy_meter_mounting}}.}
 
 \begin{figure} [H]
 	\centering  % this centers the image	
