@@ -1086,19 +1086,21 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 	
 	This CE-Listed charger supplies constant current at 6A until cell voltages reach 4.15V. Then, constant voltage is supplied at 4.15V per cell, summing to 298.8 volts, until the cells are fully charged. The charging power lines are protected via the charger's short-circuit protection, which automatically stops charging if a short-circuit condition occurs.
 	
-	The charger interfaces with the accumulator through a lever action locking connector from TE Connectivity's HVP 800 series (P/Ns 2141227(accumulator side) and 2141154(charger side)). These connectors contain an interlock that opens the shutdown circuit, preventing the AIRS from closing when not engaged to maintain compliance with EV8.3.3. The charger has an interlock function that stops charging when the connector is not engaged, shown in the figure below.
-	
+	The charger interfaces with the accumulator through a lever action locking connector from TE Connectivity's HVP 800 series (P/Ns 2141227(accumulator side) and 2141154(charger side)). These connectors are connected to the charger by 10AWG wires through a charging interlock system that piggy-backs off of the discharge circuit, seen below in \fref{fig:ChargerInterlock}
+
+
 	 \begin{figure}[H]
 		\centering
-		\includegraphics[width = 0.4 \textwidth]{charger_interlock.png}
-		\caption{Charger-Side Interlock}
+		\includegraphics[width = 0.7 \textwidth]{Charging-Interlock.png}
+		\caption{\hl{The charging interlock system, showing fuses and relays for charging the accumulator}}
 		\label{fig:ChargerInterlock}
 	\end{figure}
 	
-	
+    \hl{The charging interlock system consists of two Littelfuse KLKD 10x38 600VDC 8A fuses connected to two Omron G9EJ-1-E 400VDC relays that are powered by the discharge circuit (the end of the accumulator shutdown circuit) mounted inside a protective enclosure on the charging cart. They only allow the charging connector to be energized if the shutdown circuit on the charging cart is closed meaning all of the HV and LV connectors are properly connected. See appendix section {\ref{appendix_accumulator_charger}} for datasheets.}
+ 	
 	The accumulator will only be charged on the charging cart. The cart will be able to support the full weight of the accumulator and only move when a dead man's switch is activated.
 	
-	The accumulator cart will contain a specialized charging circuit that allows the accumulator to be charged through the main pack connector. The charging circuit mimics the shutdown circuit in the vehicle.The charging circuit will contain a clearly labeled emergency stop push button with a minimum diameter of 25mm which opens the AIRS ands stops charging. It will also communicate with the AMS over CAN and display critical information during charging.
+	The accumulator cart will contain a specialized charging circuit that allows the accumulator to be charged through the main pack connector. The charging circuit mimics the shutdown circuit in the vehicle.The charging circuit will contain a clearly labeled emergency stop push button with a minimum diameter of 25mm which opens the AIRS and the charging relays ands stops charging. It will also communicate with the AMS over CAN and display critical information during charging.
 	
 	The AMS will be active during charging and have the ability to open the AIRS and stop charging in the event of dangerous battery conditions.The AMS will communicate with the Charger over CAN and turn off the charger in the event of a fault to maintain compliance with EV8.3.5. 
 	
@@ -1629,6 +1631,18 @@ Charger Information Page
 	\includegraphics[width=\linewidth]{charger_input}
 	\caption{Charger Input and Protection Features} 
 \end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=0.9\linewidth]{Littelfuse_KLKD.png}
+    \caption{Charging protection fuse datasheet overview} 
+\end{figure}
+\href{http://www.littelfuse.com/~/media/electrical/datasheets/fuses/industrial-and-ul-fuses/littelfuse_fuse_klkd_datasheet.pdf}{\hl{KLKD fuse datasheet}}
+
+\begin{figure}[H]
+    \includegraphics[width=0.9\linewidth]{OmronG9EJ-1-E.png}
+    \caption{Charging interlock relay datasheet overview} 
+\end{figure}
+\href{http://pdf1.alldatasheet.com/datasheet-pdf/view/826351/OMRON/G9EJ-1-E.html}{Omron G9EJ-1-E Relay Datasheet}
 
 \subsection{Energy Meter Mounting}\label{appendix_energy_meter_mounting}
 \hlr{Referred from section }\ref{energy_meter_mounting}.
