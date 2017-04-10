@@ -184,3 +184,6 @@ esf_main.pdf
 
 # For the Elite VIM users
 *.swp
+
+#For OSX
+.DS_Store
