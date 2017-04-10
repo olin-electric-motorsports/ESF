@@ -1082,11 +1082,11 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 		\label{Elcon Battery Charger}
 	\end{figure}
 
-	The charging system consists of two main components:  A charger that connects to the main pack connector and supplies the current needed to charge the accumulator, and a charging circuit that provides power to the AMS, opens the AIRS if the shutdown button is pressed, and displays critical information while charging. 
+	The charging system consists of two main components:  A charger that connects to the main pack connector and supplies the current needed to charge the accumulator, and a charging circuit that provides power to the AMS, opens the AIRS if the shutdown button is pressed, and displays critical information while charging. \hl{The IMD will remain active while the accumulator is charging.}
 	
 	This CE-Listed charger supplies constant current at 6A until cell voltages reach 4.15V. Then, constant voltage is supplied at 4.15V per cell, summing to 298.8 volts, until the cells are fully charged. The charging power lines are protected via the charger's short-circuit protection, which automatically stops charging if a short-circuit condition occurs.
 	
-	The charger interfaces with the accumulator through a lever action locking connector from TE Connectivity's HVP 800 series (P/Ns 2141227(accumulator side) and 2141154(charger side)). These connectors are connected to the charger by 10AWG wires through a charging interlock system that piggy-backs off of the discharge circuit, seen below in \fref{fig:ChargerInterlock}
+	The charger interfaces with the accumulator through a lever action locking connector from TE Connectivity's HVP 800 series (P/Ns 2141227(accumulator side) and 2141154(charger side)). \hl{These connectors are connected to the charger by 10AWG wires through a charging interlock system that piggy-backs off of the discharge circuit, seen below in {\fref{fig:ChargerInterlock}}}
 
 
 	 \begin{figure}[H]
