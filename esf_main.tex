@@ -978,12 +978,12 @@ This wire is used for high power connections in the accumulator. High power conn
     \centering
     \begin{tabular}{|l|l|}
     \hline
-    Wire type & 4 AWG Cable\\ \hline
-    Current rating & 190 A \\ \hline
+    Wire type & \hl{2 AWG shielded cable}\\ \hline
+    Current rating & \hl{255 A} \\ \hline
     Maximum operating voltage & 1 kV \\ \hline
     Temperature rating & -55\degree C to 150\degree C \\ \hline
     \end{tabular}
-    \caption{Wire data of the company: Champlain Cable, EXRAD SAE 150 XLE Shielded Cable}
+    \caption{Wire data of the company: Champlain Cable, \hl{EXRAD SAE 150 XLE Shielded Cable}}
     \label{accumulator_motortomcwire}
 \end{table}
 
@@ -1012,7 +1012,7 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 	    \label{air}
 	\end{table}
 
-\subsubsection{Fusing}
+\subsubsection{Fusing}\label{accumulator_fusing}
 %Describe the fuses used and their main operation parameters, use tables, etc.
 %Additionally, fill out the following table for each fuse type used:
 %TODO
@@ -1022,7 +1022,7 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 	    \begin{tabular}{|l|l|}
 	    \hline
 	        Fuse manufacturer and type: & \begin{tabular}[c]{@{}l@{}}Bussmann,\\ LPJ type\end{tabular} \\ \hline
-	        Continuous current rating & 150 A \\ \hline
+	        Continuous current rating & \hl{200 A} \\ \hline
 	        Maximum operating voltage & 600 V \\ \hline
 	        Type of fuse & Time delay \\ \hline
 	        I2t rating & Not Listed \\ \hline
@@ -1035,24 +1035,22 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 %Create a table with components and wires protected by the fuse(s) and the according continuous current rating, below is an example table with some potential entries.  Complete this table with information for your design and add/remove additional locations as applicable.  Ensure that the rating of all the components is greater than the rating of the fuse such that none of the other components become the fuse.
 
 
-	% \begin{table}[H]
-	% 	\centering
-	% 	\begin{tabular}{|l|l|l|l|l|}
-	% 	    \hline
-	% 	    Location & Wire Size & Wire Ampacity & Fuse type & Fuse rating \\ \hline
-	% 	    \begin{tabular}[c]{@{}l@{}}TS Main fuse (before HVD,\\ on pos pole)\end{tabular} & 2 AWG & 181A & LPJ type & 175A \\ \hline
-	% 	    TS+ to GLV DC-DC converter & 20 AWG & 7A & MIN fuse & 5A \\ \hline
-	% 	    GLV 12V+ & 20 AWG & 7A & MIN fuse & 2A \\ \hline
-	% 	    GLV 12V+ to PCBs & trace width 12mil & 1A & 0zck series & 1A \\ \hline
-	% 	    Shutdown pos pole & 22 AWG & 7A & MIN fuse & 2A \\ \hline
-	% 	    \begin{tabular}[c]{@{}l@{}}TS+ to IMD, TSMPs TSAL's DC-DC\\ converter\end{tabular} & 22 AWG & 7A & ABC fuse & 1A \\ \hline
-	% 	    \begin{tabular}[c]{@{}l@{}}GLV 12V to 5V regulator \\ (CAN system)\end{tabular} & 22 AWG & 7A & ABC fuse & 1A \\ \hline
-	% 	    \begin{tabular}[c]{@{}l@{}}Keyswitch, in parallel with\\ TS voltage\end{tabular} & 18 AWG & 16A & AC fuse & 7A \\ \hline
-	% 	    Cell to BMS x28 & \begin{tabular}[c]{@{}l@{}}PCB\\          trace\end{tabular} & \begin{tabular}[c]{@{}l@{}}Trace\\ ampacity: 7.6 A \\ (open air)\end{tabular} & \begin{tabular}[c]{@{}l@{}}CIQ\\           Fuse x28\end{tabular} & 3A \\ \hline
-	% 	\end{tabular}
-	% 	\caption{Fuse Protection Table TODO:this is just fuses within the accumulator}
-	% 	\label{allfuses}
-	% \end{table}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|l|l|l|l|l|}
+            \hline
+            Location & Wire Size & Wire Ampacity & Fuse type & Fuse rating \\ \hline
+            \begin{tabular}[c]{@{}l@{}}
+
+            \hl{TS Main fuse (before HVD,\\ on pos pole)}\end{tabular} & \hl{2 AWG} & \hl{255A} & \hl{LPJ type} & \hl{200A} \\ \hline
+            \begin{tabular}[c]{@{}l@{}}\hl{TS+ to IMD}\end{tabular} & \hl{22 AWG} & \hl{5A} & \hl{Littelfuse 808} & \hl{3.15A} \\ \hline
+            \hl{Cell to BMS x72} & \begin{tabular}[c]{@{}l@{}}\hl{22AWG}\end{tabular} & \begin{tabular}[c]{@{}l@{}}\end{tabular} & \begin{tabular}[c]{@{}l@{}}\hl{PTC chip\\fuse x72}\end{tabular} & \hl{200mA }\\ \hline
+        \end{tabular}
+        \caption{\hl{Fuse Protection Table}}
+        \label{allfuses}
+    \end{table}
+
+\hl{The Littelfuse 808 protecting the IMD is identical to the Littelfuse 80813150440 that protects the Vicor DC/DC converter. The datasheet can be found in appendix section {\ref{appendix_energy_meter_mounting}}. The PTC fuses datasheet can be found in appendix section {\ref{appendix_accumulator_fusing}}. }
 
 \subsubsection{Charging}\label{accumulator_charging}
 %Describe how the accumulator will be charged. How will the charger be connected? How will the accumulator be supervised during charging? Show schematics, CAD-Renderings, etc., if needed
@@ -1086,7 +1084,7 @@ We will use KILOVAC EV200 contactors as our insulation relays. In compliance wit
 	
 	This CE-Listed charger supplies constant current at 6A until cell voltages reach 4.15V. Then, constant voltage is supplied at 4.15V per cell, summing to 298.8 volts, until the cells are fully charged. The charging power lines are protected via the charger's short-circuit protection, which automatically stops charging if a short-circuit condition occurs.
 	
-	The charger interfaces with the accumulator through a lever action locking connector from TE Connectivity's HVP 800 series (P/Ns 2141227(accumulator side) and 2141154(charger side)). \hl{These connectors are connected to the charger by 10AWG wires through a charging interlock system that piggy-backs off of the discharge circuit, seen below in {\fref{fig:ChargerInterlock}}}
+	The charger interfaces with the accumulator through a lever action locking connector from TE Connectivity's HVP 800 series (P/Ns 2141227(accumulator side) and 2141154(charger side)). \hl{These connectors are connected to the charger by 10AWG wires through a charging interlock system that piggy-backs off of the discharge circuit, seen below in }\fref{fig:ChargerInterlock}.
 
 
 	 \begin{figure}[H]
@@ -1186,7 +1184,7 @@ Voltage measurement connections to TS+ for the energy meter, and connections for
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{Energy-Meter-Schematic-w-HVD.png}
-\caption{Schematic of the internals of the energy meter. Fuses S1 and S2 are Littelfuse 80812000000s, and resistors R1 and R2 are the TSMP resistors from section \ref{measurement_points}.}
+\caption{Schematic of the internals of the energy meter. Fuses S1 and S2 are Littelfuse 80813150440s, and resistors R1 and R2 are the TSMP resistors from section \ref{measurement_points}.}
 \label{fig:energy_meter_schematic}
 \end{figure}
 
@@ -1198,7 +1196,7 @@ The energy meter TS+ connection and the TSAL TS+ measurement wire share the same
 	\centering
 	\begin{tabular}{|l|l|}
 	\hline
-	Fuse manufacturer and type & Littelfuse 80812000000 \\ \hline
+	Fuse manufacturer and type & Littelfuse 80813150440 \\ \hline
 	Continuous current rating & 2.00 A \\ \hline
 	Maximum operating voltage & 450VDC \\ \hline
 	Type of fuse & Fast-acting \\ \hline
@@ -1614,7 +1612,16 @@ For calculation of sound attenuation over distance, see \href{http://www.sengpie
 
 \href{http://cds.linear.com/docs/en/datasheet/680412fc.pdf}{Link to LTC6804 datasheet used for temperature and voltage measurement}
 
-\setcounter{subsubsection}{9}
+\setcounter{subsubsection}{8}
+\subsubsection{Fusing}\label{appendix_accumulator_fusing}
+\hl{Referred from section } \ref{accumulator_fusing}. 
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{0ZCG_fuse_overview.png}
+    \caption{BMS cell line PTC fuse overview.}
+\end{figure}
+\href{http://www.belfuse.com/pdfs/0ZCG.pdf}{0ZCG Series PC Fuse Datasheet}
+
 \subsubsection{Charging}\label{appendix_accumulator_charger}
 \hlr{Referred from section }\ref{accumulator_charging}.
 
@@ -1650,7 +1657,7 @@ Charger Information Page
 \begin{figure} [H]
 	\centering  % this centers the image	
 	\includegraphics[width=\textwidth]{Littelfuse_808_electrical_characteristics.png}
-	\caption{Electrical characteristics snapshot for Littelfuse 808 series fast-acting fuses. The high-voltage low-power fuse we use is the 80812000000.}	
+	\caption{Electrical characteristics snapshot for Littelfuse 808 series fast-acting fuses. The high-voltage low-power fuse we use is the 80813150440.}	
 	\label{fig:littelfuse_808}
 \end{figure}
 
