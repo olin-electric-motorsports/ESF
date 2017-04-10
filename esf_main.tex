@@ -764,12 +764,10 @@ The HVD is mounted at the rear of the vehicle, on the rear-facing side of the en
 \subsubsection{Description}
 %Describe your concept of the RTDS, how is the sound produced, what are the parameters for activating the RTDS, etc.
 The Ready to Drive sound is located as a component of the dashboard subsystem, and contains a buzzer (\href{http://www.mallory-sonalert.com/specifications/STA20502.PDF}{Link: Mallory Sonalert Products Inc. STA20502})\ref{Ready to Drive}. The buzzer  makes a noise when given a square wave at 1.25kHz, with the loudness proportional
-to the voltage. When the shutdown sequence is complete, a message will be sent out over the CAN bus. This will then provide the 1.25kHz wave to the gate of an N-FET which will provide a ground path for the buzzer.
+to the voltage. When the shutdown sequence is complete, a message will be sent out over the CAN bus \hl{from the Master Switch Panel monitor PCB, alerting the Dashboard CAN node to wait for the start sequence. The start sequence consists of pressing the brake pedal and then the start button while the shutdown circuit is entirely closed. The dashboard will} then provide the 1.25kHz wave to the gate of an N-FET which will provide a ground path for the buzzer. \hl{To prompt the driver, the start button will not illuminate until the shutdown circuit is closed and the brake pedal is pressed.}
 \subsubsection{Wiring, cables, current calculations, connectors}
 %Describe wiring, show schematics, describe connectors and cables and show useful data regarding the wiring.
-When the shutdown circuit completes and activates the AIRs, the car is in ready to drive mode. As soon as the
-car is in this mode, the CAN system will activate the ready to drive sound node to send a positive output
-that provides voltage to the N-FET for 2 seconds, thus letting the buzzer sound for 2 seconds. 
+\hl{Once the vehicle is in ready to drive mode, the dashboard CAN node} will activate the ready to drive sound node to \hl{drive the N-FET high} for 2 seconds, thus letting the buzzer sound for 2 seconds. 
 
 
 \begin{figure}[H]
@@ -786,7 +784,7 @@ Using the inverse square law as referenced in the appendix  for sound pressure l
 %Provide CAD-renderings showing all relevant parts. Mark the parts in the rendering, if necessary.
 The ready to drive sound will be located in the dashboard enclosure. The buzzer will be mounted
 to the exterior and front side of this enclosure, facing the front of the car as seen in figure \ref{dashboard_right}. It must be contained outside of the box so that the buzzer is
-loud enough. The speaker is waterproof, so it doesn't require any extra protection besides using an RTV silicone seal for final instillation. 
+loud enough. The speaker is waterproof, so it doesn't require any extra protection besides using an RTV silicone seal for final installation. 
 
 \begin{figure}[H]
 \centering
