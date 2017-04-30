@@ -586,7 +586,7 @@ P = 0.015A * 300V \\
 P = 4.5W
 \end{align*}
 
-According to the above calculations, the resistors will have to be rated to at least 5W and 300V. We will be using Vishay PAC500001002FAC000 10k 5W resistors. The datasheets for the resistors, the connectors, and an example multimeter can be found in \fref{sec:appendix_TSMP}.
+According to the above calculations, the resistors will have to be rated to at least 5W and 300V. We will be using \hl{RDC 160-1002-FBW} 10k 5W resistors \hl{rated for 300VDC}. The datasheets for the resistors, the connectors, and an example multimeter can be found in \fref{sec:appendix_TSMP}.
 
 The TSMPs are protected with current-limiting resistors because protecting the wires with fuses introduces the failure mode in which one of the fuses has blown, and a measurement across the TSMPs shows an open circuit even though the tractive system is still energized. 
 
@@ -1615,7 +1615,7 @@ Referred from section \ref{tractive_system_active_light}.
 \end{figure}
 \href{http://www.mouser.com/ds/2/418/NG_CD_44A112X_G1-689824.pdf}{TE 44A1121-20-0/9-9-US Shielded Multi-Conductor Wire complete Datasheet}
 
-This wire is also referenced in the TSMP section {\ref{measurement_points}}.
+This wire is also referenced in the TSMP section \ref{measurement_points}.
 
 \subsubsection{Measurement points (TSMPs)}\label{sec:appendix_TSMP}
 Referred from section \ref{measurement_points}.
@@ -1623,10 +1623,10 @@ Referred from section \ref{measurement_points}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{TSMP_resistor_ratings}
-	\caption{Ratings for Vishay PAC series resistors. The TSMP resistors are PAC05 (PAC500001002FAC000), shown in the fifth row}
+	\caption{\hl{Ratings for RCD 100 series resistors. The TSMP resistor we used is the 160-1002-FBW.}}
 \end{figure}
 \href{https://www.gossenmetrawatt.com/resources/tt/hit27/db_gb.pdf}{Example multimeter for TS measurement. Link to datasheet.}
-\href{http://www.vishay.com/docs/28731/pacserie.pdf}{Complete datasheet for TSMP current limiting resistors.}
+\href{http://www.farnell.com/datasheets/1697085.pdf}{\hl{Complete datasheet for TSMP current limiting resistors.}}
 \href{http://www.mouser.com/ds/2/159/D72930_02_10_06-21562.pdf}{Datasheet for TSMP banana jack connectors here.}
 
 \setcounter{subsubsection}{8}
