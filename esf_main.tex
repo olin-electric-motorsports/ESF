@@ -1219,7 +1219,7 @@ The vehicle's energy meter is mounted in a dedicated tractive system enclosure a
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Energy_MeterwithBoth}
-\caption{\hl{Rendering of the two energy meters superimposed upon each other in the energy meter enclosure}}
+\caption{\hl{Rendering of the two energy meters superimposed upon each other in the energy meter enclosure. See figure {\ref{fig:energy_meter_mounting_render}} for a render of the enclosure in the vehicle.}}
 \label{fig:energy_meter_both}
 \end{figure}
 
@@ -1228,21 +1228,21 @@ The vehicle's energy meter is mounted in a dedicated tractive system enclosure a
 
 The energy meter current calculations require it to be connected in series with the low pole of the tractive system. It is bolted onto custom-made copper bus bars with serrated, distorted-thread locking fasteners to ensure electrical connection, which can be seen in \fref{fig:energy_meter_internals}. 
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{EnergyMeterExposedInternalsCovered}
-\caption{Rendering of the internal geometry of the energy meter enclosure. The energy meter itself is visible in red. The blue solids are insulating covers to separate the individual HV bus bars from one another and to protect the LV energy meter circuitry at the base of the enclosure. See \fref{fig:energy_meter_mounting_render} for a render of the enclosure in the vehicle}
-\label{fig:energy_meter_internals}
-\end{figure}
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=0.8\textwidth]{EnergyMeterExposedInternalsCovered}
+% \caption{Rendering of the internal geometry of the energy meter enclosure. The energy meter itself is visible in red. The blue solids are insulating covers to separate the individual HV bus bars from one another and to protect the LV energy meter circuitry at the base of the enclosure. See \fref{fig:energy_meter_mounting_render} for a render of the enclosure in the vehicle}
+% \label{fig:energy_meter_internals}
+% \end{figure}
 
-\Fref{fig:energy_meter_internals_enclosure} shows the internals of the energy meter enclosure from another angle, also including the housing. Internal covers are removed to show bus bar geometry. Bus bars will be wrapped in Kapton polyimide tape with a protective heat-shrink sleeve.
+\Fref{fig:energy_meter_both} shows the internals of the energy meter enclosure from another angle, also including the housing. Internal covers are removed to show bus bar geometry. Bus bars will be wrapped in Kapton polyimide tape with a protective heat-shrink sleeve.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{EnergyMeterInternalsNoCovers}
-\caption{Rendering of the energy meter enclosure showing the housing. Internal bus bar covers have been hidden to show bus bar structure.}
-\label{fig:energy_meter_internals_enclosure}
-\end{figure}
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=0.8\textwidth]{EnergyMeterInternalsNoCovers}
+% \caption{Rendering of the energy meter enclosure showing the housing. Internal bus bar covers have been hidden to show bus bar structure.}
+% \label{fig:energy_meter_internals_enclosure}
+% \end{figure}
 
 Voltage measurement connections to TS+ for the energy meter, and connections for the TSAL fuses and TSMP current-limiting resistors are made via ring terminals to the corresponding bus bars. The wires for the TSMPs, the TSAL, and the energy meter will all be 20AWG rated to 300V and 90\textdegree C. The energy meter itself also requires GLVS power, which means that proper HV wire spacing of 30mm will be upheld. 
 
